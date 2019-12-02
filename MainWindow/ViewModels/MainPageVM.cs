@@ -16,7 +16,8 @@ namespace MainWindow.ViewModels
 
         public MainPageVM()
         {
-
+            AccountLists _something = new AccountLists();
+            _something.CreateAccount();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
