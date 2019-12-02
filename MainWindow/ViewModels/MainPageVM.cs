@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using MainWindow.Annotations;
+using MainWindow.Models;
 
 namespace MainWindow.ViewModels
 {
@@ -17,7 +18,8 @@ namespace MainWindow.ViewModels
         public MainPageVM()
         {
             AccountLists _something = new AccountLists();
-            _something.CreateAccount();
+            _something.LoadAccounts();
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -14,21 +14,21 @@ namespace MainWindow.Models
         //private ShoppingCart _shoppingCart;
        // private string _profilePicturePath;
         //private AccountStatistics _accountStatistics;
-        //private string _displayName;
+        private string _displayName;
 
-        public Account(string userName, string passWord)
+        public Account(string userName, string passWord, string displayName)
         {
             _userName = userName;
             _passWord = passWord;
             //_profilePicturePath = profilePicturePath;
-            //_displayName = displayName;
+            _displayName = displayName;
         }
 
         #region Properties
-        public string UserName { get; set; }
-        public string PassWord { get; set; }
+        public string UserName { get { return _userName; } set { _userName = value; } }
+        public string PassWord { get { return _passWord; } set { _passWord = value; } }
         //public string ProfilePicturePatch { get; set; }
-        //public string DisplayName { get; set; }
+        public string DisplayName { get { return _displayName; } set { _displayName = value; } }
 
 
         #endregion
