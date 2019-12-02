@@ -26,5 +26,30 @@ namespace MainWindow
         {
             this.InitializeComponent();
         }
+
+        private void NavigateMainFrameBack(object sender, RoutedEventArgs e)
+        {
+            MainFrame.GoBack();
+        }
+
+        private void NavigateMainFrameForwards(object sender, RoutedEventArgs e)
+        {
+            MainFrame.GoForward();
+        }
+
+        private void NavigateMainFrame(Type newPage)
+        {
+            MainFrame.Navigate(newPage);
+        }
+
+        private void ChangePage(object sender, RoutedEventArgs e)
+        {
+            NavigateMainFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.{(sender as Button).Tag}"));
+        }
+
+        private void HamburgerToggle_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainSplitView.IsPaneOpen = !MainSplitView.IsPaneOpen;
+        }
     }
 }

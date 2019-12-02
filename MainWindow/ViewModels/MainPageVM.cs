@@ -13,29 +13,10 @@ namespace MainWindow.ViewModels
 {
     class MainPageVM : INotifyPropertyChanged
     {
-        private bool _isPaneOpen = false;
-
-
-        public RelayCommand DoTogglePane { get; set; }
-
-        public bool IsPaneOpen
-        {
-            get { return _isPaneOpen; }
-            set
-            {
-                _isPaneOpen = value;
-                OnPropertyChanged();
-            }
-        }
 
         public MainPageVM()
         {
-            DoTogglePane = new RelayCommand(TogglePane);
-        }
 
-        private void TogglePane()
-        {
-            IsPaneOpen = !IsPaneOpen;// == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -20,17 +20,17 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal">
-                <Button Height="50" FontFamily="Segoe MDL2 Assets" Content="&#xE830;" FontSize="25" Width="56"/>
-                <Button Height="50" FontFamily="Segoe MDL2 Assets" Content="&#xEA47;" FontSize="25" Width="56"/>
+                <Button Height="50" FontFamily="Segoe MDL2 Assets" Content="&#xE830;" FontSize="25" Width="56" IsEnabled="{x:Bind MainFrame.CanGoBack, Mode=OneWay}" Click="NavigateMainFrameBack"/>
+                <Button Height="50" FontFamily="Segoe MDL2 Assets" Content="&#xEA47;" FontSize="25" Width="56" IsEnabled="{x:Bind MainFrame.CanGoForward, Mode=OneWay}" Click="NavigateMainFrameForwards"/>
             </StackPanel>
         </Grid>
-        <SplitView Grid.Row="1" IsPaneOpen="{Binding IsPaneOpen}" OpenPaneLength="256" CompactPaneLength="56" DisplayMode="CompactOverlay">
+        <SplitView x:Name="MainSplitView" Grid.Row="1" IsPaneOpen="False" OpenPaneLength="256" CompactPaneLength="56" DisplayMode="CompactOverlay">
             <SplitView.Pane>
                 <StackPanel>
-                    <Button Command="{Binding DoTogglePane}">
+                    <Button x:Name="HamburgerToggle" Click="HamburgerToggle_OnClick">
                         <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE700;" FontSize="35" Width="256"/>
                     </Button>
-                    <Button>
+                    <Button Click="ChangePage" Tag="Store">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE719;" FontSize="35" Width="50"/>
                             <TextBlock Margin="22, 0, 0, 0" FontSize="23" Width="164">
@@ -38,7 +38,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button>
+                    <Button Click="ChangePage" Tag="Library">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7FC;" FontSize="35" Width="50"/>
                             <TextBlock Margin="22, 0, 0, 0" FontSize="23" Width="164">
@@ -49,7 +49,7 @@
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <Frame>
+                <Frame x:Name="MainFrame">
 
                 </Frame>
             </SplitView.Content>
