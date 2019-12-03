@@ -5,10 +5,73 @@
     xmlns:local="using:MainWindow.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:MainWindow.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+<Page.DataContext>
+    <viewModels:TestViewModel/>
+</Page.DataContext>
+    <Page.Resources>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="36" />
+            <Setter Property="Width" Value="300" />
+            <Setter Property="Margin" Value="20,20,20,20" />
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="Margin" Value="10,10,10,10" />
+        </Style>
+    </Page.Resources>
     <Grid>
+
+        <StackPanel Orientation="Horizontal">
+            <!--  List Part  -->
+            <StackPanel>
+                <ListView ItemsSource="{Binding StoreGameCollection}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image
+                                    Width="80"
+                                    Height="80"
+                                    Source="{Binding Name}" />
+                                <TextBlock
+                                    Margin="10,10,10,10"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Text="{Binding ImageLink}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackPanel Orientation="Horizontal">
+                    <Button
+                        Margin="10"
+                        Command="{Binding DoAddGame}"
+                        Content="Add Game" />
+                </StackPanel>
+            </StackPanel>
+
+            <!--  Details Part  -->
+            <StackPanel>
+                <StackPanel
+                    Margin="10,10,10,10"
+                    BorderBrush="DarkGray"
+                    BorderThickness="3,3,3,3"
+                    Orientation="Horizontal">
+                    <Image
+                        Width="200"
+                        Height="200"
+                        Margin="10,10,10,10"
+                        VerticalAlignment="Top"
+                        Source="{Binding SelectedGame.ImageLink}" />
+                    <StackPanel Margin="20,20,20,20">
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Name}" />
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.TimePlayed}" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </Page>
