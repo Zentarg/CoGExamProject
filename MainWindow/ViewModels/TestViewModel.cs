@@ -12,7 +12,7 @@ namespace MainWindow.ViewModels
    public class TestViewModel
     {
 
-        public ObservableCollection<TestGame> StoreGameCollection { get; }
+        public ObservableCollection<Game> StoreGameCollection { get; }
         public TestGame SelectedGame { get; set; }
         public string Name { get; set; }
         public string TimePlayed { get; set; }

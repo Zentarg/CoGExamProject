@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace MainWindow.Models
 {
-    static class FileHandler
+    public static class FileHandler
     {
         private static readonly StorageFolder _storageFolder = ApplicationData.Current.LocalFolder;
 

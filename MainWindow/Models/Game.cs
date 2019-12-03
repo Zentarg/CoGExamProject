@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace MainWindow.Models
 {
-    class Game
+    public class Game
     {
         public Game(Account author, string name)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MainWindow.Models
 {
-    class Account
+    public class Account
     {
         private string _userName;
         private string _passWord;

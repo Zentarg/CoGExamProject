@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MainWindow.Models
 {
-    static class Constants
+    public static class Constants
     {
         public enum CarrouselItemType { Video, Image };
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MainWindow.Models
 {
-    class CarrouselItem
+    public class CarrouselItem
     {
 
         public CarrouselItem(Constants.CarrouselItemType carrouselItemType, string itemLink)

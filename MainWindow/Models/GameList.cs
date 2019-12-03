@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace MainWindow.Models
 {
-    static class GameList
+    public static class GameList
     {
         public static void AddGame(Game newGame)
         {
