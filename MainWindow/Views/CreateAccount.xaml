@@ -37,19 +37,19 @@
             <StackPanel Margin="0,100,0,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Display Name:" FontSize="35" Margin="30" Width="250"/>
-                    <TextBox PlaceholderText="Enter your desired display name" Margin="30,30,50,30" FontSize="35" Width="650"/>
+                    <TextBox PlaceholderText="Enter your desired display name" Margin="30,30,50,30" FontSize="35" Width="650" Text="{Binding TempDisplayName, Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="User Name:" FontSize="35" Margin="30" Width="250"/>
-                    <TextBox PlaceholderText="Enter your desired user name" Margin="30,30,50,30" FontSize="35" Width="650"/>
+                    <TextBox PlaceholderText="Enter your desired user name" Margin="30,30,50,30" FontSize="35" Width="650" Text="{Binding TempUsername, Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Password: " FontSize="35" Margin="30" Width="250"/>
-                    <PasswordBox PlaceholderText="Enter your desired password" Margin="30,30,50,30" FontSize="35" Width="650"/>
+                    <PasswordBox PlaceholderText="Enter your desired password" Margin="30,30,50,30" FontSize="35" Width="650" Password="{Binding TempPassword, Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Margin="20" Content="Cancel" FontSize="25"/>
-                    <Button Margin="20,0,50,0" Content="Confirm" FontSize="25"/>
+                    <Button Margin="20,0,50,0" Content="Confirm" FontSize="25" Command="{Binding DoConfirm}"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
