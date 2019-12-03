@@ -12,11 +12,12 @@ using System.Collections.ObjectModel;
 
 namespace MainWindow
 {
-    class AccountLists
+    public class AccountLists
     {
         private static ObservableCollection<Account> _accountLists = new ObservableCollection<Account>();
         private const string FileName = "AccountList.json";
         readonly StorageFolder _storageFolder = ApplicationData.Current.LocalFolder;
+        
 
 
         public AccountLists()

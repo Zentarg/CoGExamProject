@@ -1,35 +1,32 @@
-﻿using GalaSoft.MvvmLight.Command;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
+using MainWindow;
 using MainWindow.Annotations;
-using MainWindow.Models;
 
 namespace MainWindow.ViewModels
 {
-    public class MainPageVM : INotifyPropertyChanged
+    class CreateAccountVM : INotifyPropertyChanged
     {
+        private string _tempUsername;
+        private string _tempPassword;
 
-        public MainPageVM()
+        public CreateAccountVM()
         {
-            //AccountLists allAccounts = new AccountLists();
-            //allAccounts.LoadAccounts();
-            
+            AccountLists _accountLists = new AccountLists();
+            _accountLists.LoadAccounts();
         }
-
-        
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
