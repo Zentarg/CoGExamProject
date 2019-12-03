@@ -22,6 +22,8 @@ namespace MainWindow.ViewModels
             
         }
 
+        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
