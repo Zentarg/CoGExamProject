@@ -13,7 +13,7 @@ namespace MainWindow.Models
     {
         public static void AddGame(Game newGame)
         {
-            StoreGameList.Add(newGame);
+            StoreGameList?.Add(newGame);
             FileHandler.WriteFile(Constants.GameFileListName, StoreGameList);
         }
 
