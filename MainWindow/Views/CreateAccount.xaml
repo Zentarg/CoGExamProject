@@ -9,6 +9,44 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock FontSize="75">Create an Account</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="60"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock FontSize="45" Margin="5,5,0,0">Create an Account</TextBlock>
+
+        <Grid Grid.Row="1">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE77B;" FontSize="150" Margin="0,150,0,0" VerticalAlignment="Top"/>
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEA3A;" FontSize="200" Margin="0,130,0,0" VerticalAlignment="Top"/>
+            <TextBlock FontSize="25" Margin="30,350,30,0" HorizontalAlignment="Center" Text="New User"/>
+            
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <StackPanel Margin="0,100,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="Display Name:" FontSize="35" Margin="30" Width="250"/>
+                    <TextBox PlaceholderText="Enter your desired display name" Margin="30,30,50,30" FontSize="35" Width="650"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="User Name:" FontSize="35" Margin="30" Width="250"/>
+                    <TextBox PlaceholderText="Enter your desired user name" Margin="30,30,50,30" FontSize="35" Width="650"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="Password: " FontSize="35" Margin="30" Width="250"/>
+                    <PasswordBox PlaceholderText="Enter your desired password" Margin="30,30,50,30" FontSize="35" Width="650"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Margin="20" Content="Cancel" FontSize="25"/>
+                    <Button Margin="20,0,50,0" Content="Confirm" FontSize="25"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
