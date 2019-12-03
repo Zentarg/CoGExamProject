@@ -9,15 +9,17 @@ namespace MainWindow.Models
 {
     public class Game
     {
-        public Game(Account author, string name)
+        public Game(Account author, string thumbnailImagePath, string name)
         {
             Author = author;
+            ThumbnailImagePath = thumbnailImagePath;
             Name = name;
         }
 
-        public Game(Account author, string name, float price, int currentDiscountPercentage, string description, string gamePath)
+        public Game(Account author, string thumbnailImagePath, string name, float price, int currentDiscountPercentage, string description, string gamePath)
         {
             Author = author;
+            ThumbnailImagePath = thumbnailImagePath;
             Name = Name;
             Price = price;
             CurrentDiscountPercentage = currentDiscountPercentage;
@@ -26,9 +28,10 @@ namespace MainWindow.Models
         }
 
         [JsonConstructor]
-        public Game(Account author, string name, float price, int currentDiscountPercentage, string description, string gamePath, List<CarrouselItem> carrouselItems)
+        public Game(Account author, string thumbnailImagePath, string name, float price, int currentDiscountPercentage, string description, string gamePath, List<CarrouselItem> carrouselItems)
         {
             Author = author;
+            ThumbnailImagePath = thumbnailImagePath;
             Name = Name;
             Price = price;
             CurrentDiscountPercentage = currentDiscountPercentage;
@@ -38,6 +41,7 @@ namespace MainWindow.Models
         }
 
         public Account Author { get; private set; }
+        public string ThumbnailImagePath { get; private set; }
         public string Name { get; private set; }
         public float Price { get; private set; }
         public int CurrentDiscountPercentage { get; private set; }
@@ -48,6 +52,11 @@ namespace MainWindow.Models
         public void SetName(string name)
         {
             Name = name;
+        }
+
+        public void SetThumbnail(string path)
+        {
+            ThumbnailImagePath = path;
         }
 
         public void SetPrice(float price)

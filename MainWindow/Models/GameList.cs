@@ -9,38 +9,54 @@ using Newtonsoft.Json;
 
 namespace MainWindow.Models
 {
-    public static class GameList
+    public class GameList
     {
-        public static void AddGame(Game newGame)
+
+        private static GameList instance;
+
+        private GameList()
         {
-            StoreGameList?.Add(newGame);
-            FileHandler.WriteFile(Constants.GameFileListName, StoreGameList);
+
         }
 
-        public static void RemoveGame(Game removeGame)
-        {
-            StoreGameList.Remove(removeGame);
+        public static GameList Instance {
+            get {
+                if (instance == null)
+                    instance = new GameList();
+                return instance;
+            }
         }
 
-        public static void RemoveGame(List<Game> removeGames)
+        public void AddGame(Game newGame)
+        {
+            StoreGameCollection?.Add(newGame);
+            FileHandler.WriteFile(Constants.GameFileListName, StoreGameCollection);
+        }
+
+        public void RemoveGame(Game removeGame)
+        {
+            StoreGameCollection.Remove(removeGame);
+        }
+
+        public void RemoveGame(List<Game> removeGames)
         {
             foreach (Game game in removeGames)
             {
-                StoreGameList.Remove(game);
+                StoreGameCollection.Remove(game);
             
             }
         }
 
-        public static async void LoadGames()
+        public async void LoadGames()
         {
             if (FileHandler.FileExists(Constants.GameFileListName))
             {
                 string json = await FileHandler.ReadFile(Constants.GameFileListName);
 
-                StoreGameList = JsonConvert.DeserializeObject<ObservableCollection<Game>>(json);
+                StoreGameCollection = JsonConvert.DeserializeObject<ObservableCollection<Game>>(json);
             }
         }
 
-        public static ObservableCollection<Game> StoreGameList { get; private set; } = new ObservableCollection<Game>();
+        public ObservableCollection<Game> StoreGameCollection { get; private set; } = new ObservableCollection<Game>();
     }
 }
