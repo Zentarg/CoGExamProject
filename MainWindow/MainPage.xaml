@@ -18,19 +18,22 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <StackPanel Orientation="Horizontal">
-                <Button Height="50" FontFamily="Segoe MDL2 Assets" Content="&#xE830;" FontSize="25" Width="56" IsEnabled="{x:Bind MainFrame.CanGoBack, Mode=OneWay}" Click="NavigateMainFrameBack"/>
-                <Button Height="50" FontFamily="Segoe MDL2 Assets" Content="&#xEA47;" FontSize="25" Width="56" IsEnabled="{x:Bind MainFrame.CanGoForward, Mode=OneWay}" Click="NavigateMainFrameForwards"/>
+        <Grid Grid.Row="0" Background="#FF383838">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="50">
+                <Button x:Name="BackButton" Height="50" FontFamily="Segoe MDL2 Assets" Content="&#xE830;" FontSize="25" Width="56" IsEnabled="{x:Bind MainFrame.CanGoBack, Mode=OneWay}" Click="NavigateMainFrameBack" FocusVisualSecondaryBrush="#33FFFFFF" Background="{x:Null}" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}"/>
+                <Button x:Name="ForwardsButton" Height="50" FontFamily="Segoe MDL2 Assets" Content="&#xEA47;" FontSize="25" Width="56" IsEnabled="{x:Bind MainFrame.CanGoForward, Mode=OneWay}" Click="NavigateMainFrameForwards" BorderBrush="{x:Null}" FocusVisualPrimaryBrush="#A4FFFFFF" FocusVisualSecondaryBrush="#33FFFFFF" Background="{x:Null}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50">
+                <Button x:Name="ProfileButton" Margin="0, 2.5, 5, 0" Height="45" FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" CornerRadius="30" FontSize="25" Width="45" FocusVisualSecondaryBrush="#33FFFFFF" Background="Black" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}"/>
             </StackPanel>
         </Grid>
-        <SplitView x:Name="MainSplitView" Grid.Row="1" IsPaneOpen="False" OpenPaneLength="256" CompactPaneLength="56" DisplayMode="CompactOverlay">
+        <SplitView x:Name="MainSplitView" Grid.Row="1" IsPaneOpen="False" OpenPaneLength="256" CompactPaneLength="56" DisplayMode="CompactOverlay" PaneBackground="#FF383838">
             <SplitView.Pane>
                 <StackPanel>
-                    <Button x:Name="HamburgerToggle" Click="HamburgerToggle_OnClick">
-                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE700;" FontSize="35" Width="256"/>
+                    <Button x:Name="HamburgerToggle" Click="HamburgerToggle_OnClick" Background="{x:Null}">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE700;" FontSize="35" Width="256" FocusVisualSecondaryBrush="#99000000"/>
                     </Button>
-                    <Button Click="ChangePage" Tag="Store">
+                    <Button Click="ChangePage" Tag="Store" Background="{x:Null}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE719;" FontSize="35" Width="50"/>
                             <TextBlock Margin="22, 0, 0, 0" FontSize="23" Width="164">
@@ -38,7 +41,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Click="ChangePage" Tag="Library">
+                    <Button Click="ChangePage" Tag="Library" Background="{x:Null}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7FC;" FontSize="35" Width="50"/>
                             <TextBlock Margin="22, 0, 0, 0" FontSize="23" Width="164">
