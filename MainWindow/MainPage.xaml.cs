@@ -41,6 +41,7 @@ namespace MainWindow
         private void NavigateMainFrame(Type newPage)
         {
             MainFrame.Navigate(newPage);
+            PageNameTextblock.Text = newPage.Name;
         }
 
         private void ChangePage(object sender, RoutedEventArgs e)
