@@ -19,7 +19,7 @@ namespace MainWindow.ViewModels
 
         public StoreVM()
         {
-            _newGame = new Game(new Account("username", "password", "displayName"), "Assets/Logo" , "gameName", 34.5f, 0, "description", "gamepath", new List<CarrouselItem>());
+            _newGame = new Game(new Account("username", "password", "displayName"), "Assets/Logo.png" , "gameName", 34.5f, 0, "description", "gamepath", new List<CarrouselItem>());
             _gameList = GameList.Instance;
             DoAddGame = new RelayCommand(AddGame);
             DoLoadGames = new RelayCommand(LoadGames);

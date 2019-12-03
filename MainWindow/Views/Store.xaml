@@ -42,7 +42,7 @@
                             <RowDefinition Height="113"/>
                             <RowDefinition Height="40" />
                         </Grid.RowDefinitions>
-                        <Image Source="https://images.unsplash.com/photo-1499084732479-de2c02d45fcc" Grid.Row="0" Width="auto" Height="auto"/>
+                        <Image Source="{Binding ThumbnailImagePath}" Grid.Row="0" Width="auto" Height="auto"/>
                         <Grid Grid.RowSpan="2" Margin="0, 37 0, 0" Height="35">
                             <Grid.Background>
                                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
