@@ -23,8 +23,6 @@ namespace MainWindow
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        SolidColorBrush originalColour = new SolidColorBrush(Colors.White);
-        SolidColorBrush newColour = new SolidColorBrush(Colors.Gray);
         public MainPage()
         {
             this.InitializeComponent();
