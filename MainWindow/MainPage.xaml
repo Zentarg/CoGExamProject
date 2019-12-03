@@ -46,6 +46,14 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
+                    <Button Click="ChangePage" Tag="CreateAccount">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;" FontSize="35" Width="50"/>
+                            <TextBlock Margin="22, 0, 0, 0" FontSize="23" Width="164">
+                                Create An Account
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
