@@ -31,11 +31,11 @@
             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE77B;" FontSize="150" Margin="0,150,0,0" VerticalAlignment="Top"/>
             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEA3A;" FontSize="200" Margin="0,130,0,0" VerticalAlignment="Top"/>
             <TextBlock FontSize="25" Margin="30,350,30,0" HorizontalAlignment="Center" Text="New User"/>
-            
+
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
             <StackPanel Margin="0,100,0,0">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <TextBlock Text="Display Name:" FontSize="35" Margin="30" Width="250"/>
                     <TextBox PlaceholderText="Enter your desired display name" Margin="30,30,50,30" FontSize="35" Width="650" Text="{Binding TempDisplayName, Mode=TwoWay}"/>
                 </StackPanel>
