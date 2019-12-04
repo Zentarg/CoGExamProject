@@ -42,6 +42,7 @@ namespace MainWindow.ViewModels
             _gameList = GameList.Instance;
             DoAddGame = new RelayCommand(AddGame);
             DoLoadGames = new RelayCommand(LoadGames);
+            LoadGames();
         }
 
         public RelayCommand DoAddGame { get; set; }
