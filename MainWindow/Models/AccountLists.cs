@@ -10,6 +10,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using System.Collections.ObjectModel;
 
+
 namespace MainWindow
 {
     public class AccountLists
@@ -27,6 +28,10 @@ namespace MainWindow
             get { return accountListInstance; }
         }
 
+        public ObservableCollection<Account> AccountList
+        {
+            get { return _accountLists; }
+        }
 
         public async Task LoadAccounts()
         {

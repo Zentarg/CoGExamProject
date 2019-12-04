@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.Command;
 using MainWindow;
 using MainWindow.Annotations;
 using MainWindow.Models;
+using static MainWindow.Models.AccountHandler;
 
 namespace MainWindow.ViewModels
 {
@@ -17,29 +18,32 @@ namespace MainWindow.ViewModels
         private string _tempUsername;
         private string _tempPassword;
         private string _tempDisplayName;
-
-        private AccountLists _accountList = AccountLists.AccountListInstance;
+        private int _usernameInUse;
+       
 
         public RelayCommand DoConfirm { get; set; }
 
         public CreateAccountVM()
         {
-            
-            _accountList.LoadAccounts();
+            AccountList.LoadAccounts();
             DoConfirm = new RelayCommand(Confirm);
         }
 
         private async void Confirm()
         {
-            Account tempAccount = new Account(_tempUsername, _tempPassword, _tempDisplayName);
-            await _accountList.CreateAccount(tempAccount);
+            AccountHandler.Account = new Account(_tempUsername, TempPassword, TempDisplayName);
+            await AccountList.CreateAccount(AccountHandler.Account);
         }
 
         #region Properties
-        public string TempUsername
+        public  string TempUsername
         {
             get { return _tempUsername; }
-            set { _tempUsername = value; OnPropertyChanged(); }
+            set { 
+                _tempUsername = value; 
+                OnPropertyChanged(); 
+                UsernameInUse = UserNameCharCheck(_tempUsername);
+            }
             
         }
 
@@ -53,6 +57,16 @@ namespace MainWindow.ViewModels
         {
             get { return _tempDisplayName; }
             set { _tempDisplayName = value; OnPropertyChanged(); }
+        }
+
+        public int UsernameInUse
+        {
+            get { return _usernameInUse; }
+            set 
+            { 
+                _usernameInUse = value; 
+                OnPropertyChanged(); 
+            }
         }
         #endregion
 
