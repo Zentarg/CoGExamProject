@@ -114,7 +114,15 @@
                         </Flyout>
                     </Button.Flyout>
                 </Button>
-                <Button Style="{StaticResource MenuButon}" x:Name="ProfileButton" Margin="0, 2.5, 5, 0" Height="45" FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" CornerRadius="30" FontSize="25" Width="45" FocusVisualSecondaryBrush="#33FFFFFF" Background="Black" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}" />
+                <Button Style="{StaticResource MenuButon}" x:Name="ProfileButton" Margin="0, 2.5, 5, 0" Height="45" FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" CornerRadius="30" FontSize="25" Width="45" FocusVisualSecondaryBrush="#33FFFFFF" Background="Black" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}">
+                    <Button.Flyout>
+                        <MenuFlyout Placement="BottomEdgeAlignedRight">
+                            <MenuFlyoutItem Text="Create Account" Click="ChangePageMenuFlyoutItem" Tag="CreateAccount"/>
+                            <MenuFlyoutItem Text="Login"/>
+                            <MenuFlyoutItem Text="LogOff"/>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
             </StackPanel>
         </Grid>
         <SplitView x:Name="MainSplitView" Grid.Row="1" IsPaneOpen="False" OpenPaneLength="256" CompactPaneLength="56" DisplayMode="CompactOverlay" PaneBackground="#00020E">
