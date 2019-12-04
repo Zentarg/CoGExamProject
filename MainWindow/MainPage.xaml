@@ -6,6 +6,7 @@
     xmlns:viewmodel="using:MainWindow.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Windows.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
@@ -105,7 +106,15 @@
                 <TextBlock Visibility="Collapsed" x:Name="PageNameTextblock" Margin="20, 0, 0, 0" Padding="0, 5, 0, 0" FontSize="25" Text="Page" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50">
-                <Button Style="{StaticResource MenuButon}" x:Name="ProfileButton" Margin="0, 2.5, 5, 0" Height="45" FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" CornerRadius="30" FontSize="25" Width="45" FocusVisualSecondaryBrush="#33FFFFFF" Background="Black" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}"/>
+                <Button Style="{StaticResource MenuButon}" x:Name="ProfileButton" Margin="0, 2.5, 5, 0" Height="45" FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" CornerRadius="30" FontSize="25" Width="45" FocusVisualSecondaryBrush="#33FFFFFF" Background="Black" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}">
+                    <Button.Flyout>
+                        <MenuFlyout Placement="BottomEdgeAlignedRight">
+                            <MenuFlyoutItem Text="Create Account" Click="ChangePageMenuFlyoutItem" Tag="CreateAccount"/>
+                            <MenuFlyoutItem Text="Login"/>
+                            <MenuFlyoutItem Text="LogOff"/>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
             </StackPanel>
         </Grid>
         <SplitView x:Name="MainSplitView" Grid.Row="1" IsPaneOpen="False" OpenPaneLength="256" CompactPaneLength="56" DisplayMode="CompactOverlay" PaneBackground="#00020E">

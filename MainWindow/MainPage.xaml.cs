@@ -49,6 +49,11 @@ namespace MainWindow
             NavigateMainFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.{(sender as Button).Tag}"));
         }
 
+        private void ChangePageMenuFlyoutItem(object sender, RoutedEventArgs e)
+        {
+            NavigateMainFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.{(sender as MenuFlyoutItem).Tag}"));
+        }
+
         private void HamburgerToggle_OnClick(object sender, RoutedEventArgs e)
         {
             MainSplitView.IsPaneOpen = !MainSplitView.IsPaneOpen;

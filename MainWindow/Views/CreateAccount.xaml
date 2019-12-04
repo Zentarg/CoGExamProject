@@ -9,6 +9,23 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <Style x:Key="InputField" TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="4"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Width" Value="650"/>
+            <Setter Property="Margin" Value="30,30,50,30"/>
+            <Setter Property="FontSize" Value="35"/>
+        </Style>
+        <Style x:Key="PasswordField" TargetType="PasswordBox">
+            <Setter Property="BorderThickness" Value="4"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Width" Value="650"/>
+            <Setter Property="Margin" Value="30,30,50,30"/>
+            <Setter Property="FontSize" Value="35"/>
+        </Style>
+    </Page.Resources>
+    
     <Page.DataContext>
         <ViewModel:CreateAccountVM/>
     </Page.DataContext>
@@ -36,19 +53,27 @@
         <Grid Grid.Row="1" Grid.Column="1">
             <StackPanel Margin="0,100,0,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <TextBlock Text="Display Name:" FontSize="35" Margin="30" Width="250"/>
-                    <TextBox PlaceholderText="Enter your desired display name" Margin="30,30,50,30" FontSize="35" Width="650" Text="{Binding TempDisplayName, Mode=TwoWay}"/>
+                    <TextBox Style="{StaticResource InputField}" Header="Enter your Display Name" PlaceholderText="Display Name" Text="{Binding TempDisplayName, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <TextBox Style="{StaticResource InputField}" Header="Enter your User Name" PlaceholderText="User Name" Text="{Binding TempUsername, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <PasswordBox Style="{StaticResource PasswordField}" Header="Enter your Password" PlaceholderText="password" Password="{Binding TempPassword, Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="User Name:" FontSize="35" Margin="30" Width="250"/>
-                    <TextBox PlaceholderText="Enter your desired user name" Margin="30,30,50,30" FontSize="35" Width="650" Text="{Binding TempUsername, Mode=TwoWay}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="Password: " FontSize="35" Margin="30" Width="250"/>
-                    <PasswordBox PlaceholderText="Enter your desired password" Margin="30,30,50,30" FontSize="35" Width="650" Password="{Binding TempPassword, Mode=TwoWay}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Margin="20" Content="Cancel" FontSize="25"/>
+                    <Button Margin="20" Content="Cancel" FontSize="25">
+                        <Button.Flyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="You will be sent to previous page and lose what you have entered." Margin="0,0,0,0"/>
+                                    <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="Do you want to continue?" Margin="0,0,0,12"/>
+                                    <Button Content="Cancel my account creation" />
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+
+                    </Button>
                     <Button Margin="20,0,50,0" Content="Confirm" FontSize="25" Command="{Binding DoConfirm}"/>
                 </StackPanel>
             </StackPanel>
