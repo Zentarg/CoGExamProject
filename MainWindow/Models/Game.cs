@@ -16,27 +16,29 @@ namespace MainWindow.Models
             Name = name;
         }
 
-        public Game(Account author, string thumbnailImagePath, string name, float price, int currentDiscountPercentage, string description, string gamePath)
+        public Game(Account author, string thumbnailImagePath, string name, float price, int currentDiscountPercentage, string description, string gamePath, List<string> categories)
         {
             Author = author;
             ThumbnailImagePath = thumbnailImagePath;
-            Name = Name;
+            Name = name;
             Price = price;
             CurrentDiscountPercentage = currentDiscountPercentage;
             Description = description;
             GamePath = gamePath;
+            Categories = categories;
         }
 
         [JsonConstructor]
-        public Game(Account author, string thumbnailImagePath, string name, float price, int currentDiscountPercentage, string description, string gamePath, List<CarrouselItem> carrouselItems)
+        public Game(Account author, string thumbnailImagePath, string name, float price, int currentDiscountPercentage, string description, string gamePath, List<string> categories, List<CarrouselItem> carrouselItems)
         {
             Author = author;
             ThumbnailImagePath = thumbnailImagePath;
-            Name = Name;
+            Name = name;
             Price = price;
             CurrentDiscountPercentage = currentDiscountPercentage;
             Description = description;
             GamePath = gamePath;
+            Categories = categories;
             CarrouselItems = carrouselItems;
         }
 
@@ -48,6 +50,7 @@ namespace MainWindow.Models
         public string Description { get; private set; }
         public string GamePath { get; private set; }
         public List<CarrouselItem> CarrouselItems { get; private set; }
+        public List<string> Categories { get; private set; }
 
         public void SetName(string name)
         {
@@ -77,6 +80,32 @@ namespace MainWindow.Models
         public void SetGamePath(string gamePath)
         {
             GamePath = gamePath;
+        }
+
+        public void AddCategory(string category)
+        {
+            Categories.Add(category);
+        }
+
+        public void AddCategory(List<string> categoryList)
+        {
+            foreach (string category in categoryList)
+            {
+                Categories.Add(category);
+            }
+        }
+
+        public void RemoveCategory(string category)
+        {
+            Categories.Remove(category);
+        }
+
+        public void RemoveCategory(List<string> categoryList)
+        {
+            foreach (string category in categoryList)
+            {
+                Categories.Remove(category);
+            }
         }
 
         public void AddCarrouselItem(CarrouselItem item)
