@@ -14,12 +14,83 @@
     </Page.DataContext>
 
     <Grid>
-    <TextBlock FontSize="75">Store</TextBlock>
-        <Button Margin="372,355,0,0" VerticalAlignment="Top" Command="{Binding DoAddGame}">
-            AddGame
-        </Button>
-        <Button Margin="472,355,0,0" VerticalAlignment="Top" Command="{Binding DoLoadGames}">
-            LoadGames
-        </Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock FontSize="75">Store</TextBlock>
+            <Button Margin="1273,10,0,0" VerticalAlignment="Top" Command="{Binding DoAddGame}">
+                AddGame
+            </Button>
+            <Button Margin="1377,10,0,0" VerticalAlignment="Top" Command="{Binding DoLoadGames}">
+                LoadGames
+            </Button>
+
+        </Grid>
+
+        <GridView Grid.Row="1" x:Name="GamesGridView" ItemsSource="{Binding StoreGameCollection}" HorizontalAlignment="Center">
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="BorderThickness" Value="0" />
+                </Style>
+            </GridView.ItemContainerStyle>
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="350" Padding="0" Tapped="StoreItemClicked">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="203"/>
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Image Source="{Binding ThumbnailImagePath}"/>
+                            <TextBlock Text="{Binding Name}" Width="200" Margin="0, 170, 0, 0" TextAlignment="Center"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Width="350" Background="#3d3d3d" Margin="0">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock Text="{Binding Price}" FontSize="15" Padding="0, 7.5, 0, 0"/>
+                                <TextBlock Text="$" FontSize="15" Padding="0, 7.5, 0, 0"/>
+                                <Button Margin="10, -5, 10, 0" FontSize="15">
+                                    Buy
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout Placement="Right">
+                                <StackPanel Width="250">
+                                    <TextBlock Text="Categories" FontSize="15" Grid.Row="0"/>
+                                    <GridView Grid.Row="1" ItemsSource="{Binding Categories}" SelectionMode="None" MaxHeight="50" HorizontalContentAlignment="Center" Width="250" Margin="0, 5, 0, 5">
+                                        <GridView.ItemContainerStyle>
+                                            <Style TargetType="GridViewItem">
+                                                <Setter Property="MinHeight" Value="10" />
+                                                <Setter Property="MinWidth" Value="10" />
+                                                <Setter Property="Margin" Value="3.5"/>
+                                                <Setter Property="BorderThickness" Value="0" />
+                                            </Style>
+                                        </GridView.ItemContainerStyle>
+                                        <GridView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Background="CornflowerBlue" Padding="5, 2, 5, 2" Margin="0">
+                                                    <TextBlock Text="{Binding}" Foreground="AliceBlue" FontSize="10"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridView.ItemTemplate>
+                                    </GridView>
+                                    <TextBlock Grid.Row="2" Text="Game Description" FontSize="15"/>
+                                    <ScrollViewer Grid.Row="3" MaxHeight="100" Margin="0, 5, 0, 5">
+                                        <TextBlock Text="{Binding Description}" FontSize="12" TextWrapping="WrapWholeWords" />
+                                    </ScrollViewer>
+                                    <Button Grid.Row="3" Width="250" Height="35" Content="Go to game" FontSize="15"/>
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
     </Grid>
 </Page>

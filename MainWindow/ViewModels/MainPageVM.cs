@@ -12,13 +12,13 @@ using MainWindow.Models;
 
 namespace MainWindow.ViewModels
 {
-    class MainPageVM : INotifyPropertyChanged
+    public class MainPageVM : INotifyPropertyChanged
     {
 
         public MainPageVM()
         {
-            AccountLists _something = new AccountLists();
-            _something.LoadAccounts();
+            //AccountLists allAccounts = new AccountLists();
+            //allAccounts.LoadAccounts();
             
         }
 

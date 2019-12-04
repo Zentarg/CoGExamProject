@@ -12,25 +12,32 @@ using System.Collections.ObjectModel;
 
 namespace MainWindow
 {
-    class AccountLists
+    public class AccountLists
     {
         private static ObservableCollection<Account> _accountLists = new ObservableCollection<Account>();
         private const string FileName = "AccountList.json";
         readonly StorageFolder _storageFolder = ApplicationData.Current.LocalFolder;
+        private static AccountLists accountListInstance = new AccountLists();
 
+        static AccountLists() { }
+        private AccountLists() { }
 
-        public AccountLists()
+        public static AccountLists AccountListInstance
         {
-            
+            get { return accountListInstance; }
         }
+
 
         public async Task LoadAccounts()
         {
             string accounts = await FileIO.ReadTextAsync(await OpenOrCreateFile());
-            _accountLists = JsonConvert.DeserializeObject<ObservableCollection<Account>>(accounts);
+            if (accounts != "")
+            {
+                _accountLists = JsonConvert.DeserializeObject<ObservableCollection<Account>>(accounts);
+            }    
         }
 
-        public async void CreateAccount(Account A)
+        public async Task CreateAccount(Account A)
         {
             _accountLists.Add(A);
             string _json = JsonConvert.SerializeObject(_accountLists);

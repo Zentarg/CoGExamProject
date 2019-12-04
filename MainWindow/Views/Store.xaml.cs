@@ -26,5 +26,10 @@ namespace MainWindow.Views
         {
             this.InitializeComponent();
         }
+
+        private void StoreItemClicked(object sender, TappedRoutedEventArgs e)
+        {
+            FlyoutBase.ShowAttachedFlyout(sender as FrameworkElement);
+        }
     }
 }
