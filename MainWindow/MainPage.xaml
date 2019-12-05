@@ -122,7 +122,7 @@
                                                     </StackPanel>
                                                     <StackPanel Orientation="Horizontal">
                                                     <Button Content="Yes" />
-                                                    <Button Content="No"/>
+                                                    <Button Content="No" Margin="100,0,0,0"/>
                                                 </StackPanel>
                                                 </StackPanel>
                                             </Flyout>
