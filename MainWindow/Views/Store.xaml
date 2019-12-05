@@ -29,7 +29,7 @@
 
         </Grid>
 
-        <GridView Grid.Row="1" x:Name="GamesGridView" ItemsSource="{Binding StoreGameCollection}" HorizontalAlignment="Center">
+        <GridView Grid.Row="1" x:Name="GamesGridView" ItemsSource="{Binding StoreGameCollection}" HorizontalAlignment="Center" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
             <GridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
                     <Setter Property="Margin" Value="10"/>
@@ -38,12 +38,12 @@
             </GridView.ItemContainerStyle>
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="350" Padding="0" Tapped="StoreItemClicked">
+                    <Grid Width="350" Padding="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="203"/>
                             <RowDefinition Height="40" />
                         </Grid.RowDefinitions>
-                        <Grid>
+                        <Grid Tapped="StoreItemClicked">
                             <Image Source="{Binding ThumbnailImagePath}"/>
                             <TextBlock Text="{Binding Name}" Width="200" Margin="0, 170, 0, 0" TextAlignment="Center"/>
                         </Grid>
@@ -51,7 +51,7 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <TextBlock Text="{Binding Price}" FontSize="15" Padding="0, 7.5, 0, 0"/>
                                 <TextBlock Text="$" FontSize="15" Padding="0, 7.5, 0, 0"/>
-                                <Button Margin="10, -5, 10, 0" FontSize="15">
+                                <Button x:Name="BuyButton" Margin="10, -5, 10, 0" FontSize="15" Click="BuyButton_OnClick">
                                     Buy
                                 </Button>
                             </StackPanel>
