@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 <Page.DataContext>
-    <viewModels:TestViewModel/>
+    <viewModels:StoreVM/>
 </Page.DataContext>
     <Page.Resources>
         <Style x:Key="TextBlockStyle" TargetType="TextBlock">
@@ -27,50 +27,27 @@
         <StackPanel Orientation="Horizontal">
             <!--  List Part  -->
             <StackPanel>
-                <ListView ItemsSource="{Binding StoreGameCollection}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
+                <ListView ItemsSource="{Binding StoreGameCollection}" SelectedItem="{Binding StoreGameCollection, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
                                 <Image
                                     Width="80"
                                     Height="80"
-                                    Source="{Binding Name}" />
-                                <TextBlock
-                                    Margin="10,10,10,10"
-                                    VerticalAlignment="Center"
-                                    FontSize="18"
-                                    Text="{Binding ImageLink}" />
+                                    Source="{Binding Author}" />
+                                
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <StackPanel Orientation="Horizontal">
-                    <Button
-                        Margin="10"
-                        Command="{Binding DoAddGame}"
-                        Content="Add Game" />
-                </StackPanel>
             </StackPanel>
 
             <!--  Details Part  -->
+            
             <StackPanel>
-                <StackPanel
-                    Margin="10,10,10,10"
-                    BorderBrush="DarkGray"
-                    BorderThickness="3,3,3,3"
-                    Orientation="Horizontal">
-                    <Image
-                        Width="200"
-                        Height="200"
-                        Margin="10,10,10,10"
-                        VerticalAlignment="Top"
-                        Source="{Binding SelectedGame.ImageLink}" />
-                    <StackPanel Margin="20,20,20,20">
-                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Name}" />
-                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.TimePlayed}" />
-                    </StackPanel>
-                </StackPanel>
+                
             </StackPanel>
+
         </StackPanel>
 
     </Grid>

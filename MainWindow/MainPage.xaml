@@ -105,12 +105,31 @@
                 <Button Style="{StaticResource MenuButon}" x:Name="CartButton" Margin="0, 2.5, 5, 0" Height="45" FontFamily="Segoe MDL2 Assets" Content="&#xE7BF;" CornerRadius="30" FontSize="25" Width="45" FocusVisualSecondaryBrush="#33FFFFFF" Background="Black" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}">
                     <Button.Flyout>
                         <Flyout>
-                            <ListView>
+                            <Grid>
+                                <StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="test"/>
-                                    <Button Content="Remove (this button does nothing)"></Button>
+                                    <Button Content="Add game" Command="{Binding DoAddGame}"/>
+                                    <Button Content="Remove game" Command="{Binding DoRemoveGame}"/>
                                 </StackPanel>
-                            </ListView>
+                                    <ListView ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
+                                    </ListView>
+                                    <Button Content="Proceed to checkpoint">
+                                        <Button.Flyout>
+                                            <Flyout Placement="Bottom">
+                                                <StackPanel>
+                                                   <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Are you sure you want to buy all these items?" Margin="0,0,0,12" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                    <Button Content="Yes" />
+                                                    <Button Content="No" Margin="100,0,0,0"/>
+                                                </StackPanel>
+                                                </StackPanel>
+                                            </Flyout>
+                                        </Button.Flyout>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
                         </Flyout>
                     </Button.Flyout>
                 </Button>

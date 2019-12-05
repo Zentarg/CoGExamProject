@@ -153,6 +153,30 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\10ReallyScaryHill.jpg" />
+    <Content Include="Assets\11LoudHillTheSequel.jpg" />
+    <Content Include="Assets\12WayTooSmallRentalBike.jpg" />
+    <Content Include="Assets\13AnimeSlothNinjaFightingGame.jpg" />
+    <Content Include="Assets\14DragonCitySushi.jpg" />
+    <Content Include="Assets\15MinimumWage.jpg" />
+    <Content Include="Assets\16Non-PostApocalypticGame.jpg" />
+    <Content Include="Assets\17JargyMcphearson.jpg" />
+    <Content Include="Assets\18AllegianceofAlliedCooperationofLeagues.jpg" />
+    <Content Include="Assets\19PlumpPlumbPlumbers.jpg" />
+    <Content Include="Assets\1Pepe%27sKitchen.jpg" />
+    <Content Include="Assets\20BleepBloopLoopRoboMobo.jpg" />
+    <Content Include="Assets\21UselessCryptoMiningGame.jpg" />
+    <Content Include="Assets\22LucianosQuest.jpg" />
+    <Content Include="Assets\23PortlandTrail.jpg" />
+    <Content Include="Assets\24AreYouSmarterThanaSpaceTurtle.jpg" />
+    <Content Include="Assets\2HARDCOREMEGADEATHPART7.jpg" />
+    <Content Include="Assets\3BIKEWARES.jpg" />
+    <Content Include="Assets\4BIKEWARS.jpg" />
+    <Content Include="Assets\5PloneySpawkSnowAlligators.jpg" />
+    <Content Include="Assets\6PineappleBrothers.jpg" />
+    <Content Include="Assets\7GenereicHeroGame.jpg" />
+    <Content Include="Assets\8Jen%27sHairSalloon.jpg" />
+    <Content Include="Assets\9VegasSteak.jpg" />
     <Content Include="Assets\GreenCheck.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\RedX.png" />
