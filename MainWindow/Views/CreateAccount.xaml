@@ -37,6 +37,7 @@
         <ViewModel:CreateAccountVM/>
     </Page.DataContext>
 
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -49,7 +50,9 @@
             <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock FontSize="45" Margin="5,5,0,0"><Run Text="Create an Account"/></TextBlock>
+        <TextBlock FontSize="45" Margin="5,5,0,0">
+            <Run Text="Create an Account"/>
+        </TextBlock>
 
         <Grid Grid.Row="1">
             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE77B;" FontSize="150" Margin="0,150,0,0" VerticalAlignment="Top"/>
@@ -63,17 +66,32 @@
                     <TextBox Style="{StaticResource InputField}" Header="Enter your Display Name" PlaceholderText="Display Name" Text="{Binding TempDisplayName, Mode=TwoWay}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <TextBox Style="{StaticResource InputField}" Header="Enter your User Name" PlaceholderText="User Name" Text="{Binding TempUsername, Mode=TwoWay}">
+                    <TextBox  LostFocus="UserNameCheck" Style="{StaticResource InputField}" Header="Enter your User Name" PlaceholderText="User Name" Text="{Binding TempUsername, Mode=TwoWay}">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout Placement="Right">
+                                <TextBlock Text="{Binding GetFlyOutText, Mode=TwoWay}"/>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
                         <Custom:Interaction.Behaviors>
-                            <Custom1:DataTriggerBehavior Value="2" Binding="{Binding UsernameInUse}">
+                            <Custom1:DataTriggerBehavior Value="4" Binding="{Binding UsernameCheck}">
                                 <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Red"/>
                             </Custom1:DataTriggerBehavior>
-                            <Custom1:DataTriggerBehavior Value="1" Binding="{Binding UsernameInUse}">
+                            <Custom1:DataTriggerBehavior Value="3" Binding="{Binding UsernameCheck}">
+                                <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Red"/>
+                            </Custom1:DataTriggerBehavior>
+                            <Custom1:DataTriggerBehavior Value="2" Binding="{Binding UsernameCheck}">
+                                <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Red"/>
+                            </Custom1:DataTriggerBehavior>
+                            <Custom1:DataTriggerBehavior Value="1" Binding="{Binding UsernameCheck}">
+                                <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Red"/>
+                            </Custom1:DataTriggerBehavior>
+                            <Custom1:DataTriggerBehavior Value="0" Binding="{Binding UsernameCheck}">
                                 <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Green"/>
                             </Custom1:DataTriggerBehavior>
-                            <Custom1:DataTriggerBehavior Value="0" Binding="{Binding UsernameInUse}">
+                            <Custom1:DataTriggerBehavior Value="5" Binding="{Binding UsernameCheck}">
                                 <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Blue"/>
                             </Custom1:DataTriggerBehavior>
+                            
                         </Custom:Interaction.Behaviors>
                     </TextBox>
                 </StackPanel>
@@ -96,6 +114,8 @@
                     <Button Margin="20,0,50,0" Content="Confirm" FontSize="25" Command="{Binding DoConfirm}"/>
                 </StackPanel>
             </StackPanel>
+
+            
         </Grid>
     </Grid>
 </Page>

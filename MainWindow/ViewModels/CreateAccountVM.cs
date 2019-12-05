@@ -18,7 +18,8 @@ namespace MainWindow.ViewModels
         private string _tempUsername;
         private string _tempPassword;
         private string _tempDisplayName;
-        private int _usernameInUse;
+        private int _usernameCheck = 5;
+        private string _getFlyoutText;
        
 
         public RelayCommand DoConfirm { get; set; }
@@ -42,9 +43,9 @@ namespace MainWindow.ViewModels
             set { 
                 _tempUsername = value; 
                 OnPropertyChanged(); 
-                UsernameInUse = UserNameCharCheck(_tempUsername);
-            }
-            
+                UsernameCheck = UserNameCheck(_tempUsername);
+                GetFlyOutText = UserNameResultString(UsernameCheck);
+            }    
         }
 
         public string TempPassword
@@ -59,13 +60,24 @@ namespace MainWindow.ViewModels
             set { _tempDisplayName = value; OnPropertyChanged(); }
         }
 
-        public int UsernameInUse
+        public int UsernameCheck
         {
-            get { return _usernameInUse; }
+            get { return _usernameCheck; }
             set 
             { 
-                _usernameInUse = value; 
+                _usernameCheck = value; 
                 OnPropertyChanged(); 
+            }
+        }
+
+
+        public string GetFlyOutText
+        {
+            get { return _getFlyoutText; }
+            set
+            {
+                _getFlyoutText = value;
+                OnPropertyChanged();
             }
         }
         #endregion
