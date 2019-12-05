@@ -16,8 +16,6 @@ namespace MainWindow
     public class AccountLists
     {
         private static ObservableCollection<Account> _accountLists = new ObservableCollection<Account>();
-        private const string FileName = "AccountList.json";
-        readonly StorageFolder _storageFolder = ApplicationData.Current.LocalFolder;
         private static AccountLists accountListInstance = new AccountLists();
 
         static AccountLists() { }
@@ -35,29 +33,23 @@ namespace MainWindow
 
         public async Task LoadAccounts()
         {
-            string accounts = await FileIO.ReadTextAsync(await OpenOrCreateFile());
-            if (accounts != "")
+            if (FileHandler.FileExists(Constants.FileName)) 
             {
-                _accountLists = JsonConvert.DeserializeObject<ObservableCollection<Account>>(accounts);
-            }    
+                string accounts = await FileHandler.ReadFile(Constants.FileName);
+                if (accounts != "")
+                {
+                    _accountLists = JsonConvert.DeserializeObject<ObservableCollection<Account>>(accounts);
+                }   
+            }     
         }
 
         public async Task CreateAccount(Account A)
         {
             _accountLists.Add(A);
-            string _json = JsonConvert.SerializeObject(_accountLists);
-            await FileIO.WriteTextAsync(await OpenOrCreateFile(), _json);
+            FileHandler.WriteFile(Constants.FileName, _accountLists);
 
             //Line below returns path of the file for checking
-            var path = _storageFolder.Path;
         }
-
-        public async Task<StorageFile> OpenOrCreateFile()
-        {
-             
-            return await _storageFolder.CreateFileAsync(FileName, CreationCollisionOption.OpenIfExists);
-        }
-    
     }
 }
 
