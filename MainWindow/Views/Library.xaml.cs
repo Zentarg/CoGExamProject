@@ -26,5 +26,10 @@ namespace MainWindow.Views
         {
             this.InitializeComponent();
         }
+
+        private void BaseExample_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
