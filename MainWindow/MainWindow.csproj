@@ -136,10 +136,10 @@
     <Compile Include="ViewModels\CreateAccountVM.cs" />
     <Compile Include="ViewModels\MainPageVM.cs" />
     <Compile Include="ViewModels\TestViewModel.cs" />
-    <Compile Include="Views\CreateAccount.xaml.cs">
-      <DependentUpon>CreateAccount.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\StoreVM.cs" />
+    <Compile Include="Views\CreateAccountDialogBox.xaml.cs">
+      <DependentUpon>CreateAccountDialogBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Library.xaml.cs">
       <DependentUpon>Library.xaml</DependentUpon>
     </Compile>
@@ -177,7 +177,9 @@
     <Content Include="Assets\7GenereicHeroGame.jpg" />
     <Content Include="Assets\8Jen%27sHairSalloon.jpg" />
     <Content Include="Assets\9VegasSteak.jpg" />
+    <Content Include="Assets\DarkModeAddPFP.png" />
     <Content Include="Assets\GreenCheck.png" />
+    <Content Include="Assets\LightModeAddPFP.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\RedX.png" />
     <Content Include="DataStorage\AccountList.txt" />
@@ -195,11 +197,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\LightDarkThemeImageSources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\CreateAccount.xaml">
+    <Page Include="Views\CreateAccountDialogBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
