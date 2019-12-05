@@ -27,6 +27,8 @@ namespace MainWindow.Models
             }
         }
 
+        public Game SelectedGame { get; set; }
+
         public void AddGame(Game newGame)
         {
             StoreGameCollection?.Add(newGame);

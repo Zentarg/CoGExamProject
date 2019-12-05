@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using MainWindow.Models;
+using MainWindow.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,14 +24,25 @@ namespace MainWindow.Views
     /// </summary>
     public sealed partial class Store : Page
     {
+        private StoreVM _storeVm;
         public Store()
         {
             this.InitializeComponent();
+            _storeVm = DataContext as StoreVM;
         }
 
         private void StoreItemClicked(object sender, TappedRoutedEventArgs e)
         {
-            FlyoutBase.ShowAttachedFlyout(sender as FrameworkElement);
+            FlyoutBase.ShowAttachedFlyout(VisualTreeHelper.GetParent(sender as FrameworkElement) as FrameworkElement);
+        }
+
+        private void BuyButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var _Item = sender as DependencyObject;
+            while (!(_Item is GridViewItem))
+                _Item = VisualTreeHelper.GetParent(_Item);
+            _Item.SetValue(GridViewItem.IsSelectedProperty, true);
+            _storeVm.PurchaseSelectedGame();
         }
     }
 }
