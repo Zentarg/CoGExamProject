@@ -271,7 +271,7 @@ namespace MainWindow.Models
             }
             else if (resultFromCheck == 0)
             {
-                return "The entered username invalid";
+                return "The entered username does not exist";
             }
             return "The entered username is exists";
         }

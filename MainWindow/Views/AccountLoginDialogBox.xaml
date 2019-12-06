@@ -43,7 +43,7 @@
     <ScrollViewer>
         <StackPanel Width="483">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <TextBox Style="{StaticResource InputField}" Header="Enter your User Name" PlaceholderText="User Name" Text="{Binding TempUsername, Mode=TwoWay}">
+                <TextBox Style="{StaticResource InputField}" Header="Enter your User Name" PlaceholderText="User Name" Text="{Binding TempUsername, Mode=TwoWay}" CharacterCasing="Lower">
                     <Custom:Interaction.Behaviors>
                         <Custom1:DataTriggerBehavior Value="4" Binding="{Binding UsernameCheck}">
                             <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Red"/>

@@ -58,9 +58,7 @@ namespace MainWindow.ViewModels
                 //Allows one to enter password first and then the username without having to click on the password field and retype to check
                 if (_tempPassword != null)
                 {
-                    PasswordCheck = PasswordCheckForLogin(_tempPassword, _tempUsername);
-                    PasswordTooltip = PasswordResultStringForLogin(PasswordCheck);
-                    ImagePathPassword = ReturnImagePathPasswordForLogin(PasswordCheck);
+                    PasswordAsync();
                 }     
             }
         }
@@ -73,10 +71,7 @@ namespace MainWindow.ViewModels
                 _tempPassword = value;
                 OnPropertyChanged();
 
-                PasswordCheck = PasswordCheckForLogin(_tempPassword, _tempUsername);
-                PasswordTooltip = PasswordResultStringForLogin(PasswordCheck);
-                ImagePathPassword = ReturnImagePathPasswordForLogin(PasswordCheck);
-                IsConfirmButtonEnabled = EnableConfirmButton();
+                PasswordAsync();
             }
         }
 
@@ -154,6 +149,14 @@ namespace MainWindow.ViewModels
             {
                 return false;
             }
+        }
+
+        private void PasswordAsync()
+        {
+            PasswordCheck = PasswordCheckForLogin(_tempPassword, _tempUsername);
+            PasswordTooltip = PasswordResultStringForLogin(PasswordCheck);
+            ImagePathPassword = ReturnImagePathPasswordForLogin(PasswordCheck);
+            IsConfirmButtonEnabled = EnableConfirmButton();
         }
 
 
