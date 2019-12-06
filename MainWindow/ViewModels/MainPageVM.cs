@@ -18,6 +18,8 @@ namespace MainWindow.ViewModels
     {
         private ShoppingCart _shoppingCart;
         private Game _selectedGame;
+        private bool _isAccountCreationLoginEnabled;
+        private bool _isAccountLogOffEnabled;
 
         public MainPageVM()
         {
@@ -27,6 +29,8 @@ namespace MainWindow.ViewModels
             DoAddGame = new RelayCommand(AddGame);
             DoRemoveGame = new RelayCommand(RemoveGame);
             DoPurchaseGame = new RelayCommand(PurchaseGame);
+            DoCheckAccountStatus = new RelayCommand(CheckAccountStatus);
+
             List<string> categories = new List<string>();
             categories.Add("Category 1");
             categories.Add("Category 2");
@@ -76,6 +80,9 @@ namespace MainWindow.ViewModels
         public RelayCommand DoRemoveGame { get; set; }
         public RelayCommand DoAddGame { get; set; }
         public RelayCommand DoPurchaseGame { get; set; }
+        public RelayCommand DoCheckAccountStatus { get; set; }
+        public bool IsAccountCreationLoginEnabled { get { return _isAccountCreationLoginEnabled; } set { _isAccountCreationLoginEnabled = value; OnPropertyChanged(); } }
+        public bool IsAccountLogOffEnabled { get { return _isAccountLogOffEnabled; } set { _isAccountLogOffEnabled = value; OnPropertyChanged(); } }
         public void AddGame()
         {
             _shoppingCart.AddGame(SelectedGame);
@@ -92,6 +99,36 @@ namespace MainWindow.ViewModels
         {
             _shoppingCart.PurchaseGame();
             OnPropertyChanged(nameof(Games));
+        }
+
+        private void IsAccountCreationLoginPossible()
+        {
+            if (AccountHandler.Account != null)
+            {
+                IsAccountCreationLoginEnabled = false;
+            }
+            else
+            {
+                IsAccountCreationLoginEnabled = true;
+            }  
+        }
+
+        private void IsAccountLogOffPossible()
+        {
+            if (AccountHandler.Account != null)
+            {
+                IsAccountLogOffEnabled = true;
+            }
+            else
+            {
+                IsAccountLogOffEnabled = false;
+            }
+        }
+
+        private void CheckAccountStatus()
+        {
+            IsAccountCreationLoginPossible();
+            IsAccountLogOffPossible();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

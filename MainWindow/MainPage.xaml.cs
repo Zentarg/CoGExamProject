@@ -26,6 +26,8 @@ namespace MainWindow
     public sealed partial class MainPage : Page
     {
         private readonly NavigationHandler _navigationHandler;
+        
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -84,6 +86,17 @@ namespace MainWindow
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             CheckoutFlyout.Hide();
+        }
+
+        private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+            AccountLoginDialogBox dialog = new AccountLoginDialogBox();
+            await dialog.ShowAsync();
+        }
+
+        private void MenuFlyoutItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            AccountHandler.LogOff();
         }
 
         private void RemoveGame_OnClick(object sender, RoutedEventArgs e)

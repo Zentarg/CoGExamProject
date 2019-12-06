@@ -11,7 +11,6 @@ namespace MainWindow.Models
     {
         private static Account _account;
         private static AccountDetails _accountDetails;
-        private static Account _loggedInAccount;
 
         private static AccountLists _accountList = AccountLists.AccountListInstance;
 
@@ -55,12 +54,25 @@ namespace MainWindow.Models
 
         public static void Login(string username, string password)
         {
-            
+            foreach (Account account in _accountList.AccountList)
+            {
+                if(username == account.UserName && password == account.PassWord)
+                {
+                    _account = new Account(account.UserName, account.PassWord, account.DisplayName);
+                    break;
+                }
+            }
+        }
+
+        public static void LogOff()
+        {
+            _account = null;
         }
 
         public static void CreateAccount(Account account)
         {
             _accountList.AccountList.Add(account);
+            //_accountDetails = new AccountDetails(_account.UserName);
         }
 
 
@@ -81,6 +93,24 @@ namespace MainWindow.Models
             return false;
         }
 
+        private static bool DoesPasswordHaveMatchToUsername(string username, string password)
+        {
+            foreach (Account acc in _accountList.AccountList)
+            {
+                if (acc.UserName == username)
+                {
+                    //If there is a username in the account list that matches the entered username, check if has matching password
+                    if (acc.PassWord == password)
+                    {
+                        //Return true if matching password was found
+                        return true;
+                    }
+                }
+            }
+            //Returns false if there was no username password match
+            return false;
+        }
+
         private static bool StringContainsSpecialChar(string _string)
         {
             //Checks for if there is any special characters in the username and returns true or false depending
@@ -89,12 +119,15 @@ namespace MainWindow.Models
 
         private static bool StringDoesNotContainOneNumberAndOneCapitalLetter(string _string)
         {
-            //Checks the entered password to see if it contains at least 1 number and at least 1 letter
-            if (!_string.Any(ch => char.IsDigit(ch)) == !_string.Any(ch => char.IsUpper(ch)))
+            //Checks the entered password to see if it does not contain at least 1 number and 1 letter
+            if (!_string.Any(ch => char.IsDigit(ch)) == true || !_string.Any(ch => char.IsUpper(ch)) == true)
+            {
+                return true;
+            }
+            else
             {
                 return false;
-            }
-            return true;
+            }           
         }
 
         private static int StringLengthCheck(string _string)
@@ -197,7 +230,7 @@ namespace MainWindow.Models
             return 5;
         }
 
-        public static string UserNameResultString(int resultFromCheck)
+        public static string UserNameResultStringForCreateAccount(int resultFromCheck)
         {
             if (resultFromCheck == 4)
             {
@@ -218,6 +251,29 @@ namespace MainWindow.Models
                 return "The entered username is already in use";
             }
             return "The entered username is ok";
+        }
+
+        public static string UserNameResultStringForLogin(int resultFromCheck)
+        {
+            if (resultFromCheck == 4)
+            {
+                return "The entered username contains special Characters.";
+            }
+            else if (resultFromCheck == 3)
+            {
+                return "The entered username contains less than 8 Characters.";
+
+            }
+            else if (resultFromCheck == 2)
+            {
+                return "The entered username contains more than 16 Characters.";
+
+            }
+            else if (resultFromCheck == 0)
+            {
+                return "The entered username invalid";
+            }
+            return "The entered username is exists";
         }
 
 
@@ -268,6 +324,33 @@ namespace MainWindow.Models
             return 5;
         }
 
+        public static int PasswordCheckForLogin(string password, string username)
+        {
+            if (password != "")
+            {
+                if (StringContainsSpecialChar(password) == true)
+                {
+                    //If the password contains special characters, return 4
+
+                    return 2;
+                }
+                else
+                {
+                    //Checks the username to password combination to see if there is a match in the account list, return 0 if yes, return 1, if no
+                    if (DoesPasswordHaveMatchToUsername(username, password) == true)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return 1;
+                    }
+                }
+            }
+            //Default colour for enter password box, if the string is empty
+            return 3;
+        }
+
         public static string PasswordResultString(int resultFromCheck)
         {
             if (resultFromCheck == 4)
@@ -288,6 +371,20 @@ namespace MainWindow.Models
             {
                 return "The entered password does not contain at least 1 number and 1 capital letter";
             }
+            return "The entered password is ok";
+        }
+
+        public static string PasswordResultStringForLogin(int resultFromCheck)
+        {
+            if (resultFromCheck == 2)
+            {
+                return "The entered password contains special Characters.";
+            }
+            else if (resultFromCheck == 1)
+            {
+                return "The entered password was incorrect";
+            }
+
             return "The entered password is ok";
         }
 
@@ -372,6 +469,32 @@ namespace MainWindow.Models
                 return new BitmapImage(new Uri("ms-appx:///Assets/RedX.png"));
             }
             else if(resultFromCheck == 0)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/GreenCheck.png"));
+            }
+            return null;
+        }
+
+        public static BitmapImage ReturnImagePathUsernameForLogin(int resultFromCheck)
+        {
+            if (resultFromCheck == 4 || resultFromCheck == 3 || resultFromCheck == 2 || resultFromCheck == 0)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/RedX.png"));
+            }
+            else if (resultFromCheck == 1)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/GreenCheck.png"));
+            }
+            return null;
+        }
+
+        public static BitmapImage ReturnImagePathPasswordForLogin(int resultFromCheck)
+        {
+            if (resultFromCheck == 2 || resultFromCheck == 1)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/RedX.png"));
+            }
+            else if (resultFromCheck == 0)
             {
                 return new BitmapImage(new Uri("ms-appx:///Assets/GreenCheck.png"));
             }
