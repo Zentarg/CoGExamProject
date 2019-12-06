@@ -26,6 +26,7 @@ namespace MainWindow.ViewModels
             _shoppingCart = ShoppingCart.Instance;
             DoAddGame = new RelayCommand(AddGame);
             DoRemoveGame = new RelayCommand(RemoveGame);
+            DoPurchaseGame = new RelayCommand(PurchaseGame);
             List<string> categories = new List<string>();
             categories.Add("Category 1");
             categories.Add("Category 2");
@@ -48,6 +49,15 @@ namespace MainWindow.ViewModels
             _selectedGame = new Game(new Account("username", "password", "displayName"), "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg", "gameName", 34.5f, 0, lorem, "gamepath", categories, new List<CarrouselItem>());
         }
 
+        public float TotalPrice
+        {
+            get { return _shoppingCart.TotalPrice;}
+            set
+            {
+                _shoppingCart.TotalPrice = value;
+                OnPropertyChanged();
+            }
+        }
         public Game SelectedGame
         {
             get { return _selectedGame; }
@@ -65,6 +75,7 @@ namespace MainWindow.ViewModels
 
         public RelayCommand DoRemoveGame { get; set; }
         public RelayCommand DoAddGame { get; set; }
+        public RelayCommand DoPurchaseGame { get; set; }
         public void AddGame()
         {
             _shoppingCart.AddGame(SelectedGame);
@@ -74,6 +85,12 @@ namespace MainWindow.ViewModels
         public void RemoveGame()
         {
             _shoppingCart.RemoveGame(SelectedGame);
+            OnPropertyChanged(nameof(Games));
+        }
+
+        public void PurchaseGame()
+        {
+            _shoppingCart.PurchaseGame();
             OnPropertyChanged(nameof(Games));
         }
 

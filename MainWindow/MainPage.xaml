@@ -113,17 +113,23 @@
                                 </StackPanel>
                                     <ListView ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
                                     </ListView>
-                                    <Button Content="Proceed to checkpoint">
+                                    <Button Content="Proceed to checkout">
                                         <Button.Flyout>
-                                            <Flyout Placement="Bottom">
+                                            <Flyout x:Name="CheckoutFlyout"  Placement="Bottom">
                                                 <StackPanel>
-                                                   <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="Are you sure you want to buy all these items?" Margin="0,0,0,12" />
+                                                    <StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Totalprice:   "/>
+                                                            <TextBlock Text="{Binding TotalPrice}" Margin="5,0,0,0"/>
+                                                        </StackPanel>
+                                                            <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Are you sure you want to buy all these items?" Margin="0,0,0,12" />
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Button Content="Yes" Command="{Binding DoPurchaseGame}"/>
+                                                            <Button Content="No" Click="CancelButton_Click" Margin="25,0,0,0"/>
+                                                        </StackPanel>
                                                     </StackPanel>
-                                                    <StackPanel Orientation="Horizontal">
-                                                    <Button Content="Yes" />
-                                                    <Button Content="No" Margin="100,0,0,0"/>
-                                                </StackPanel>
                                                 </StackPanel>
                                             </Flyout>
                                         </Button.Flyout>
@@ -136,7 +142,7 @@
                 <Button Style="{StaticResource MenuButon}" x:Name="ProfileButton" Margin="0, 2.5, 5, 0" Height="45" FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" CornerRadius="30" FontSize="25" Width="45" FocusVisualSecondaryBrush="#33FFFFFF" Background="Black" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}">
                     <Button.Flyout>
                         <MenuFlyout Placement="BottomEdgeAlignedRight">
-                            <MenuFlyoutItem Text="Create Account" Click="ChangePageMenuFlyoutItem" Tag="CreateAccount"/>
+                            <MenuFlyoutItem Text="Create Account" Click="ShowDialog_Click"/>
                             <MenuFlyoutItem Text="Login"/>
                             <MenuFlyoutItem Text="LogOff"/>
                         </MenuFlyout>
@@ -168,7 +174,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="CreateAccount">
+                    <Button Style="{StaticResource MenuButon}" Click="ShowDialog_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;" FontSize="35" Width="50" />
                             <TextBlock Margin="22, 0, 0, 0" FontSize="23" Width="164">

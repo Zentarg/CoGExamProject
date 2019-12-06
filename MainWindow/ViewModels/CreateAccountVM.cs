@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.Command;
 using MainWindow;
 using MainWindow.Annotations;
 using MainWindow.Models;
+using Windows.UI.Xaml.Media.Imaging;
 using static MainWindow.Models.AccountHandler;
 
 namespace MainWindow.ViewModels
@@ -18,11 +19,26 @@ namespace MainWindow.ViewModels
         private string _tempUsername;
         private string _tempPassword;
         private string _tempDisplayName;
-        private int _usernameCheck = 5;
-        private string _getFlyoutText;
-       
 
+        private int _usernameCheck = 5;
+        private string _usernameTooltip;
+        private BitmapImage _imagePathUsername;
+
+        private int _passwordCheck = 5;
+        private string _passwordTooltip;
+        private BitmapImage _imagePathPassword;
+
+        private int _displaynameCheck = 4;
+        private string _displaynameTooltip;
+        private BitmapImage _ImagePathDisplayname;
+
+        private bool _isConfirmButtonEnabled = false;
+
+
+        
         public RelayCommand DoConfirm { get; set; }
+
+
 
         public CreateAccountVM()
         {
@@ -30,8 +46,9 @@ namespace MainWindow.ViewModels
             DoConfirm = new RelayCommand(Confirm);
         }
 
-        private async void Confirm()
+        public async void Confirm()
         {
+            TempDisplayName = AccountHandler.DisplayNameToFile(_tempDisplayName);
             AccountHandler.Account = new Account(_tempUsername, TempPassword, TempDisplayName);
             await AccountList.CreateAccount(AccountHandler.Account);
         }
@@ -43,22 +60,42 @@ namespace MainWindow.ViewModels
             set { 
                 _tempUsername = value; 
                 OnPropertyChanged(); 
+
                 UsernameCheck = UserNameCheck(_tempUsername);
-                GetFlyOutText = UserNameResultString(UsernameCheck);
+                UsernameTooltip = UserNameResultString(UsernameCheck);
+                ImagePathUsername = ReturnImagePathUsernamePassword(UsernameCheck);
+                IsConfirmButtonEnabled = EnableConfirmButton();
             }    
         }
 
         public string TempPassword
         {
             get { return _tempPassword; }
-            set { _tempPassword = value; OnPropertyChanged(); }
+            set { 
+                _tempPassword = value; 
+                OnPropertyChanged();
+
+                PasswordCheck = PasswordCheck(_tempPassword);
+                PasswordTooltip = PasswordResultString(PasswordCheck);
+                ImagePathPassword = ReturnImagePathUsernamePassword(PasswordCheck);
+                IsConfirmButtonEnabled = EnableConfirmButton();
+            }
         }
 
         public string TempDisplayName
         {
             get { return _tempDisplayName; }
-            set { _tempDisplayName = value; OnPropertyChanged(); }
+            set { 
+                _tempDisplayName = value; 
+                OnPropertyChanged();
+
+                DisplaynameCheck = DisplayNameCheck(_tempDisplayName);
+                DisplaynameTooltip = DisplayNameResultStrng(DisplaynameCheck);
+                ImagePathDisplayname = ReturnImagePathDisplayName(DisplaynameCheck);
+                IsConfirmButtonEnabled = EnableConfirmButton();
+            }
         }
+
 
         public int UsernameCheck
         {
@@ -70,17 +107,95 @@ namespace MainWindow.ViewModels
             }
         }
 
-
-        public string GetFlyOutText
+        public string UsernameTooltip
         {
-            get { return _getFlyoutText; }
+            get { return _usernameTooltip; }
             set
             {
-                _getFlyoutText = value;
+                _usernameTooltip = value;
                 OnPropertyChanged();
             }
         }
+
+        public BitmapImage ImagePathUsername
+        {
+            get { return _imagePathUsername; }
+            set
+            {
+                _imagePathUsername = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public int PasswordCheck
+        {
+            get { return _passwordCheck; }
+            set
+            {
+                _passwordCheck = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string PasswordTooltip
+        {
+            get { return _passwordTooltip; }
+            set
+            {
+                _passwordTooltip = value; 
+                OnPropertyChanged();
+            }
+        }
+
+        public BitmapImage ImagePathPassword
+        {
+            get { return _imagePathPassword; }
+            set
+            {
+                _imagePathPassword = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public int DisplaynameCheck
+        {
+            get { return _displaynameCheck; }
+            set { _displaynameCheck = value; OnPropertyChanged(); }
+        }
+
+        public string DisplaynameTooltip
+        {
+            get { return _displaynameTooltip; }
+            set { _displaynameTooltip = value; OnPropertyChanged(); }
+        }
+
+        public BitmapImage ImagePathDisplayname
+        {
+            get { return _ImagePathDisplayname; }
+            set { _ImagePathDisplayname = value; OnPropertyChanged(); }
+        }
+
+        public BitmapImage ProfilePicture
+        {
+            get; set;
+        }
+
+        public bool IsConfirmButtonEnabled { get { return _isConfirmButtonEnabled; } set { _isConfirmButtonEnabled = value; OnPropertyChanged(); } }
         #endregion
+
+        private bool EnableConfirmButton()
+        {
+            if(UsernameCheck == 0 && PasswordCheck == 00 && DisplaynameCheck == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace MainWindow.Models
 {
@@ -43,7 +44,7 @@ namespace MainWindow.Models
         }
 
 
-        private static bool StringinUseCheck(string _string)
+        private static bool UsernameinUseCheck(string _string)
         {
             foreach (Account acc in _accountList.AccountList)
             {
@@ -61,6 +62,16 @@ namespace MainWindow.Models
         {
             //Checks for if there is any special characters in the username and returns true or false depending
             return _string.Any(ch => !char.IsLetterOrDigit(ch));
+        }
+
+        private static bool StringDoesNotContainOneNumberAndOneCapitalLetter(string _string)
+        {
+            //Checks the entered password to see if it contains at least 1 number and at least 1 letter
+            if (!_string.Any(ch => char.IsDigit(ch)) == !_string.Any(ch => char.IsUpper(ch)))
+            {
+                return false;
+            }
+            return true;
         }
 
         private static int StringLengthCheck(string _string)
@@ -81,6 +92,41 @@ namespace MainWindow.Models
                 return 0;
             }
         }
+
+        private static int DisplayNameLengthCheck(string _string)
+        {
+            if (_string.Length < 1)
+            {
+                //When the length of the display name is less than 1, return 2
+                return 2;
+            }
+            else if (_string.Length > 32)
+            {
+                //When the length of the display name is greater than 32, return 1
+                return 1;
+            }
+            else
+            {
+                //When the length of the display name is within the range of 1 <-> 32, return 0
+                return 0;
+            }
+        }
+
+        private static bool DisplayNameNumberinUseCheck(string _string)
+        {
+            foreach (Account acc in _accountList.AccountList)
+            {
+                if (acc.DisplayName == _string)
+                {
+                    //returns true if there is a display name in the account list that matches the entered display name
+                    return true;
+                }
+            }
+            //returns false if the display name that was entered was not found in the account list
+            return false;
+        }
+
+
 
         public static int UserNameCheck(string username)
         {
@@ -110,7 +156,7 @@ namespace MainWindow.Models
                     else
                     {
                         //Run this block if the length is fine
-                        if (StringinUseCheck(username) == true)
+                        if (UsernameinUseCheck(username) == true)
                         {
                             //If the username is in use, return 1
 
@@ -133,8 +179,6 @@ namespace MainWindow.Models
             if (resultFromCheck == 4)
             {
                 return "The entered username contains special Characters.";
-
-
             }
             else if (resultFromCheck == 3)
             {
@@ -149,9 +193,180 @@ namespace MainWindow.Models
             else if (resultFromCheck == 1)
             {
                 return "The entered username is already in use";
+            }
+            return "The entered username is ok";
+        }
+
+
+
+        public static int PasswordCheck(string password)
+        {
+            if (password != "")
+            {
+                if (StringContainsSpecialChar(password) == true)
+                {
+                    //If the password contains special characters, return 4
+
+                    return 4;
+                }
+                else
+                {
+                    //Run this block if the password doesnt contain special characters
+                    if (StringLengthCheck(password) == 2)
+                    {
+                        //If the password's length is less than 8, return 3
+
+                        return 3;
+                    }
+                    else if (StringLengthCheck(password) == 1)
+                    {
+                        //Return 2 if the password's length is greater than 16
+
+                        return 2;
+                    }
+                    else
+                    {
+                        //Run this block if the length is fine
+                        if (StringDoesNotContainOneNumberAndOneCapitalLetter(password) == true)
+                        {
+                            //If the password does not contain at least 1 number and 1 capital letter
+
+                            return 1;
+                        }
+                        else
+                        {
+                            //If the password is fine, return 0
+                            return 0;
+                        }
+                    }
+                }
+            }
+            //Default colour for enter password box, if the string is empty
+            return 5;
+        }
+
+        public static string PasswordResultString(int resultFromCheck)
+        {
+            if (resultFromCheck == 4)
+            {
+                return "The entered password contains special Characters.";
+            }
+            else if (resultFromCheck == 3)
+            {
+                return "The entered password contains less than 8 Characters.";
 
             }
-            return "";
+            else if (resultFromCheck == 2)
+            {
+                return "The entered password contains more than 16 Characters.";
+
+            }
+            else if (resultFromCheck == 1)
+            {
+                return "The entered password does not contain at least 1 number and 1 capital letter";
+            }
+            return "The entered password is ok";
         }
+
+
+
+        public static int DisplayNameCheck(string displayname)
+        {
+            if (displayname != "")
+            {
+                if (StringContainsSpecialChar(displayname))
+                {
+                    return 3;
+                }
+                else
+                {
+                    if (DisplayNameLengthCheck(displayname) == 2)
+                    {
+                        return 2;
+                    }
+                    else if (DisplayNameLengthCheck(displayname) == 1)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+            return 4;
+        }
+
+        public static string DisplayNameResultStrng(int resultFromCheck)
+        {
+            if (resultFromCheck == 3)
+            {
+                return "The entered display name contains special Characters.";
+            }
+            else if (resultFromCheck == 2)
+            {
+                return "The entered display name contains less than 1 Character.";
+            }
+            else if (resultFromCheck == 1)
+            {
+                return "The entered display name contains more than 32 Characters.";
+
+            }
+            return "The entered display name is ok";
+        }
+
+        public static string DisplayNameToFile(string displayname)
+        {
+            //Creates and adds a random number tag to a display name, continously checks if it is an available tag for that name until it finds one.
+            Random numberGenerator = new Random();
+            int randomInt = numberGenerator.Next(0, 10000);
+
+            string identifier = randomInt.ToString();
+            for (int i = 4; i > identifier.Length; i = i)
+            {
+                identifier = "0" + identifier;
+            }
+
+            string _tempDisplayname = displayname;
+            displayname += "#" + identifier;
+
+            if (DisplayNameNumberinUseCheck(displayname) == true)
+            {
+                displayname = _tempDisplayname;
+                return DisplayNameToFile(displayname);
+            }
+            else
+            {
+                return displayname;
+            }
+        }
+
+
+        public static BitmapImage ReturnImagePathUsernamePassword(int resultFromCheck)
+        {
+            if(resultFromCheck == 4 || resultFromCheck == 3 || resultFromCheck == 2 || resultFromCheck == 1)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/RedX.png"));
+            }
+            else if(resultFromCheck == 0)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/GreenCheck.png"));
+            }
+            return null;
+        }
+
+        public static BitmapImage ReturnImagePathDisplayName(int resultFromCheck)
+        {
+            if (resultFromCheck == 3 || resultFromCheck == 2 || resultFromCheck == 1)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/RedX.png"));
+            }
+            else if (resultFromCheck == 0)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/GreenCheck.png"));
+            }
+            return null;
+        }
+        
     }
 }
