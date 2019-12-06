@@ -85,5 +85,9 @@ namespace MainWindow
         {
             CheckoutFlyout.Hide();
         }
+
+        private void RemoveGame_OnClick(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

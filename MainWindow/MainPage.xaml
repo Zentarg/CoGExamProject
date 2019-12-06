@@ -107,33 +107,42 @@
                         <Flyout>
                             <Grid>
                                 <StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Content="Add game" Command="{Binding DoAddGame}"/>
-                                    <Button Content="Remove game" Command="{Binding DoRemoveGame}"/>
-                                </StackPanel>
-                                    <ListView ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,5">
+                                    <Button Content="Add game" Command="{Binding DoAddGame}" Margin="0,0,10,0"/>
+                                    <Button Content="Remove game" Command="{Binding DoRemoveGame}" Margin="0,0,10,0"/>
+                                    </StackPanel>
+                                    <ListView ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}" HorizontalAlignment="Right">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Price, Mode=TwoWay}" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                                    <Button Click="RemoveGame_OnClick" Content="Remove game" Margin="20,0,0,0"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
-                                    <Button Content="Proceed to checkout">
-                                        <Button.Flyout>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <TextBlock Text="Totalprice:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding TotalPrice, Mode=TwoWay}" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        <Button Content="Proceed to checkout" HorizontalAlignment="Right" Margin="20,0,0,0">
+                                    <Button.Flyout>
                                             <Flyout x:Name="CheckoutFlyout"  Placement="Bottom">
                                                 <StackPanel>
                                                     <StackPanel>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="Totalprice:   "/>
-                                                            <TextBlock Text="{Binding TotalPrice}" Margin="5,0,0,0"/>
-                                                        </StackPanel>
-                                                            <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="Are you sure you want to buy all these items?" Margin="0,0,0,12" />
+                                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                                            <TextBlock Text="Are you sure you want to buy all these items?" />
                                                         </StackPanel>
                                                         <StackPanel Orientation="Horizontal">
                                                             <Button Content="Yes" Command="{Binding DoPurchaseGame}"/>
-                                                            <Button Content="No" Click="CancelButton_Click" Margin="25,0,0,0"/>
+                                                            <Button Content="No" Click="CancelButton_Click" Margin="10,0,0,0"/>
                                                         </StackPanel>
                                                     </StackPanel>
                                                 </StackPanel>
                                             </Flyout>
                                         </Button.Flyout>
                                     </Button>
+                                    </StackPanel>
                                 </StackPanel>
                             </Grid>
                         </Flyout>
