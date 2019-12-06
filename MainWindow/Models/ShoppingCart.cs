@@ -48,6 +48,10 @@ namespace MainWindow.Models
             }
         }
 
+        public void PurchaseGame()
+        {
+
+        }
         public static ShoppingCart Instance
         {
             get

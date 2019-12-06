@@ -126,7 +126,7 @@
                                                             <TextBlock Text="Are you sure you want to buy all these items?" Margin="0,0,0,12" />
                                                         </StackPanel>
                                                         <StackPanel Orientation="Horizontal">
-                                                            <Button Content="Yes" />
+                                                            <Button Content="Yes" Command="{Binding DoPurchaseGame}"/>
                                                             <Button Content="No" Click="CancelButton_Click" Margin="25,0,0,0"/>
                                                         </StackPanel>
                                                     </StackPanel>
