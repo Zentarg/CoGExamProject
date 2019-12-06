@@ -31,6 +31,7 @@ namespace MainWindow
             get { return _accountLists; }
         }
 
+
         public async Task LoadAccounts()
         {
             if (FileHandler.FileExists(Constants.AccountListFileName)) 

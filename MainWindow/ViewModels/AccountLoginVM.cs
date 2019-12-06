@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using MainWindow.Annotations;
+using MainWindow.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,7 @@ namespace MainWindow.ViewModels
         public void Confirm()
         {
             Login(_tempUsername, _tempPassword);
+            SetDisplayNameForUI = AccountHandler.Account.DisplayName;
         }
 
         public string TempUsername

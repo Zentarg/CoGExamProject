@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
+using LinqToDB;
 using MainWindow;
 using MainWindow.Annotations;
 using MainWindow.Models;
@@ -34,7 +35,6 @@ namespace MainWindow.ViewModels
 
         private bool _isConfirmButtonEnabled = false;
 
-
         
         public RelayCommand DoConfirm { get; set; }
 
@@ -44,6 +44,7 @@ namespace MainWindow.ViewModels
         {
             AccountList.LoadAccounts();
             DoConfirm = new RelayCommand(Confirm);
+            
         }
 
         public async void Confirm()
@@ -52,6 +53,7 @@ namespace MainWindow.ViewModels
             AccountHandler.Account = new Account(_tempUsername, TempPassword, TempDisplayName);
             AccountHandler.CreateAccount(AccountHandler.Account);
             await AccountList.AddAccountToFile(AccountHandler.Account);
+            SetDisplayNameForUI = AccountHandler.Account.DisplayName;
         }
 
         #region Properties

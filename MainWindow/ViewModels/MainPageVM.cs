@@ -20,6 +20,7 @@ namespace MainWindow.ViewModels
         private Game _selectedGame;
         private bool _isAccountCreationLoginEnabled;
         private bool _isAccountLogOffEnabled;
+        private string _displayName;
 
         public MainPageVM()
         {
@@ -30,7 +31,6 @@ namespace MainWindow.ViewModels
             DoRemoveGame = new RelayCommand(RemoveGame);
             DoPurchaseGame = new RelayCommand(PurchaseGame);
             DoCheckAccountStatus = new RelayCommand(CheckAccountStatus);
-
             List<string> categories = new List<string>();
             categories.Add("Category 1");
             categories.Add("Category 2");
@@ -83,6 +83,8 @@ namespace MainWindow.ViewModels
         public RelayCommand DoCheckAccountStatus { get; set; }
         public bool IsAccountCreationLoginEnabled { get { return _isAccountCreationLoginEnabled; } set { _isAccountCreationLoginEnabled = value; OnPropertyChanged(); } }
         public bool IsAccountLogOffEnabled { get { return _isAccountLogOffEnabled; } set { _isAccountLogOffEnabled = value; OnPropertyChanged(); } }
+        public string DisplayName { get { return _displayName; } set { _displayName = value; OnPropertyChanged(); } }
+        
         public void AddGame()
         {
             _shoppingCart.AddGame(SelectedGame);
@@ -129,7 +131,23 @@ namespace MainWindow.ViewModels
         {
             IsAccountCreationLoginPossible();
             IsAccountLogOffPossible();
+            CallForDisplayName();
         }
+
+
+
+        private void CallForDisplayName()
+        {
+            if (AccountHandler.SetDisplayNameForUI != null)
+            {
+                DisplayName = AccountHandler.SetDisplayNameForUI;
+            }
+            else
+            {
+                DisplayName = null;
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

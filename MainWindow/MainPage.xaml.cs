@@ -26,13 +26,16 @@ namespace MainWindow
     public sealed partial class MainPage : Page
     {
         private readonly NavigationHandler _navigationHandler;
-        
+
+
 
         public MainPage()
         {
             this.InitializeComponent();
             _navigationHandler = NavigationHandler.Instance;
             _navigationHandler.SetNavigationFrame(MainFrame);
+
+            
         }
 
         private void NavigateMainFrameBack(object sender, RoutedEventArgs e)
@@ -102,5 +105,8 @@ namespace MainWindow
         private void RemoveGame_OnClick(object sender, RoutedEventArgs e)
         {
         }
+
+       
     }
 }
+
