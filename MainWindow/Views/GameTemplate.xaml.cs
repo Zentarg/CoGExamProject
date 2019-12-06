@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,6 +33,8 @@ namespace MainWindow.Views
             this.InitializeComponent();
             _shoppingCart = ShoppingCart.Instance;
             _gameList = GameList.Instance;
+            ScrollViewGrid.MaxHeight = ApplicationView.GetForCurrentView().VisibleBounds.Height *
+                                       DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
         }
 
         private void BuyGameButton_OnClick(object sender, RoutedEventArgs e)

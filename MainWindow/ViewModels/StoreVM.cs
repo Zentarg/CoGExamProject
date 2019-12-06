@@ -44,7 +44,8 @@ namespace MainWindow.ViewModels
                 new CarrouselItem(Constants.CarrouselItemType.Image, "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg"),
                 new CarrouselItem(Constants.CarrouselItemType.Image, "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg"),
                 new CarrouselItem(Constants.CarrouselItemType.Image, "https://media3.s-nbcnews.com/j/newscms/2019_41/3047866/191010-japan-stalker-mc-1121_06b4c20bbf96a51dc8663f334404a899.fit-760w.JPG"),
-                new CarrouselItem(Constants.CarrouselItemType.Image, "https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg")
+                new CarrouselItem(Constants.CarrouselItemType.Image, "https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg"),
+                new CarrouselItem(Constants.CarrouselItemType.YoutubeVideo, "https://www.youtube.com/embed/8xNmUNlJZtE")
             };
             string lorem =
                 "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";

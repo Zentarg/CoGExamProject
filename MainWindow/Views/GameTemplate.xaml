@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MainWindow.Views"
     xmlns:ViewModel="using:MainWindow.ViewModels"
+    xmlns:models="using:MainWindow.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -13,21 +14,30 @@
         <ViewModel:GameTemplateVM/>
     </Page.DataContext>
 
+    <Page.Resources>
+        <DataTemplate x:Key="VideoTemplate" x:DataType="models:CarrouselItem">
+            <MediaPlayerElement Source="{Binding ItemLink}" />
+        </DataTemplate>
+        <DataTemplate x:Key="YoutubeVideoTemplate" x:DataType="models:CarrouselItem">
+            <WebView Source="{Binding ItemLink}">
+
+            </WebView>
+        </DataTemplate>
+        <DataTemplate x:Key="ImageTemplate" x:DataType="models:CarrouselItem">
+            <Image Source="{Binding ItemLink}"/>
+        </DataTemplate>
+        <models:GameCarrouselDataTemplateSelector x:Key="CarrouselDataTemplateSelector" VideoTemplate="{StaticResource VideoTemplate}" YoutubeVideoTemplate="{StaticResource YoutubeVideoTemplate}" ImageTemplate="{StaticResource ImageTemplate}"/>
+    </Page.Resources>
+
     <Grid>
         <ScrollViewer>
-            <Grid>
+            <Grid x:Name="ScrollViewGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
-                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <FlipView ItemsSource="{Binding SelectedGame.CarrouselItems}">
-                    <FlipView.ItemTemplate>
-                        <DataTemplate x:DataType="{Binding CarrouselItemType}">
-                            <Image Source="{Binding ItemLink}"/>
-                        </DataTemplate>
-                    </FlipView.ItemTemplate>
-                </FlipView>
+                <FlipView Grid.Row="0" ItemsSource="{Binding SelectedGame.CarrouselItems}" ItemTemplateSelector="{StaticResource CarrouselDataTemplateSelector}"/>
                 <Grid x:Name="GameInformationGrid" Grid.Row="1" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
