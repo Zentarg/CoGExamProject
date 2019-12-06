@@ -126,6 +126,7 @@
     <Compile Include="Models\AccountDetails.cs" />
     <Compile Include="Models\AccountHandler.cs" />
     <Compile Include="Models\AccountLists.cs" />
+    <Compile Include="Models\ApplicationSettings.cs" />
     <Compile Include="Models\CarrouselItem.cs" />
     <Compile Include="Models\GameCarrouselDataTemplateSelector.cs" />
     <Compile Include="Models\GameCatalog.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountLoginVM.cs" />
+    <Compile Include="ViewModels\ApplicationSettingsVM.cs" />
     <Compile Include="ViewModels\CreateAccountVM.cs" />
     <Compile Include="ViewModels\GameTemplateVM.cs" />
     <Compile Include="ViewModels\LibraryViewModel.cs" />
@@ -147,6 +149,9 @@
     <Compile Include="ViewModels\StoreVM.cs" />
     <Compile Include="Views\AccountLoginDialogBox.xaml.cs">
       <DependentUpon>AccountLoginDialogBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ApplicationSettings.xaml.cs">
+      <DependentUpon>ApplicationSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GameTemplate.xaml.cs">
       <DependentUpon>GameTemplate.xaml</DependentUpon>
@@ -219,6 +224,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ApplicationSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CreateAccountDialogBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -237,6 +246,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="linq2db">
+      <Version>2.9.4</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.8</Version>
     </PackageReference>

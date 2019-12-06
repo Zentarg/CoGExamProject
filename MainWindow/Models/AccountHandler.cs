@@ -1,5 +1,8 @@
-﻿using System;
+﻿using LinqToDB;
+using MainWindow.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,12 +10,14 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace MainWindow.Models
 {
-    public static class AccountHandler
+    public static class AccountHandler 
     {
         private static Account _account;
         private static AccountDetails _accountDetails;
 
         private static AccountLists _accountList = AccountLists.AccountListInstance;
+
+        private static string _displaynameForUI;
 
 
         static  AccountHandler()
@@ -20,6 +25,7 @@ namespace MainWindow.Models
             
             _account = null;
             _accountDetails = null;
+            
         }
 
         public static AccountLists AccountList
@@ -67,12 +73,20 @@ namespace MainWindow.Models
         public static void LogOff()
         {
             _account = null;
+            _displaynameForUI = null;
         }
 
         public static void CreateAccount(Account account)
         {
+
             _accountList.AccountList.Add(account);
             //_accountDetails = new AccountDetails(_account.UserName);
+        }
+
+        public static string SetDisplayNameForUI
+        {
+            get { return _displaynameForUI; }
+            set { _displaynameForUI = value; }
         }
 
 
