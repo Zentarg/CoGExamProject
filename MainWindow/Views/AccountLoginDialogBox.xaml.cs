@@ -36,5 +36,10 @@ namespace MainWindow.Views
         {
             vm.Confirm();
         }
+
+        private void PasswordBox_PasswordChanged()
+        {
+
+        }
     }
 }

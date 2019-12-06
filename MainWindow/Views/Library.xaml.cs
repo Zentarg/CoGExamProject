@@ -31,5 +31,10 @@ namespace MainWindow.Views
         {
 
         }
+
+        private void TextBlock_SelectionChanged_1()
+        {
+
+        }
     }
 }

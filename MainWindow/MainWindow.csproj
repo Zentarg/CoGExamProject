@@ -128,6 +128,8 @@
     <Compile Include="Models\AccountLists.cs" />
     <Compile Include="Models\CarrouselItem.cs" />
     <Compile Include="Models\GameCarrouselDataTemplateSelector.cs" />
+    <Compile Include="Models\GameCatalog.cs" />
+    <Compile Include="Models\GameDetails.cs" />
     <Compile Include="Models\NavigationHandler.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\Constants.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="ViewModels\AccountLoginVM.cs" />
     <Compile Include="ViewModels\CreateAccountVM.cs" />
     <Compile Include="ViewModels\GameTemplateVM.cs" />
+    <Compile Include="ViewModels\LibraryViewModel.cs" />
     <Compile Include="ViewModels\MainPageVM.cs" />
     <Compile Include="ViewModels\TestViewModel.cs" />
     <Compile Include="ViewModels\StoreVM.cs" />
