@@ -98,5 +98,9 @@ namespace MainWindow
         {
             AccountHandler.LogOff();
         }
+
+        private void RemoveGame_OnClick(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }
