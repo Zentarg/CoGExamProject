@@ -139,12 +139,12 @@
                         </Flyout>
                     </Button.Flyout>
                 </Button>
-                <Button Style="{StaticResource MenuButon}" x:Name="ProfileButton" Margin="0, 2.5, 5, 0" Height="45" FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" CornerRadius="30" FontSize="25" Width="45" FocusVisualSecondaryBrush="#33FFFFFF" Background="Black" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}">
-                    <Button.Flyout>
-                        <MenuFlyout Placement="BottomEdgeAlignedRight">
-                            <MenuFlyoutItem Text="Create Account" Click="ShowDialog_Click"/>
-                            <MenuFlyoutItem Text="Login"/>
-                            <MenuFlyoutItem Text="LogOff"/>
+                <Button Command="{Binding DoCheckAccountStatus}" Style="{StaticResource MenuButon}" x:Name="ProfileButton" Margin="0, 2.5, 5, 0" Height="45" FontFamily="Segoe MDL2 Assets" Content="&#xE77B;" CornerRadius="30" FontSize="25" Width="45" FocusVisualSecondaryBrush="#33FFFFFF" Background="Black" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}">
+                    <Button.Flyout >
+                        <MenuFlyout Placement="BottomEdgeAlignedRight" >
+                            <MenuFlyoutItem Text="Create Account" Click="ShowDialog_Click" IsEnabled="{Binding IsAccountCreationLoginEnabled}"/>
+                            <MenuFlyoutItem Text="Login" Click="MenuFlyoutItem_Click" IsEnabled="{Binding IsAccountCreationLoginEnabled}"/>
+                            <MenuFlyoutItem Text="LogOff" Click="MenuFlyoutItem_Click_1" IsEnabled="{Binding IsAccountLogOffEnabled}"/>
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>

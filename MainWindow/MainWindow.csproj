@@ -136,11 +136,15 @@
     <Compile Include="Models\GameList.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AccountLoginVM.cs" />
     <Compile Include="ViewModels\CreateAccountVM.cs" />
     <Compile Include="ViewModels\GameTemplateVM.cs" />
     <Compile Include="ViewModels\MainPageVM.cs" />
     <Compile Include="ViewModels\TestViewModel.cs" />
     <Compile Include="ViewModels\StoreVM.cs" />
+    <Compile Include="Views\AccountLoginDialogBox.xaml.cs">
+      <DependentUpon>AccountLoginDialogBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GameTemplate.xaml.cs">
       <DependentUpon>GameTemplate.xaml</DependentUpon>
     </Compile>
@@ -207,6 +211,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AccountLoginDialogBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateAccountDialogBox.xaml">
       <SubType>Designer</SubType>
