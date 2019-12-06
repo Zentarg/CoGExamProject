@@ -10,13 +10,17 @@ namespace MainWindow.Models
     public static class AccountHandler
     {
         private static Account _account;
+        private static AccountDetails _accountDetails;
+        private static Account _loggedInAccount;
+
         private static AccountLists _accountList = AccountLists.AccountListInstance;
 
 
         static  AccountHandler()
         {
             
-            _account = new Account("", "", "");
+            _account = null;
+            _accountDetails = null;
         }
 
         public static AccountLists AccountList
@@ -43,6 +47,25 @@ namespace MainWindow.Models
             }
         }
 
+        public static AccountDetails AccountDetail { 
+            get { return _accountDetails; } 
+            set { _accountDetails = value; } 
+        }
+
+
+        public static void Login(string username, string password)
+        {
+            
+        }
+
+        public static void CreateAccount(Account account)
+        {
+            _accountList.AccountList.Add(account);
+        }
+
+
+
+        #region Check Username, password and display name methods
 
         private static bool UsernameinUseCheck(string _string)
         {
@@ -315,7 +338,7 @@ namespace MainWindow.Models
             return "The entered display name is ok";
         }
 
-        public static string DisplayNameToFile(string displayname)
+        public static string DisplayNameAddTag(string displayname)
         {
             //Creates and adds a random number tag to a display name, continously checks if it is an available tag for that name until it finds one.
             Random numberGenerator = new Random();
@@ -333,7 +356,7 @@ namespace MainWindow.Models
             if (DisplayNameNumberinUseCheck(displayname) == true)
             {
                 displayname = _tempDisplayname;
-                return DisplayNameToFile(displayname);
+                return DisplayNameAddTag(displayname);
             }
             else
             {
@@ -367,6 +390,6 @@ namespace MainWindow.Models
             }
             return null;
         }
-        
+        #endregion
     }
 }

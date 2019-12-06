@@ -33,9 +33,9 @@ namespace MainWindow
 
         public async Task LoadAccounts()
         {
-            if (FileHandler.FileExists(Constants.FileName)) 
+            if (FileHandler.FileExists(Constants.AccountListFileName)) 
             {
-                string accounts = await FileHandler.ReadFile(Constants.FileName);
+                string accounts = await FileHandler.ReadFile(Constants.AccountListFileName);
                 if (accounts != "")
                 {
                     _accountLists = JsonConvert.DeserializeObject<ObservableCollection<Account>>(accounts);
@@ -43,10 +43,9 @@ namespace MainWindow
             }     
         }
 
-        public async Task CreateAccount(Account A)
+        public async Task AddAccountToFile(Account A)
         {
-            _accountLists.Add(A);
-            FileHandler.WriteFile(Constants.FileName, _accountLists);
+            FileHandler.WriteFile(Constants.AccountListFileName, _accountLists);
 
             //Line below returns path of the file for checking
         }

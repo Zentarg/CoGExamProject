@@ -12,7 +12,7 @@ namespace MainWindow.Models
 
         public const string GameFileListName = "GameList.json";
 
-        public const string FileName = "AccountList.json";
+        public const string AccountListFileName = "AccountList.json";
 
     }
 }

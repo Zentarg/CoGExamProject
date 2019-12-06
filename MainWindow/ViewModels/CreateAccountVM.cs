@@ -48,9 +48,10 @@ namespace MainWindow.ViewModels
 
         public async void Confirm()
         {
-            TempDisplayName = AccountHandler.DisplayNameToFile(_tempDisplayName);
+            TempDisplayName = AccountHandler.DisplayNameAddTag(_tempDisplayName);
             AccountHandler.Account = new Account(_tempUsername, TempPassword, TempDisplayName);
-            await AccountList.CreateAccount(AccountHandler.Account);
+            AccountHandler.CreateAccount(AccountHandler.Account);
+            await AccountList.AddAccountToFile(AccountHandler.Account);
         }
 
         #region Properties
