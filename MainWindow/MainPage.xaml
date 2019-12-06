@@ -113,17 +113,23 @@
                                 </StackPanel>
                                     <ListView ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
                                     </ListView>
-                                    <Button Content="Proceed to checkpoint">
+                                    <Button Content="Proceed to checkout">
                                         <Button.Flyout>
-                                            <Flyout Placement="Bottom">
+                                            <Flyout x:Name="CheckoutFlyout"  Placement="Bottom">
                                                 <StackPanel>
-                                                   <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="Are you sure you want to buy all these items?" Margin="0,0,0,12" />
+                                                    <StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Totalprice:   "/>
+                                                            <TextBlock Text="{Binding TotalPrice}" Margin="5,0,0,0"/>
+                                                        </StackPanel>
+                                                            <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Are you sure you want to buy all these items?" Margin="0,0,0,12" />
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Button Content="Yes" />
+                                                            <Button Content="No" Click="CancelButton_Click" Margin="25,0,0,0"/>
+                                                        </StackPanel>
                                                     </StackPanel>
-                                                    <StackPanel Orientation="Horizontal">
-                                                    <Button Content="Yes" />
-                                                    <Button Content="No" Margin="100,0,0,0"/>
-                                                </StackPanel>
                                                 </StackPanel>
                                             </Flyout>
                                         </Button.Flyout>

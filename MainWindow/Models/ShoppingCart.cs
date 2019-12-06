@@ -14,10 +14,12 @@ namespace MainWindow.Models
     {
         private ObservableCollection<Game> _games;
         private static ShoppingCart instance;
+        private float _totalPrice;
 
         private ShoppingCart()
         {
             _games = new ObservableCollection<Game>();
+            _totalPrice = TotalPrice;
         }
 
         public void AddGame(Game game)
@@ -61,16 +63,21 @@ namespace MainWindow.Models
             get { return _games; }
         }
 
+        public float TotalPrice
+        {
+            get { return GetCurrentPrice(); }
+            set { _totalPrice = value; }
+        }
+
         public float GetCurrentPrice()
         {
-            float totalPrice = 0;
-
+            
             foreach (Game game in _games)
             {
-                totalPrice += game.Price * game.CurrentDiscountPercentage;
+                _totalPrice += game.Price * game.CurrentDiscountPercentage;
             }
 
-            return totalPrice;
+            return _totalPrice;
         }
 
     }

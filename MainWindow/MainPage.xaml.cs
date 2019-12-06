@@ -80,5 +80,10 @@ namespace MainWindow
                 DialogResult.Text = "Dialog result NO.";
             }*/
         }
+        
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            CheckoutFlyout.Hide();
+        }
     }
 }
