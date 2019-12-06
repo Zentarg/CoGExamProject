@@ -25,10 +25,12 @@ namespace MainWindow.Views
     public sealed partial class Store : Page
     {
         private StoreVM _storeVm;
+        private NavigationHandler _navigationHandler;
         public Store()
         {
             this.InitializeComponent();
             _storeVm = DataContext as StoreVM;
+            _navigationHandler = NavigationHandler.Instance;
         }
 
         private void StoreItemClicked(object sender, TappedRoutedEventArgs e)
@@ -43,6 +45,11 @@ namespace MainWindow.Views
                 _Item = VisualTreeHelper.GetParent(_Item);
             _Item.SetValue(GridViewItem.IsSelectedProperty, true);
             _storeVm.PurchaseSelectedGame();
+        }
+
+        private void GoToGameButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.GameTemplate"));
         }
     }
 }

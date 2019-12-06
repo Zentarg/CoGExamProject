@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using MainWindow.Models;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +23,19 @@ namespace MainWindow.Views
     /// </summary>
     public sealed partial class GameTemplate : Page
     {
+        private ShoppingCart _shoppingCart;
+        private GameList _gameList;
+
         public GameTemplate()
         {
             this.InitializeComponent();
+            _shoppingCart = ShoppingCart.Instance;
+            _gameList = GameList.Instance;
+        }
+
+        private void BuyGameButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _shoppingCart.AddGame(_gameList.SelectedGame);
         }
     }
 }

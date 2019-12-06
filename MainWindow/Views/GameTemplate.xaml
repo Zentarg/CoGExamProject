@@ -14,6 +14,60 @@
     </Page.DataContext>
 
     <Grid>
+        <ScrollViewer>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
 
+                <FlipView ItemsSource="{Binding SelectedGame.CarrouselItems}">
+                    <FlipView.ItemTemplate>
+                        <DataTemplate x:DataType="{Binding CarrouselItemType}">
+                            <Image Source="{Binding ItemLink}"/>
+                        </DataTemplate>
+                    </FlipView.ItemTemplate>
+                </FlipView>
+                <Grid x:Name="GameInformationGrid" Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="250" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBlock Text="Game Description" FontSize="18"/>
+                        <TextBlock Text="{Binding SelectedGame.Description}" TextWrapping="WrapWholeWords" FontSize="15" />
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock Text="{Binding SelectedGame.Price}" Margin="0, 2, 0, 0" FontSize="17"/>
+                                <TextBlock Text="$" Margin="0, 2, 10, 0" FontSize="17"/>
+                                <Button x:Name="BuyGameButton" Content="Add to cart" Margin="0, 0, 40, 0" Click="BuyGameButton_OnClick"/>
+                            </StackPanel>
+                            <TextBlock Text="Developer:" FontSize="17"/>
+                            <TextBlock Text="{Binding SelectedGame.Author.DisplayName}" FontSize="15"/>
+                            <TextBlock Text="Overall Rating: " FontSize="17" />
+                            <TextBlock Text="" FontSize="15"/>
+                            <TextBlock Text="Categories:" FontSize="17" />
+                            <GridView ItemsSource="{Binding SelectedGame.Categories}" SelectionMode="None" HorizontalAlignment="Right" Margin="0, 0, 20, 0">
+                                <GridView.ItemContainerStyle>
+                                    <Style TargetType="GridViewItem">
+                                        <Setter Property="MinHeight" Value="10" />
+                                        <Setter Property="MinWidth" Value="10" />
+                                        <Setter Property="Margin" Value="3.5"/>
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="Background" Value="CornflowerBlue" />
+                                        <Setter Property="Padding" Value="5, 2, 5, 2"/>
+                                        <Setter Property="Foreground" Value="AliceBlue" />
+                                        <Setter Property="FontSize" Value="12" />
+                                    </Style>
+                                </GridView.ItemContainerStyle>
+                            </GridView>
+                        </StackPanel>
+                        
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using MainWindow.Models;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -23,35 +24,34 @@ namespace MainWindow
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private readonly NavigationHandler _navigationHandler;
         public MainPage()
         {
             this.InitializeComponent();
+            _navigationHandler = NavigationHandler.Instance;
+            _navigationHandler.SetNavigationFrame(MainFrame);
         }
 
         private void NavigateMainFrameBack(object sender, RoutedEventArgs e)
         {
-            MainFrame.GoBack();
+            _navigationHandler.NavigateFrameBack();
         }
 
         private void NavigateMainFrameForwards(object sender, RoutedEventArgs e)
         {
-            MainFrame.GoForward();
-        }
-
-        private void NavigateMainFrame(Type newPage)
-        {
-            MainFrame.Navigate(newPage);
-            PageNameTextblock.Text = newPage.Name;
+            _navigationHandler.NavigateFrameForwards();
         }
 
         private void ChangePage(object sender, RoutedEventArgs e)
         {
-            NavigateMainFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.{(sender as Button).Tag}"));
+            _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.{(sender as Button).Tag}"));
+            PageNameTextblock.Text =
+                Type.GetType($"{Application.Current.GetType().Namespace}.Views.{(sender as Button).Tag}").Name;
         }
 
         private void ChangePageMenuFlyoutItem(object sender, RoutedEventArgs e)
         {
-            NavigateMainFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.{(sender as MenuFlyoutItem).Tag}"));
+            _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.{(sender as MenuFlyoutItem).Tag}"));
         }
 
         private void HamburgerToggle_OnClick(object sender, RoutedEventArgs e)

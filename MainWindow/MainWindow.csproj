@@ -126,6 +126,7 @@
     <Compile Include="Models\AccountHandler.cs" />
     <Compile Include="Models\AccountLists.cs" />
     <Compile Include="Models\CarrouselItem.cs" />
+    <Compile Include="Models\NavigationHandler.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\FileHandler.cs" />
