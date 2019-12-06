@@ -70,18 +70,17 @@ namespace MainWindow.Models
         public float TotalPrice
         {
             get { return GetCurrentPrice(); }
-            set { _totalPrice = value; }
         }
 
         public float GetCurrentPrice()
         {
-            
+            float price = 0;
             foreach (Game game in _games)
             {
-                _totalPrice += game.Price * game.CurrentDiscountPercentage;
+               price += game.Price - (game.Price *  ((float)game.CurrentDiscountPercentage / 100));
             }
-
-            return _totalPrice;
+            
+            return price;
         }
 
     }

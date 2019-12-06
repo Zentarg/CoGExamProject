@@ -56,11 +56,6 @@ namespace MainWindow.ViewModels
         public float TotalPrice
         {
             get { return _shoppingCart.TotalPrice;}
-            set
-            {
-                _shoppingCart.TotalPrice = value;
-                OnPropertyChanged();
-            }
         }
         public Game SelectedGame
         {
@@ -89,12 +84,14 @@ namespace MainWindow.ViewModels
         {
             _shoppingCart.AddGame(SelectedGame);
             OnPropertyChanged(nameof(Games));
+            OnPropertyChanged(nameof(TotalPrice));
         }
 
         public void RemoveGame()
         {
             _shoppingCart.RemoveGame(SelectedGame);
             OnPropertyChanged(nameof(Games));
+            OnPropertyChanged(nameof(TotalPrice));
         }
 
         public void PurchaseGame()

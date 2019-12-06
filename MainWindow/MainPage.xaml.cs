@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MainWindow.Models;
+using MainWindow.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,7 +27,7 @@ namespace MainWindow
     public sealed partial class MainPage : Page
     {
         private readonly NavigationHandler _navigationHandler;
-
+        private MainPageVM _mainPageVM;
 
 
         public MainPage()
@@ -34,7 +35,7 @@ namespace MainWindow
             this.InitializeComponent();
             _navigationHandler = NavigationHandler.Instance;
             _navigationHandler.SetNavigationFrame(MainFrame);
-
+            _mainPageVM = DataContext as MainPageVM;
             
         }
 
@@ -104,6 +105,13 @@ namespace MainWindow
 
         private void RemoveGame_OnClick(object sender, RoutedEventArgs e)
         {
+            var item = sender as DependencyObject;
+            while (!(item is ListViewItem))
+            {
+                item = VisualTreeHelper.GetParent(item);
+            }
+            item.SetValue(ListViewItem.IsSelectedProperty, true);
+            _mainPageVM.RemoveGame();
         }
 
        
