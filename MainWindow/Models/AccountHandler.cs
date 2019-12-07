@@ -85,6 +85,8 @@ namespace MainWindow.Models
         {
 
             _accountList.AccountList.Add(account);
+            SetDisplayNameForUI = _account.DisplayName;
+            MainPageVm?.CallForDisplayName();
             //_accountDetails = new AccountDetails(_account.UserName);
         }
 
