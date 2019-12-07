@@ -24,27 +24,27 @@ namespace MainWindow.Models
 
         public void AddGame(Game game)
         {
-            _games.Add(game);
+            Games.Add(game);
         }
 
-        public void AddGame(ObservableCollection<Game> _games)
+        public void AddGame(ObservableCollection<Game> games)
         {
-            foreach (Game game in _games)
+            foreach (Game game in games)
             {
-                _games.Add(game);
+                Games.Add(game);
             }
         }
 
         public void RemoveGame(Game game)
         {
-            _games.Remove(game);
+            Games.Remove(game);
         }
 
-        public void RemoveGame(ObservableCollection<Game> _games)
+        public void RemoveGame(ObservableCollection<Game> games)
         {
-            foreach (Game game in _games)
+            foreach (Game game in games)
             {
-                _games.Remove(game);
+                Games.Remove(game);
             }
         }
 
@@ -52,6 +52,7 @@ namespace MainWindow.Models
         {
 
         }
+
         public static ShoppingCart Instance
         {
             get

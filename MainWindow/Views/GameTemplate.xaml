@@ -16,11 +16,10 @@
 
     <Page.Resources>
         <DataTemplate x:Key="VideoTemplate" x:DataType="models:CarrouselItem">
-            <MediaPlayerElement Source="{Binding ItemLink}" />
+            <MediaPlayerElement Source="{Binding ItemLink}"/>
         </DataTemplate>
         <DataTemplate x:Key="YoutubeVideoTemplate" x:DataType="models:CarrouselItem">
             <WebView Source="{Binding ItemLink}">
-
             </WebView>
         </DataTemplate>
         <DataTemplate x:Key="ImageTemplate" x:DataType="models:CarrouselItem">
@@ -36,17 +35,40 @@
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <FlipView x:Name="Carrousel" Grid.Row="0" ItemsSource="{Binding SelectedGame.CarrouselItems}" ItemTemplateSelector="{StaticResource CarrouselDataTemplateSelector}"/>
+                    <GridView ItemsSource="{Binding ItemsSource, ElementName=Carrousel}" SelectedIndex="{Binding SelectedIndex, ElementName=Carrousel, Mode=TwoWay}" VerticalAlignment="Bottom" IsItemClickEnabled="False" HorizontalAlignment="Center" Margin="0, 0, 0, -10">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"></StackPanel>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="MinHeight" Value="10" />
+                                <Setter Property="MinWidth" Value="30" />
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="28" Height="8" Background="CornflowerBlue">
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
 
-                <FlipView Grid.Row="0" ItemsSource="{Binding SelectedGame.CarrouselItems}" ItemTemplateSelector="{StaticResource CarrouselDataTemplateSelector}"/>
+                </Grid>
+
                 <Grid x:Name="GameInformationGrid" Grid.Row="1" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="250" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <TextBlock Text="Game Description" FontSize="18"/>
-                        <TextBlock Text="{Binding SelectedGame.Description}" TextWrapping="WrapWholeWords" FontSize="15" />
-                    </Grid>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Game Description" FontSize="18" Padding="10"/>
+                        <TextBlock Text="{Binding SelectedGame.Description}" TextWrapping="WrapWholeWords" FontSize="15" Padding="10" />
+                    </StackPanel>
                     <Grid Grid.Column="1">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
