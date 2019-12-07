@@ -31,6 +31,7 @@ namespace MainWindow.ViewModels
             DoRemoveGame = new RelayCommand(RemoveGame);
             DoPurchaseGame = new RelayCommand(PurchaseGame);
             DoCheckAccountStatus = new RelayCommand(CheckAccountStatus);
+            AccountHandler.MainPageVm = this;
             List<string> categories = new List<string>();
             categories.Add("Category 1");
             categories.Add("Category 2");
@@ -133,7 +134,7 @@ namespace MainWindow.ViewModels
 
 
 
-        private void CallForDisplayName()
+        public void CallForDisplayName()
         {
             if (AccountHandler.SetDisplayNameForUI != null)
             {

@@ -28,6 +28,8 @@ namespace MainWindow.Models
             
         }
 
+        public static MainPageVM MainPageVm { get; set; }
+
         public static AccountLists AccountList
         {
             get
@@ -65,6 +67,8 @@ namespace MainWindow.Models
                 if(username == account.UserName && password == account.PassWord)
                 {
                     _account = new Account(account.UserName, account.PassWord, account.DisplayName);
+                    SetDisplayNameForUI = _account.DisplayName;
+                    MainPageVm?.CallForDisplayName();
                     break;
                 }
             }
@@ -74,6 +78,7 @@ namespace MainWindow.Models
         {
             _account = null;
             _displaynameForUI = null;
+            MainPageVm?.CallForDisplayName();
         }
 
         public static void CreateAccount(Account account)
