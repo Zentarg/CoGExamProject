@@ -20,16 +20,20 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <TextBlock FontSize="75">Store</TextBlock>
-            <Button Margin="1273,10,0,0" VerticalAlignment="Top" Command="{Binding DoAddGame}">
-                AddGame
-            </Button>
-            <Button Margin="1377,10,0,0" VerticalAlignment="Top" Command="{Binding DoLoadGames}">
-                LoadGames
-            </Button>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBox x:Name="StoreSearchTextBox" TextChanged="StoreSearchTextBox_OnTextChanged" Width="250" Height="30" PlaceholderText="Search..." Margin="0, 0, 10, 0"/>
+                <Button Command="{Binding DoAddGame}" Margin="0, 0, 10, 0">
+                    AddGame
+                </Button>
+                <Button Command="{Binding DoLoadGames}">
+                    LoadGames
+                </Button>
+
+            </StackPanel>
 
         </Grid>
 
-        <GridView Grid.Row="1" x:Name="GamesGridView" ItemsSource="{Binding StoreGameCollection}" HorizontalAlignment="Center" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
+        <GridView Grid.Row="1" x:Name="GamesGridView" ItemsSource="{Binding FilteredGames}" HorizontalAlignment="Center" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
             <GridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
                     <Setter Property="Margin" Value="10"/>

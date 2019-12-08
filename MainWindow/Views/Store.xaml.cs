@@ -51,5 +51,28 @@ namespace MainWindow.Views
         {
             _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.GameTemplate"));
         }
+
+        private void StoreSearchTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<Game> _tempList = new List<Game>();
+            foreach (Game game in _storeVm.StoreGameCollection)
+            {
+                if (game.Name.ToLower().Contains(StoreSearchTextBox.Text.ToLower()))
+                    _tempList.Add(game);
+            }
+
+            for (int i = _storeVm.FilteredGames.Count; i > 0; i--)
+            {
+                if (!(_tempList.Contains(_storeVm.FilteredGames[i - 1])))
+                    _storeVm.FilteredGames.Remove(_storeVm.FilteredGames[i - 1]);
+            }
+
+            foreach (Game game in _tempList)
+            {
+                if (!_storeVm.FilteredGames.Contains(game))
+                    _storeVm.FilteredGames.Add(game);
+            }
+
+        }
     }
 }

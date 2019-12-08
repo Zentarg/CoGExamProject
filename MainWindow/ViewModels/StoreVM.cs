@@ -17,6 +17,7 @@ namespace MainWindow.ViewModels
         private readonly Game _newGame;
         private readonly GameList _gameList;
         private readonly ShoppingCart _shoppingCart;
+        private ObservableCollection<Game> _filteredGames = new ObservableCollection<Game>();
 
         public StoreVM()
         {
@@ -55,6 +56,7 @@ namespace MainWindow.ViewModels
             DoAddGame = new RelayCommand(AddGame);
             DoLoadGames = new RelayCommand(LoadGames);
             LoadGames();
+            FilteredGames = StoreGameCollection;
         }
 
         public RelayCommand DoAddGame { get; set; }
@@ -79,6 +81,16 @@ namespace MainWindow.ViewModels
 
         public ObservableCollection<Game> StoreGameCollection {
             get { return _gameList.StoreGameCollection; }
+        }
+
+        public ObservableCollection<Game> FilteredGames
+        {
+            get { return _filteredGames; }
+            set
+            {
+                _filteredGames = value;
+                OnPropertyChanged();
+            }
         }
 
         public Game SelectedGame
