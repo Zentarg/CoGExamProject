@@ -139,6 +139,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountLoginVM.cs" />
+    <Compile Include="ViewModels\AccountSettingsVM.cs" />
     <Compile Include="ViewModels\ApplicationSettingsVM.cs" />
     <Compile Include="ViewModels\CreateAccountVM.cs" />
     <Compile Include="ViewModels\GameTemplateVM.cs" />
