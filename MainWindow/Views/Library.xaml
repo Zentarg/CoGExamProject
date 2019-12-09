@@ -31,51 +31,52 @@
 
         <StackPanel Orientation="Horizontal">
             <!--  List Part  -->
-            <StackPanel>
+            <ScrollViewer>
+            <StackPanel Width="180" >
                 <ListView ItemsSource="{Binding GamesCollection}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <ListView
-                                    x:Name="BaseExample"
-                                    ItemTemplate="{StaticResource ListPickerFlyoutPresenterContentTemplate}"
-                                     BorderThickness="1"
-                                    BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
-                                    Width="350" 
-                                     Height="400"
-                                    HorizontalAlignment="Left"/>
-
-
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Source="{Binding GameImageSource}" />
                                 <TextBlock
                                     Margin="10,10,10,10"
                                     VerticalAlignment="Center"
-                                    FontSize="18"
-                                    Text="{Binding GameImageSource}" />
+                                    FontSize="8"
+                                    Text="{Binding Title}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <TextBlock Text="Game List"/>
-                <TextBlock Text="Goes Here"/>
             </StackPanel>
+            </ScrollViewer>
+
 
             <!--  Details Part  -->
-            <StackPanel>
+            <StackPanel Width="auto">
                 <StackPanel
                     Margin="10,10,10,10"
                     BorderBrush="DarkGray"
                     BorderThickness="3,3,3,3"
-                    Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    Orientation="Vertical" HorizontalAlignment="Stretch" Height="705" Width="675">
                     <Image
-                        Width="300"
-                        Height="40"
-                        Margin="10,10,10,10"
+                        Width="100"
+                        Height="100"
+                        Margin="10,10,420,10"
                         Source="{Binding SelectedGame.GameImageSource}" />
-
-                    <TextBlock x:Name="gfhf" Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Title}" />
-                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Catagories}"  />
-                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.GameDescription}" />
+                    
+                    <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                            <TextBlock x:Name="Game" Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Title}" FontSize="24" Width="500" Height="auto" HorizontalTextAlignment="DetectFromContent" TextWrapping="Wrap" />
+                    </Viewbox>
+                    <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                            <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Catagories}" FontSize="16" Height="auto" Width="500" TextWrapping="Wrap" />
+                    </Viewbox>
+                        <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                                <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.GameDescription}" FontSize="12" Width="500"  Height="400" Padding="3" TextWrapping="Wrap" />
+                    </Viewbox>
 
                 </StackPanel>
             </StackPanel>

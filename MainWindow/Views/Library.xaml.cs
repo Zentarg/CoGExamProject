@@ -36,5 +36,20 @@ namespace MainWindow.Views
         {
 
         }
+
+        private void BaseExample_SelectionChanged_1()
+        {
+
+        }
+
+        private void TextBlock_SelectionChanged()
+        {
+
+        }
+
+        private void ScrollViewer_ViewChanged()
+        {
+
+        }
     }
 }
