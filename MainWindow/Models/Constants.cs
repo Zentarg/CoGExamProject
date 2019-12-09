@@ -14,5 +14,7 @@ namespace MainWindow.Models
 
         public const string AccountListFileName = "AccountList.json";
 
+        public const string AccountDetailsFolderPath = "\\AccountDetails\\";
+
     }
 }

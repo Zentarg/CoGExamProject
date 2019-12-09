@@ -13,11 +13,13 @@ namespace MainWindow.Models
     public static class AccountHandler 
     {
         private static Account _account;
-        private static AccountDetails _accountDetails;
 
         private static AccountLists _accountList = AccountLists.AccountListInstance;
 
         private static string _displaynameForUI;
+
+        private static AccountDetails _accountDetails;
+
 
 
         static  AccountHandler()
@@ -60,7 +62,7 @@ namespace MainWindow.Models
         }
 
 
-        public static void Login(string username, string password)
+        public static async void Login(string username, string password)
         {
             foreach (Account account in _accountList.AccountList)
             {
@@ -68,7 +70,10 @@ namespace MainWindow.Models
                 {
                     _account = new Account(account.UserName, account.PassWord, account.DisplayName);
                     SetDisplayNameForUI = _account.DisplayName;
-                    MainPageVm?.CallForDisplayName();
+                    AccountDetail = new AccountDetails();
+                    _accountDetails = await AccountDetail.LoadUserDetailsFile(username);
+                    MainPageVm?.CallForAccountStatus();
+
                     break;
                 }
             }
@@ -78,7 +83,9 @@ namespace MainWindow.Models
         {
             _account = null;
             _displaynameForUI = null;
-            MainPageVm?.CallForDisplayName();
+            _accountDetails = null;
+            MainPageVm?.CallForAccountStatus();
+
         }
 
         public static void CreateAccount(Account account)
@@ -86,7 +93,11 @@ namespace MainWindow.Models
 
             _accountList.AccountList.Add(account);
             SetDisplayNameForUI = _account.DisplayName;
-            MainPageVm?.CallForDisplayName();
+            AccountDetail = new AccountDetails();
+            _accountDetails.DisplayName = account.DisplayName;
+            _accountDetails.CreateUserDetailsFile(_accountDetails, account.UserName);
+            MainPageVm?.CallForAccountStatus();
+
             //_accountDetails = new AccountDetails(_account.UserName);
         }
 

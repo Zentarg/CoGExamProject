@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,31 +10,46 @@ namespace MainWindow.Models
 {
     public class AccountDetails
     {
-        private string _userName;
-        //private Library _library;
-        private ShoppingCart _shoppingCart;
-        // private string _profilePicturePath;
-        //private AccountStatistics _accountStatistics;
-        private string _displayName;
 
-        public AccountDetails(string userName)
+        //private Library _library;
+
+        // private string _profilePicturePath;
+        private string _displayname;
+
+        public AccountDetails()
         {
-            _userName = userName;
-            //_profilePicturePath = profilePicturePath;
+
         }
+      
 
         #region Properties
-        public string UserName { get { return _userName; } set { _userName = value; } }
+        public string UserName { get; set; }
         //public string ProfilePicturePatch { get; set; }
-        public string DisplayName { get { return _displayName; } set { _displayName = value; } }
-        public ShoppingCart AccountShoppingCart { get { return _shoppingCart; } set { _shoppingCart = value; } }
+        public string DisplayName { get { return _displayname; } set { _displayname = value; } }
+        public ShoppingCart AccountShoppingCart { get; set; }
 
 
         #endregion
 
         #region Methods
+        public void CreateUserDetailsFile(AccountDetails accountDetails, string username)
+        {
+            FileHandler.WriteFile(Constants.AccountDetailsFolderPath + username + ".json", accountDetails);
+        }
 
+        public async Task<AccountDetails> LoadUserDetailsFile(string username)
+        {
+            if (FileHandler.FileExists(Constants.AccountDetailsFolderPath + username + ".json"))
+            {
+                string json = await FileHandler.ReadFile(Constants.AccountDetailsFolderPath + username + ".json");
 
+                return JsonConvert.DeserializeObject<AccountDetails>(json);
+            }
+            else
+            {
+                return null;
+            }       
+        }
         #endregion
     }
 }

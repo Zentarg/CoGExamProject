@@ -21,6 +21,8 @@ namespace MainWindow.ViewModels
         private bool _isAccountCreationLoginEnabled;
         private bool _isAccountLogOffEnabled;
         private string _displayName;
+        private bool _isAccountSettingsEnabled = false;
+        private bool _isProfileEnabled = false;
 
         public MainPageVM()
         {
@@ -80,6 +82,8 @@ namespace MainWindow.ViewModels
         public bool IsAccountCreationLoginEnabled { get { return _isAccountCreationLoginEnabled; } set { _isAccountCreationLoginEnabled = value; OnPropertyChanged(); } }
         public bool IsAccountLogOffEnabled { get { return _isAccountLogOffEnabled; } set { _isAccountLogOffEnabled = value; OnPropertyChanged(); } }
         public string DisplayName { get { return _displayName; } set { _displayName = value; OnPropertyChanged(); } }
+        public bool IsAccountSettingsEnabled { get { return _isAccountSettingsEnabled; } set { _isAccountSettingsEnabled = value; OnPropertyChanged(); } }
+        public bool IsProfileEnabled { get { return _isProfileEnabled; } set { _isProfileEnabled = value; OnPropertyChanged(); } }
         
         public void AddGame()
         {
@@ -134,15 +138,19 @@ namespace MainWindow.ViewModels
 
 
 
-        public void CallForDisplayName()
+        public void CallForAccountStatus()
         {
-            if (AccountHandler.SetDisplayNameForUI != null)
+            if (AccountHandler.Account != null)
             {
                 DisplayName = AccountHandler.SetDisplayNameForUI;
+                IsAccountSettingsEnabled = true;
+                IsProfileEnabled = true;
             }
             else
             {
                 DisplayName = null;
+                IsAccountSettingsEnabled = false;
+                IsProfileEnabled = false;
             }
         }
 

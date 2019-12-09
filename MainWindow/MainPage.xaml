@@ -164,8 +164,9 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <SplitView x:Name="MainSplitView" Grid.Row="1" IsPaneOpen="False" OpenPaneLength="256" CompactPaneLength="56" DisplayMode="CompactOverlay" PaneBackground="#00020E">
+        <SplitView x:Name="MainSplitView" Grid.Row="1" IsPaneOpen="False" OpenPaneLength="266" CompactPaneLength="56" DisplayMode="CompactOverlay" PaneBackground="#00020E">
             <SplitView.Pane>
+                <Grid>
                 <StackPanel>
                     <Button Style="{StaticResource MenuButon}" x:Name="HamburgerToggle" Click="HamburgerToggle_OnClick" Background="{x:Null}">
                         <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE700;" FontSize="35" Width="256" FocusVisualSecondaryBrush="#99000000" />
@@ -188,25 +189,34 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource MenuButon}" Click="ShowDialog_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;" FontSize="35" Width="50" />
-                            <TextBlock Margin="22, 0, 0, 0" FontSize="23" Width="164">
+                        <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="UserProfile" Background="{x:Null}" IsEnabled="{Binding IsProfileEnabled}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;" FontSize="35" Width="50" />
+                                <TextBlock Margin="22, 0, 0, 0" FontSize="23" Width="164">
                                 Profile
-                            </TextBlock>
-                        </StackPanel>
-                    </Button>
-                    <TextBlock Text="" FontSize="35"/>
-                    <TextBlock Text="" FontSize="35"/>
-                    <TextBlock Text="" FontSize="35"/>
-                    <TextBlock Text="" FontSize="35"/>
-                    <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="ApplicationSettings" VerticalAlignment="Bottom">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE713;" FontSize="35" Width="50"/>
-                            <TextBlock Margin="22,0,0,0" FontSize="23" Width="164" Text="Settings"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
+                                </TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Bottom">
+                        <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="AccountSettings" IsEnabled="{Binding IsAccountSettingsEnabled}">
+                            <StackPanel Orientation="Horizontal">
+                                <Grid>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;" FontSize="20" Width="50" Margin="0,0,0,0"/>
+                                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE713;" FontSize="20" Margin="15,20,0,0"/>
+                                </Grid>
+                                <TextBlock Margin="22,0,0,0" FontSize="23" Width="184" Text="Account Settings"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="ApplicationSettings">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE713;" FontSize="35" Width="50"/>
+                                <TextBlock Margin="22,0,0,0" FontSize="23" Width="164" Text="App Settings"/>
+                            </StackPanel>
+                        </Button>
+                        <TextBlock FontSize="35" Text=""/>
+                    </StackPanel>
+                </Grid>
             </SplitView.Pane>
             <SplitView.Content>
                 <Frame x:Name="MainFrame">
