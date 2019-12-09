@@ -47,8 +47,6 @@ namespace MainWindow
         public async Task AddAccountToFile(Account A)
         {
             FileHandler.WriteFile(Constants.AccountListFileName, _accountLists);
-
-            //Line below returns path of the file for checking
         }
     }
 }

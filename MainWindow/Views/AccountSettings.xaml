@@ -6,8 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:ViewModel ="using:MainWindow.ViewModels"
+    xmlns:Custom="using:Microsoft.Xaml.Interactivity"
+    xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core">
 
+    <Page.DataContext>
+        <ViewModel:AccountSettingsVM/>
+    </Page.DataContext>
 
 
     <Page.Resources>
@@ -56,11 +62,37 @@
                     <StackPanel HorizontalAlignment="Left">
                         <TextBlock Text="Change Display Name" FontSize="25"/>
                     </StackPanel>
-                    <StackPanel HorizontalAlignment="Center">
-                        <TextBox Style="{StaticResource InputField}" PlaceholderText="Display Name" Text="" Margin="0,0,0,0"></TextBox>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <TextBox Style="{StaticResource InputField}" PlaceholderText="Display Name" Text="{Binding TempDisplayName, Mode=TwoWay}" Margin="0,0,0,0">
+                            <Custom:Interaction.Behaviors>
+                                <Custom1:DataTriggerBehavior Value="3" Binding="{Binding DisplaynameCheck}">
+                                    <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Red"/>
+                                </Custom1:DataTriggerBehavior>
+                                <Custom1:DataTriggerBehavior Value="2" Binding="{Binding DisplaynameCheck}">
+                                    <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Red"/>
+                                </Custom1:DataTriggerBehavior>
+                                <Custom1:DataTriggerBehavior Value="1" Binding="{Binding DisplaynameCheck}">
+                                    <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Red"/>
+                                </Custom1:DataTriggerBehavior>
+                                <Custom1:DataTriggerBehavior Value="0" Binding="{Binding DisplaynameCheck}">
+                                    <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Green"/>
+                                </Custom1:DataTriggerBehavior>
+                                <Custom1:DataTriggerBehavior Value="4" Binding="{Binding DisplaynameCheck}">
+                                    <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Blue"/>
+                                </Custom1:DataTriggerBehavior>
+                                <Custom1:DataTriggerBehavior Value="5" Binding="{Binding DisplaynameCheck}">
+                                    <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="red"/>
+                                </Custom1:DataTriggerBehavior>
+                            </Custom:Interaction.Behaviors>
+                        </TextBox>
+                        <Image Source="{Binding ImagePathDisplayname}" Stretch="Fill" Height="20" Margin="0,20,0,0">
+                            <ToolTipService.ToolTip>
+                                <ToolTip Content="{Binding DisplaynameTooltip}" FontSize="15"/>
+                            </ToolTipService.ToolTip>
+                        </Image>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right">
-                        <Button Content="Set Display Name" CornerRadius="10" Margin="0,0,0,0" Width="180"/>
+                        <Button Content="Set Display Name" CornerRadius="10" Margin="0,0,0,0" Width="180" Command="{Binding DoSetDisplayName}" IsEnabled="{Binding IsSetDisplayNameEnabled}"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="0,0,0,20">

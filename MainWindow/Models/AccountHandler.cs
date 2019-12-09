@@ -545,6 +545,19 @@ namespace MainWindow.Models
             }
             return null;
         }
+
+
+        public static void ChangeDisplayNameInAccountList(string term)
+        {
+            foreach(Account account in _accountList.AccountList)
+            {
+                if(_account.UserName == account.UserName)
+                {
+                    account.DisplayName = term;
+                    break;
+                }
+            }
+        }
         #endregion
     }
 }

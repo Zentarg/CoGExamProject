@@ -31,7 +31,7 @@ namespace MainWindow.ViewModels
 
         private int _displaynameCheck = 4;
         private string _displaynameTooltip;
-        private BitmapImage _ImagePathDisplayname;
+        private BitmapImage _imagePathDisplayname;
 
         private bool _isConfirmButtonEnabled = false;
 
@@ -176,8 +176,8 @@ namespace MainWindow.ViewModels
 
         public BitmapImage ImagePathDisplayname
         {
-            get { return _ImagePathDisplayname; }
-            set { _ImagePathDisplayname = value; OnPropertyChanged(); }
+            get { return _imagePathDisplayname; }
+            set { _imagePathDisplayname = value; OnPropertyChanged(); }
         }
 
         public BitmapImage ProfilePicture
