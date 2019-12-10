@@ -27,14 +27,10 @@
                 <Button x:Name="ThumbnailImageChangeButton" Margin="0, 0, 10, 0" Click="ThumbnailImageChangeButton_OnClick" HorizontalAlignment="Right">Change</Button>
             </Grid>
             <Image x:Name="ThumbnailImage" AllowDrop="True" DragOver="ThumbnailImage_OnDragOver"  Drop="ThumbnailImage_OnDrop" Height="100" Tapped="ThumbnailImage_OnTapped" Source="{Binding ThumbnailImagePath}" Margin="10" />
-            <TextBlock Text="Game Name:" />
-            <TextBox Margin="0, 10, 0, 10" Text="{Binding Name, Mode=TwoWay}"/>
-            <TextBlock Text="Categories (Separated by comma):" />
-            <TextBox Margin="0, 10, 0, 10" Text="{Binding Categories, Mode=TwoWay}"/>
-            <TextBlock Text="Game Price:" />
-            <TextBox Margin="0, 10, 0, 10" Text="{Binding Price, Mode=TwoWay}"/>
-            <TextBlock Text="Game Description:" />
-            <TextBox Margin="0, 10, 0, 10" Text="{Binding Description, Mode=TwoWay}"/>
+            <TextBox Margin="0, 10, 0, 10" Text="{Binding Name, Mode=TwoWay}" Header="Game Name:"/>
+            <TextBox Margin="0, 10, 0, 10" Text="{Binding Categories, Mode=TwoWay}" Header="Categories (Separated by comma):"/>
+            <TextBox Margin="0, 10, 0, 10" Text="{Binding Price, Mode=TwoWay}" Header="Game Price:"/>
+            <TextBox Margin="0, 10, 0, 10" Text="{Binding Description, Mode=TwoWay}" AcceptsReturn="True" Header="Game Description:"/>
             <Grid>
                 <TextBlock Text="Carrousel Videos:" Margin="0, 10, 0, 10" AllowDrop="True" Drop="CarrouselVideosGridView_OnDrop" DragOver="CarrouselVideosGridView_OnDragOver"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -65,14 +61,7 @@
                 <GridViewItem>
                 </GridViewItem>
             </GridView>
-            <Grid>
-                <TextBlock Text="Carrousel Youtube Videos:" Margin="0, 10, 0, 10"/>
-                <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="CarrouselYoutubeAddButton" Margin="0, 0, 10, 0" Width="92" Click="CarrouselYoutubeAddButton_OnClick">Add Video</Button>
-                    <Button x:Name="CarrouselYoutubeDelButton" Click="CarrouselYoutubeDelButton_OnClick">Remove</Button>
-                </StackPanel>-->
-            </Grid>
-            <ListView ItemsSource="{Binding CarrouselYoutubeVids}" SelectedItem="{Binding SelectedCarrouselYoutubeVid, Mode=TwoWay}">
+            <ListView ItemsSource="{Binding CarrouselYoutubeVids}" SelectedItem="{Binding SelectedCarrouselYoutubeVid, Mode=TwoWay}" Header="Carrousel Youtube Videos:">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch" Width="326">
