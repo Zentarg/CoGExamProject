@@ -76,6 +76,10 @@ namespace MainWindow.ViewModels
             AccountHandler.SetDisplayNameForUI = AccountHandler.Account.DisplayName;
             AccountHandler.MainPageVm?.CallForAccountStatus();
             IsSetDisplayNameEnabled = false;
+
+            //Below saves the changed display name to the <username>.json file under /AccountDetails/
+            AccountHandler.AccountDetail.DisplayName = AccountHandler.Account.DisplayName;
+            AccountHandler.AccountDetail.CreateUserDetailsFile(AccountHandler.AccountDetail, AccountHandler.Account.UserName);
         }
 
         private bool EnableSetDisplayName()

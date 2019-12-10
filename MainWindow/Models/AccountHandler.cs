@@ -32,6 +32,7 @@ namespace MainWindow.Models
 
         public static MainPageVM MainPageVm { get; set; }
 
+
         public static AccountLists AccountList
         {
             get
@@ -95,6 +96,7 @@ namespace MainWindow.Models
             SetDisplayNameForUI = _account.DisplayName;
             AccountDetail = new AccountDetails();
             _accountDetails.DisplayName = account.DisplayName;
+            _accountDetails.UserName = account.UserName;
             _accountDetails.CreateUserDetailsFile(_accountDetails, account.UserName);
             MainPageVm?.CallForAccountStatus();
 

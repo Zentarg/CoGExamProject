@@ -150,6 +150,7 @@
     <Compile Include="ViewModels\MainPageVM.cs" />
     <Compile Include="ViewModels\TestViewModel.cs" />
     <Compile Include="ViewModels\StoreVM.cs" />
+    <Compile Include="ViewModels\UserProfileVM.cs" />
     <Compile Include="Views\AccountLoginDialogBox.xaml.cs">
       <DependentUpon>AccountLoginDialogBox.xaml</DependentUpon>
     </Compile>

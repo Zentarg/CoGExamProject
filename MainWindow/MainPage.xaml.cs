@@ -101,6 +101,10 @@ namespace MainWindow
         private void MenuFlyoutItem_Click_1(object sender, RoutedEventArgs e)
         {
             AccountHandler.LogOff();
+            _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.{"Store"}"));
+            PageNameTextblock.Text =
+                Type.GetType($"{Application.Current.GetType().Namespace}.Views.{"Store"}").Name;
+            //Frame.BackStack.Clear(); <- Needs implementation 
         }
 
         private void RemoveGame_OnClick(object sender, RoutedEventArgs e)

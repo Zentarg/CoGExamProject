@@ -6,12 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:ViewModel ="using:MainWindow.ViewModels">
+
+
+    <Page.DataContext>
+        <ViewModel:UserProfileVM/>
+    </Page.DataContext>
 
     <Grid>
         <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;" FontSize="75" HorizontalAlignment="Center" Margin="0,50,0,0"/>
         <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEA3A;" FontSize="100" HorizontalAlignment="Center" Margin="0,40,0,0"/>
-        <TextBlock Text="DisplayName#1234" FontSize="35" HorizontalAlignment="Center" Margin="0,150,0,0"/>
+        <TextBlock Text="{Binding DisplayName, Mode=TwoWay}" FontSize="35" HorizontalAlignment="Center" Margin="0,150,0,0"/>
 
 
     </Grid>

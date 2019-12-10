@@ -15,6 +15,7 @@ namespace MainWindow.Models
 
         // private string _profilePicturePath;
         private string _displayname;
+        private string _username;
 
         public AccountDetails()
         {
@@ -23,7 +24,7 @@ namespace MainWindow.Models
       
 
         #region Properties
-        public string UserName { get; set; }
+        public string UserName { get { return _username; } set { _username = value; } }
         //public string ProfilePicturePatch { get; set; }
         public string DisplayName { get { return _displayname; } set { _displayname = value; } }
         public ShoppingCart AccountShoppingCart { get; set; }
