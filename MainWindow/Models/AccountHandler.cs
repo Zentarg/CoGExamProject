@@ -312,7 +312,7 @@ namespace MainWindow.Models
 
         public static int PasswordCheck(string password)
         {
-            if (password != "")
+            if (password != null)
             {
                 if (StringContainsSpecialChar(password) == true)
                 {
@@ -493,6 +493,141 @@ namespace MainWindow.Models
             }
         }
 
+        public static int ConfirmPasswordCheck(string confirmPassword, string password)
+        {
+            if (confirmPassword != null)
+            {
+                if (confirmPassword != password)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
+        public static string PasswordConfirmResultString(int resultFromCheck)
+        {
+            if (resultFromCheck == 1)
+            {
+                return "The entered password does not match";
+            }
+            return "The entered password matches";
+        }
+
+        public static int PasswordCheckVersusOldPassword(string password)
+        {
+            if (password != null)
+            {
+                if (password != Account.PassWord)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            return 2;
+        }
+
+        public static int EnteredNewPasswordMatchesEnteredOldPassword(string newpassword)
+        {
+            if (newpassword != null)
+            {
+                if (StringContainsSpecialChar(newpassword) == true)
+                {
+
+
+                    return 5;
+                }
+                else
+                {
+
+                    if (StringLengthCheck(newpassword) == 2)
+                    {
+
+
+                        return 4;
+                    }
+                    else if (StringLengthCheck(newpassword) == 1)
+                    {
+
+
+                        return 3;
+                    }
+                    else
+                    {
+
+                        if (StringDoesNotContainOneNumberAndOneCapitalLetter(newpassword) == true)
+                        {
+
+
+                            return 2;
+                        }
+                        else
+                        {
+                            if (newpassword == Account.PassWord)
+                            {
+                                return 1;
+                            }
+                            else
+                            {
+                                return 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return 6;
+        }
+
+        public static string EnteredNewPasswordMatchesOldPasswordResultFromString(int resultFromCheck)
+        {
+            if (resultFromCheck == 5)
+            {
+                return "The entered password contains special Characters.";
+            }
+            else if (resultFromCheck == 4)
+            {
+                return "The entered password contains less than 8 Characters.";
+
+            }
+            else if (resultFromCheck == 3)
+            {
+                return "The entered password contains more than 16 Characters.";
+
+            }
+            else if (resultFromCheck == 2)
+            {
+                return "The entered password does not contain at least 1 number and 1 capital letter";
+            }
+            else if (resultFromCheck == 1)
+            {
+                return "The entered password cannot be the same as the old one";
+            }
+            return "The entered password is ok";
+        }
+
+        public static BitmapImage ReturnImagePathConfirmPassword(int resultFromCheck)
+        {
+            if (resultFromCheck == 1)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/RedX.png"));
+            }
+            else if (resultFromCheck == 0)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/GreenCheck.png"));
+            }
+            return null;
+        }
 
         public static BitmapImage ReturnImagePathUsernamePassword(int resultFromCheck)
         {
@@ -501,6 +636,19 @@ namespace MainWindow.Models
                 return new BitmapImage(new Uri("ms-appx:///Assets/RedX.png"));
             }
             else if(resultFromCheck == 0)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/GreenCheck.png"));
+            }
+            return null;
+        }
+
+        public static BitmapImage ReturnImagePathChangePassword(int resultFromCheck)
+        {
+            if (resultFromCheck == 4 || resultFromCheck == 3 || resultFromCheck == 2 || resultFromCheck == 1 || resultFromCheck == 5)
+            {
+                return new BitmapImage(new Uri("ms-appx:///Assets/RedX.png"));
+            }
+            else if (resultFromCheck == 0)
             {
                 return new BitmapImage(new Uri("ms-appx:///Assets/GreenCheck.png"));
             }
@@ -555,6 +703,17 @@ namespace MainWindow.Models
                 {
                     account.DisplayName = term;
                     break;
+                }
+            }
+        }
+
+        public static void ChangeUserPassword(string password)
+        {
+            foreach (Account acc in _accountList.AccountList)
+            {
+                if(_account.UserName == acc.UserName)
+                {
+                    acc.PassWord = password;
                 }
             }
         }

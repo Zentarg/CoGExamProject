@@ -46,7 +46,7 @@
                 <Setter Property="BorderThickness" Value="4"/>
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="Width" Value="350"/>
-                <Setter Property="Margin" Value="30,30,50,30"/>
+                <Setter Property="Margin" Value="30,15,50,15"/>
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="BorderBrush" Value="Blue"/>
 
@@ -55,7 +55,7 @@
                 <Setter Property="BorderThickness" Value="4"/>
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="Width" Value="350"/>
-                <Setter Property="Margin" Value="30,30,50,30"/>
+                <Setter Property="Margin" Value="30,15,50,15"/>
                 <Setter Property="FontSize" Value="15"/>
             </Style>
 
@@ -152,6 +152,26 @@
                 <Image Source="{Binding ImagePathPassword}" Stretch="Fill" Height="20" Margin="0,20,0,0">
                     <ToolTipService.ToolTip>
                         <ToolTip Content="{Binding PasswordTooltip}" FontSize="15"/>
+                    </ToolTipService.ToolTip>
+                </Image>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <PasswordBox Style="{StaticResource PasswordField}" Header="Confirm your Password" PlaceholderText="password" Password="{Binding ConfirmPassword, Mode=TwoWay}">
+                    <Custom:Interaction.Behaviors>
+                        <Custom1:DataTriggerBehavior Value="1" Binding="{Binding PasswordConfirmCheck}">
+                            <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Red"/>
+                        </Custom1:DataTriggerBehavior>
+                        <Custom1:DataTriggerBehavior Value="0" Binding="{Binding PasswordConfirmCheck}">
+                            <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Green"/>
+                        </Custom1:DataTriggerBehavior>
+                        <Custom1:DataTriggerBehavior Value="2" Binding="{Binding PasswordConfirmCheck}">
+                            <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Blue"/>
+                        </Custom1:DataTriggerBehavior>
+                    </Custom:Interaction.Behaviors>
+                </PasswordBox>
+                <Image Source="{Binding ImagePathConfirmPassword}" Stretch="Fill" Height="20" Margin="0,20,0,0">
+                    <ToolTipService.ToolTip>
+                        <ToolTip Content="{Binding ConfirmPasswordTooltip}" FontSize="15"/>
                     </ToolTipService.ToolTip>
                 </Image>
             </StackPanel>

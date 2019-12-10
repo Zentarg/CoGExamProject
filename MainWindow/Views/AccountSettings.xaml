@@ -103,7 +103,7 @@
                         
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right">
-                        <Button Content="Change Password" CornerRadius="10" Margin="0,0,0,0" Width="180"/>
+                        <Button Content="Change Password" CornerRadius="10" Margin="0,0,0,0" Width="180" Click="Button_Click"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="0,0,0,20">

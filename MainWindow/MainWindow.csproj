@@ -143,6 +143,7 @@
     <Compile Include="ViewModels\AccountSettingsVM.cs" />
     <Compile Include="ViewModels\AddGameContentDialogVM.cs" />
     <Compile Include="ViewModels\ApplicationSettingsVM.cs" />
+    <Compile Include="ViewModels\ChangePasswordContentDialogVM.cs" />
     <Compile Include="ViewModels\CreateAccountVM.cs" />
     <Compile Include="ViewModels\GameTemplateVM.cs" />
     <Compile Include="ViewModels\LibraryViewModel.cs" />
@@ -160,6 +161,9 @@
     </Compile>
     <Compile Include="Views\ApplicationSettings.xaml.cs">
       <DependentUpon>ApplicationSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GameTemplate.xaml.cs">
       <DependentUpon>GameTemplate.xaml</DependentUpon>
@@ -244,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ApplicationSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
