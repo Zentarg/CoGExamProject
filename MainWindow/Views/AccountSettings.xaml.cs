@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MainWindow.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,12 @@ namespace MainWindow.Views
         public AccountSettings()
         {
             this.InitializeComponent();
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePassword dialogbox = new ChangePassword();
+            await dialogbox.ShowAsync();
         }
     }
 }

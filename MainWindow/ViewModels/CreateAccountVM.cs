@@ -33,6 +33,11 @@ namespace MainWindow.ViewModels
         private string _displaynameTooltip;
         private BitmapImage _imagePathDisplayname;
 
+        private string _confirmPassword;
+        private int _passwordConfirmCheck = 2;
+        private string _confirmPasswordTooltip;
+        private BitmapImage _imagePathConfirmPassword;
+
         private bool _isConfirmButtonEnabled = false;
 
         
@@ -81,6 +86,11 @@ namespace MainWindow.ViewModels
                 PasswordCheck = PasswordCheck(_tempPassword);
                 PasswordTooltip = PasswordResultString(PasswordCheck);
                 ImagePathPassword = ReturnImagePathUsernamePassword(PasswordCheck);
+
+                PasswordConfirmCheck = ConfirmPasswordCheck(_confirmPassword, TempPassword);
+                ConfirmPasswordTooltip = PasswordConfirmResultString(PasswordConfirmCheck);
+                ImagePathConfirmPassword = ReturnImagePathConfirmPassword(PasswordConfirmCheck);
+
                 IsConfirmButtonEnabled = EnableConfirmButton();
             }
         }
@@ -99,6 +109,46 @@ namespace MainWindow.ViewModels
             }
         }
 
+        public string ConfirmPassword
+        {
+            get { return _confirmPassword; }
+            set
+            {
+                _confirmPassword = value;
+                OnPropertyChanged();
+
+                PasswordConfirmCheck = ConfirmPasswordCheck(_confirmPassword, TempPassword);
+                ConfirmPasswordTooltip = PasswordConfirmResultString(PasswordConfirmCheck);
+                ImagePathConfirmPassword = ReturnImagePathConfirmPassword(PasswordConfirmCheck);
+                IsConfirmButtonEnabled = EnableConfirmButton();
+            }
+        }
+
+        public int PasswordConfirmCheck
+        {
+            get { return _passwordConfirmCheck; }
+            set
+            {
+                _passwordConfirmCheck = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string ConfirmPasswordTooltip
+        {
+            get { return _confirmPasswordTooltip; }
+            set { _confirmPasswordTooltip = value; OnPropertyChanged(); }
+        }
+
+        public BitmapImage ImagePathConfirmPassword
+        {
+            get { return _imagePathConfirmPassword; }
+            set
+            {
+                _imagePathConfirmPassword = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int UsernameCheck
         {
@@ -190,7 +240,7 @@ namespace MainWindow.ViewModels
 
         private bool EnableConfirmButton()
         {
-            if(UsernameCheck == 0 && PasswordCheck == 00 && DisplaynameCheck == 0)
+            if(UsernameCheck == 0 && PasswordCheck == 00 && DisplaynameCheck == 0 && PasswordConfirmCheck == 0)
             {
                 return true;
             }
