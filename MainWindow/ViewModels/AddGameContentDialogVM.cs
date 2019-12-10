@@ -18,7 +18,7 @@ namespace MainWindow.ViewModels
 
     class AddGameContentDialogVM : INotifyPropertyChanged
     {
-
+        private ReleaseDate _releaseDate;
         private string _thumbnailImagePath;
         private ObservableCollection<StorageFile> _carrouselImages;
         private ObservableCollection<StorageFile> _carrouselVideos;
@@ -76,7 +76,7 @@ namespace MainWindow.ViewModels
             else if (Description.Length == 0)
                 return Constants.AddGameErrors.DescriptionInvalid;
 
-            Game newGame = new Game(AccountHandler.Account, ThumbnailImagePath, Name, _price, 0, Description, "", _categories, _carrouselItems);
+            Game newGame = new Game(AccountHandler.Account, ThumbnailImagePath, Name, _price, 0, Description, "", _categories, _carrouselItems, _releaseDate);
 
             foreach (Game game in _gameList.StoreGameCollection)
             {
@@ -142,6 +142,11 @@ namespace MainWindow.ViewModels
             set { _selectedListviewStrings = value; OnPropertyChanged(); }
         }
 
+        public ReleaseDate ReleaseTime
+        {
+            get { return _releaseDate; }
+            set { _releaseDate = value; OnPropertyChanged(); }
+        }
 
         public string Name { get; set; }
         public string Categories { get; set; }

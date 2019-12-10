@@ -130,6 +130,7 @@
     <Compile Include="Models\GameCarrouselDataTemplateSelector.cs" />
     <Compile Include="Models\GameCatalog.cs" />
     <Compile Include="Models\GameDetails.cs" />
+    <Compile Include="Models\ReleaseDate.cs" />
     <Compile Include="Models\ListviewString.cs" />
     <Compile Include="Models\NavigationHandler.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
