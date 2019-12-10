@@ -54,25 +54,13 @@ namespace MainWindow.Views
 
         private void StoreSearchTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            List<Game> _tempList = new List<Game>();
-            foreach (Game game in _storeVm.StoreGameCollection)
-            {
-                if (game.Name.ToLower().Contains(StoreSearchTextBox.Text.ToLower()))
-                    _tempList.Add(game);
-            }
+            _storeVm.FilterGames(StoreSearchTextBox.Text);
+        }
 
-            for (int i = _storeVm.FilteredGames.Count; i > 0; i--)
-            {
-                if (!(_tempList.Contains(_storeVm.FilteredGames[i - 1])))
-                    _storeVm.FilteredGames.Remove(_storeVm.FilteredGames[i - 1]);
-            }
-
-            foreach (Game game in _tempList)
-            {
-                if (!_storeVm.FilteredGames.Contains(game))
-                    _storeVm.FilteredGames.Add(game);
-            }
-
+        private void AddGameButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            AddGameContentDialog dialog = new AddGameContentDialog();
+            dialog.ShowAsync();
         }
     }
 }

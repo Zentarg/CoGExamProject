@@ -130,6 +130,7 @@
     <Compile Include="Models\GameCarrouselDataTemplateSelector.cs" />
     <Compile Include="Models\GameCatalog.cs" />
     <Compile Include="Models\GameDetails.cs" />
+    <Compile Include="Models\ListviewString.cs" />
     <Compile Include="Models\NavigationHandler.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\Constants.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountLoginVM.cs" />
     <Compile Include="ViewModels\AccountSettingsVM.cs" />
+    <Compile Include="ViewModels\AddGameContentDialogVM.cs" />
     <Compile Include="ViewModels\ApplicationSettingsVM.cs" />
     <Compile Include="ViewModels\CreateAccountVM.cs" />
     <Compile Include="ViewModels\GameTemplateVM.cs" />
@@ -152,6 +154,9 @@
     </Compile>
     <Compile Include="Views\AccountSettings.xaml.cs">
       <DependentUpon>AccountSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddGameContentDialog.xaml.cs">
+      <DependentUpon>AddGameContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ApplicationSettings.xaml.cs">
       <DependentUpon>ApplicationSettings.xaml</DependentUpon>
@@ -231,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AccountSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddGameContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

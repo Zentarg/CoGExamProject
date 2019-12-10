@@ -49,7 +49,7 @@ namespace MainWindow.Models
             }
         }
 
-        public async void LoadGames()
+        public async Task LoadGames()
         {
             if (FileHandler.FileExists(Constants.GameFileListName))
             {

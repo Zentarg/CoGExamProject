@@ -67,7 +67,7 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="Game Description" FontSize="18" Padding="10"/>
-                        <TextBlock Text="{Binding SelectedGame.Description}" TextWrapping="WrapWholeWords" FontSize="15" Padding="10" />
+                        <TextBlock Text="{Binding SelectedGame.Description}" TextWrapping="WrapWholeWords" FontSize="15" Padding="10"/>
                     </StackPanel>
                     <Grid Grid.Column="1">
                         <StackPanel>

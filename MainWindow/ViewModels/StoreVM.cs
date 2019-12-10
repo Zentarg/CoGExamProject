@@ -53,25 +53,40 @@ namespace MainWindow.ViewModels
             _newGame = new Game(new Account("username", "password", "displayName"), "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg", "gameName", 34.5f, 0, lorem, "gamepath", categories,carrouselItems);
             _gameList = GameList.Instance;
             _shoppingCart = ShoppingCart.Instance;
-            DoAddGame = new RelayCommand(AddGame);
             DoLoadGames = new RelayCommand(LoadGames);
             LoadGames();
-            FilteredGames = StoreGameCollection;
         }
 
         public RelayCommand DoAddGame { get; set; }
         public RelayCommand DoLoadGames { get; set; }
 
-        private void AddGame()
+        private async void LoadGames()
         {
-            _gameList.AddGame(_newGame);
-            OnPropertyChanged(nameof(StoreGameCollection));
+            await _gameList.LoadGames();
+            FilterGames("");
         }
 
-        private void LoadGames()
+        public void FilterGames(string searchTerms)
         {
-            _gameList.LoadGames();
-            OnPropertyChanged(nameof(StoreGameCollection));
+            List<Game> _tempList = new List<Game>();
+            foreach (Game game in StoreGameCollection)
+            {
+                if (game.Name.ToLower().Contains(searchTerms.ToLower()))
+                    _tempList.Add(game);
+            }
+
+            for (int i = FilteredGames.Count; i > 0; i--)
+            {
+                if (!(_tempList.Contains(FilteredGames[i - 1])))
+                    FilteredGames.Remove(FilteredGames[i - 1]);
+            }
+
+            foreach (Game game in _tempList)
+            {
+                if (!FilteredGames.Contains(game))
+                    FilteredGames.Add(game);
+            }
+
         }
 
         public void PurchaseSelectedGame()

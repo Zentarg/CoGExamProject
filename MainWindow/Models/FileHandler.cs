@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; 
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +16,21 @@ namespace MainWindow.Models
         {
             string _json = JsonConvert.SerializeObject(objectToSave);
             await FileIO.WriteTextAsync(await OpenOrCreateFile(fileName), _json);
+        }
+
+        public static async Task<StorageFile> CopyFile(string folderPath, StorageFile fileToCopy)
+        {
+            return await fileToCopy.CopyAsync(await StorageFolder.GetFolderFromPathAsync(_storageFolder.Path + folderPath), fileToCopy.Name, NameCollisionOption.GenerateUniqueName);
+        }
+
+        public static async void RemoveFile(StorageFile fileToRemove)
+        {
+            await fileToRemove.DeleteAsync();
+        }
+
+        public static async void RemoveFile(string filePath)
+        {
+            await (await StorageFile.GetFileFromPathAsync(_storageFolder + filePath)).DeleteAsync();
         }
 
         public static bool FileExists(string fileName)
