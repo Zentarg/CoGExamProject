@@ -17,13 +17,13 @@
             <Setter Property="FontSize" Value="36" />
             <Setter Property="Width" Value="300" />
             <Setter Property="Margin" Value="20,20,20,20" />
-            <Setter Property="Foreground" Value="DarkGray"/>
+            <Setter Property="Foreground" Value="#a9a9a9"/>
 
         </Style>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="24" />
             <Setter Property="Margin" Value="10,10,10,10" />
-            <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="BorderBrush" Value="#a9a9a9"/>
         </Style>
     </Page.Resources>
 
@@ -32,8 +32,10 @@
         <StackPanel Orientation="Horizontal">
             <!--  List Part  -->
             <ScrollViewer>
-            <StackPanel Width="180" >
-                <ListView ItemsSource="{Binding GamesCollection}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
+            <StackPanel Width="180" Background="#7ec0ee" >
+                    <Button Style="{StaticResource AccentButtonStyle}" Content="Browse New Titles" Width="180" Background="#00020E" />
+                    
+                    <ListView ItemsSource="{Binding GamesCollection}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -56,20 +58,22 @@
 
 
             <!--  Details Part  -->
-            <StackPanel Width="auto">
+            <StackPanel Width="auto" Background="#00020E" >
                 <StackPanel
                     Margin="10,10,10,10"
-                    BorderBrush="DarkGray"
+                    BorderBrush="#00020E"
                     BorderThickness="3,3,3,3"
-                    Orientation="Vertical" HorizontalAlignment="Stretch" Height="705" Width="675">
+                    Orientation="Vertical" HorizontalAlignment="Stretch" Height="auto" Width="auto">
                     <Image
                         Width="100"
                         Height="100"
                         Margin="10,10,420,10"
                         Source="{Binding SelectedGame.GameImageSource}" />
+
                     
+
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
-                            <TextBlock x:Name="Game" Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Title}" FontSize="24" Width="500" Height="auto" HorizontalTextAlignment="DetectFromContent" TextWrapping="Wrap" />
+                        <TextBlock x:Name="Game" Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Title}" SelectionHighlightColor="#000033" FontSize="24" Width="500" Height="auto" HorizontalTextAlignment="DetectFromContent" TextWrapping="Wrap" />
                     </Viewbox>
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                             <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Catagories}" FontSize="16" Height="auto" Width="500" TextWrapping="Wrap" />

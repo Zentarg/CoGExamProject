@@ -51,5 +51,15 @@ namespace MainWindow.Views
         {
 
         }
+
+        private void AutoSuggestBox_OnTextChanged_GameCatalog(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
