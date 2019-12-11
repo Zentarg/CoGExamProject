@@ -22,9 +22,14 @@ namespace MainWindow.Models
             _totalPrice = TotalPrice;
         }
 
+
         public void AddGame(Game game)
         {
             Games.Add(game);
+            if (AccountHandler.Account != null)
+            {
+                AccountHandler.AccountDetail.AccountShoppingCart = this;
+            }
         }
 
         public void AddGame(ObservableCollection<Game> games)
@@ -33,12 +38,21 @@ namespace MainWindow.Models
             {
                 Games.Add(game);
             }
+            if (AccountHandler.Account != null)
+            {
+                AccountHandler.AccountDetail.AccountShoppingCart = this;
+            }
         }
 
         public void RemoveGame(Game game)
         {
             Games.Remove(game);
+            if (AccountHandler.Account != null)
+            {
+                AccountHandler.AccountDetail.AccountShoppingCart = this;
+            }
         }
+
 
         public void RemoveGame(ObservableCollection<Game> games)
         {
@@ -46,11 +60,15 @@ namespace MainWindow.Models
             {
                 Games.Remove(game);
             }
+            if (AccountHandler.Account != null)
+            {
+                AccountHandler.AccountDetail.AccountShoppingCart = this;
+            }
         }
 
         public void PurchaseGame()
         {
-            //link to account details with a date
+               
         }
 
         public static ShoppingCart Instance
@@ -58,7 +76,14 @@ namespace MainWindow.Models
             get
             {
                 if (instance == null)
+                {
                     instance = new ShoppingCart();
+                    
+                }
+                else if (AccountHandler.Account != null)
+                {
+                    instance = AccountHandler.AccountDetail.AccountShoppingCart;
+                }
                 return instance;
             }
         }
@@ -83,6 +108,5 @@ namespace MainWindow.Models
             
             return price;
         }
-
     }
 }

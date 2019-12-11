@@ -75,7 +75,6 @@ namespace MainWindow.Models
                     AccountDetail = new AccountDetails();
                     _accountDetails = await AccountDetail.LoadUserDetailsFile(username);
                     MainPageVm?.CallForAccountStatus();
-
                     break;
                 }
             }
@@ -83,6 +82,8 @@ namespace MainWindow.Models
 
         public static void LogOff()
         {
+            _accountDetails.CreateUserDetailsFile(_accountDetails, _account.UserName);
+
             _account = null;
             _displaynameForUI = null;
             _accountDetails = null;
