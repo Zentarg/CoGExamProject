@@ -112,6 +112,7 @@ namespace MainWindow.Models
             set { _displaynameForUI = value; }
         }
 
+
         #region Check Username, password and display name methods
 
         private static bool UsernameinUseCheck(string _string)
