@@ -59,7 +59,7 @@ namespace MainWindow.Views
             _closeDialog = true;
         }
 
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             _closeDialog = true;
             Constants.AddGameErrors status = _addGameContentDialogVm.AddGame();
@@ -71,14 +71,19 @@ namespace MainWindow.Views
                 switch (status)
                 {
                     case Constants.AddGameErrors.GameExists:
+                        Flyout.ShowAttachedFlyout(ScrollViewer);
                         break;
                     case Constants.AddGameErrors.NameInvalid:
+                        Flyout.ShowAttachedFlyout(GameNameTextBox);
                         break;
                     case Constants.AddGameErrors.DescriptionInvalid:
+                        Flyout.ShowAttachedFlyout(GameDescriptionTextBox);
                         break;
                     case Constants.AddGameErrors.PriceInvalid:
+                        Flyout.ShowAttachedFlyout(GamePriceTextBox);
                         break;
                     case Constants.AddGameErrors.CategoriesInvalid:
+                        Flyout.ShowAttachedFlyout(CategoriesTextBox);
                         break;
                 }
 

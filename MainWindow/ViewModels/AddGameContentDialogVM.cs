@@ -10,6 +10,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.System.RemoteSystems;
 using Windows.UI.Xaml.Controls;
+using LinqToDB.Common;
 using MainWindow.Annotations;
 using MainWindow.Models;
 
@@ -42,14 +43,14 @@ namespace MainWindow.ViewModels
 
 
 
-            if (Price == null)
-                return Constants.AddGameErrors.PriceInvalid;
-            else if (Name == null)
+            if (Name.IsNullOrEmpty())
                 return Constants.AddGameErrors.NameInvalid;
-            else if (Description == null)
-                return Constants.AddGameErrors.DescriptionInvalid;
-            else if (Categories == null)
+            else if (Categories.IsNullOrEmpty())
                 return Constants.AddGameErrors.CategoriesInvalid;
+            else if (Price.IsNullOrEmpty())
+                return Constants.AddGameErrors.PriceInvalid;
+            else if (Description.IsNullOrEmpty())
+                return Constants.AddGameErrors.DescriptionInvalid;
 
             float _price = float.Parse(Price, System.Globalization.CultureInfo.InvariantCulture);
             List<String> _categories = new List<string>();
@@ -71,10 +72,6 @@ namespace MainWindow.ViewModels
 
             if (_price.ToString().Length == 0 || _price < 1 || _price > 1000)
                 return Constants.AddGameErrors.PriceInvalid;
-            else if (Name.Length == 0)
-                return Constants.AddGameErrors.NameInvalid;
-            else if (Description.Length == 0)
-                return Constants.AddGameErrors.DescriptionInvalid;
 
             Game newGame = new Game(AccountHandler.Account, ThumbnailImagePath, Name, _price, 0, Description, "", _categories, _carrouselItems, _releaseDate);
 

@@ -22,7 +22,6 @@ namespace MainWindow.Models
 
         private static DateTime _joinDateBeforeFormat;
 
-
         static  AccountHandler()
         {
             
@@ -112,8 +111,6 @@ namespace MainWindow.Models
             get { return _displaynameForUI; }
             set { _displaynameForUI = value; }
         }
-
-
 
         #region Check Username, password and display name methods
 

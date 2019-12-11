@@ -89,6 +89,11 @@ namespace MainWindow.ViewModels
 
         }
 
+        public bool LoggedIn
+        {
+            get { return AccountHandler.Account != null; }
+        }
+
         public void PurchaseSelectedGame()
         {
             _shoppingCart.AddGame(SelectedGame);
