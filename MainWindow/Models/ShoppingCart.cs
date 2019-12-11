@@ -68,7 +68,13 @@ namespace MainWindow.Models
 
         public void PurchaseGame()
         {
-               
+            if (AccountHandler.Account != null)
+            {
+                foreach (Game gamePurchase in Games)
+                {
+                    AccountHandler.AccountDetail.AddPurchaseToPurchaseHistory(gamePurchase.Name, gamePurchase.Price, DateTime.Now, gamePurchase.Identifier);
+                }
+            }
         }
 
         public static ShoppingCart Instance
@@ -79,10 +85,6 @@ namespace MainWindow.Models
                 {
                     instance = new ShoppingCart();
                     
-                }
-                else if (AccountHandler.Account != null)
-                {
-                    instance = AccountHandler.AccountDetail.AccountShoppingCart;
                 }
                 return instance;
             }

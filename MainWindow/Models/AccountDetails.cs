@@ -18,6 +18,7 @@ namespace MainWindow.Models
         private string _username;
         private string _joinDate;
         private int _gamesOwnedCount;
+        private ObservableCollection<AccountPurchase> _purchaseHistory = new ObservableCollection<AccountPurchase>();
 
         public AccountDetails()
         {
@@ -31,7 +32,7 @@ namespace MainWindow.Models
         public string DisplayName { get { return _displayname; } set { _displayname = value; } } 
         public string JoinDate { get { return _joinDate; } set { _joinDate = value; } }
         public int GamesOwnedCount { get { return _gamesOwnedCount; } set { _gamesOwnedCount = value; } }
-
+        public ObservableCollection<AccountPurchase> PurchaseHistory { get { return _purchaseHistory; } set { _purchaseHistory = value; } }
         //Below need implementing
         public ShoppingCart AccountShoppingCart { get; set; }
         public ObservableCollection<Game> Library { get; set; }
@@ -39,6 +40,11 @@ namespace MainWindow.Models
         #endregion
 
         #region Methods
+        public void AddPurchaseToPurchaseHistory(string gameName, float gamePrice, DateTime purchaseDate, string identifier)
+        {
+            PurchaseHistory.Add(new AccountPurchase(gameName, gamePrice, purchaseDate, identifier));
+        }
+
         public void CreateUserDetailsFile(AccountDetails accountDetails, string username)
         {
             FileHandler.WriteFile(Constants.AccountDetailsFolderPath + username + ".json", accountDetails);

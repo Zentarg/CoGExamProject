@@ -114,7 +114,6 @@ namespace MainWindow.Models
         }
 
 
-
         #region Check Username, password and display name methods
 
         private static bool UsernameinUseCheck(string _string)
