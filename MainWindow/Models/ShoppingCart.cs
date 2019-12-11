@@ -50,7 +50,7 @@ namespace MainWindow.Models
 
         public void PurchaseGame()
         {
-
+            //link to account details with a date
         }
 
         public static ShoppingCart Instance

@@ -20,6 +20,7 @@ namespace MainWindow.Models
 
         private static AccountDetails _accountDetails;
 
+        private static DateTime _joinDateBeforeFormat;
 
 
         static  AccountHandler()
@@ -97,6 +98,8 @@ namespace MainWindow.Models
             AccountDetail = new AccountDetails();
             _accountDetails.DisplayName = account.DisplayName;
             _accountDetails.UserName = account.UserName;
+            _joinDateBeforeFormat = DateTime.Now;
+            _accountDetails.JoinDate = _joinDateBeforeFormat.Date.ToShortDateString();
             _accountDetails.CreateUserDetailsFile(_accountDetails, account.UserName);
             MainPageVm?.CallForAccountStatus();
 

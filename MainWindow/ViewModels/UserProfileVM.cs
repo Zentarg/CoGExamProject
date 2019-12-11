@@ -2,6 +2,7 @@
 using MainWindow.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -14,9 +15,22 @@ namespace MainWindow.ViewModels
     {
         private string _displayName;
 
+        private GameDetails _domainObject;
+        private GameCatalog _gameCatalog;
+        private GameDetails _selectedGame;
+        private int _gamesOwnedCount = 200;
+        private string _joinedDate;
+        private int _thisYear = DateTime.Now.Year;
+        private int _yearDifference;
+
         public UserProfileVM()
         {
             DisplayName = AccountHandler.SetDisplayNameForUI;
+            _gameCatalog = new GameCatalog();
+            DomainObject();
+            _selectedGame = null;
+            _joinedDate = AccountHandler.AccountDetail.JoinDate;
+            _yearDifference = _thisYear - Convert.ToInt32(_joinedDate.Split("/")[2]);
         }
 
         public string DisplayName
@@ -28,12 +42,61 @@ namespace MainWindow.ViewModels
             }
         }
 
+        public int GamesOwnedCount
+        {
+            get { return _gamesOwnedCount; }
+            set { 
+                _gamesOwnedCount = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string JoinedDate
+        {
+            get { return _joinedDate; }
+        }
+
+        public int YearsSinceJoined { get { return _yearDifference; } }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+
+        //Test Stuff
+
+        public GameDetails SelectedGame
+        {
+            get
+            {
+                return _selectedGame;
+            }
+
+            set
+            {
+                _selectedGame = value;
+                OnPropertyChanged();
+                //_deletionCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public ObservableCollection<GameDetails> GamesCollection
+        {
+            get { return _gameCatalog.Games; }
+        }
+
+        public void DomainObject()
+        {
+            foreach (var c in _gameCatalog.Games)
+            {
+                _domainObject = c;
+            }
         }
     }
 }

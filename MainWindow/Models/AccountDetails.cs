@@ -16,6 +16,8 @@ namespace MainWindow.Models
         // private string _profilePicturePath;
         private string _displayname;
         private string _username;
+        private string _joinDate;
+        private int _gamesOwnedCount;
 
         public AccountDetails()
         {
@@ -26,9 +28,13 @@ namespace MainWindow.Models
         #region Properties
         public string UserName { get { return _username; } set { _username = value; } }
         //public string ProfilePicturePatch { get; set; }
-        public string DisplayName { get { return _displayname; } set { _displayname = value; } }
-        public ShoppingCart AccountShoppingCart { get; set; }
+        public string DisplayName { get { return _displayname; } set { _displayname = value; } } 
+        public string JoinDate { get { return _joinDate; } set { _joinDate = value; } }
+        public int GamesOwnedCount { get { return _gamesOwnedCount; } set { _gamesOwnedCount = value; } }
 
+        //Below need implementing
+        public ShoppingCart AccountShoppingCart { get; set; }
+        public ObservableCollection<Game> Library { get; set; }
 
         #endregion
 
