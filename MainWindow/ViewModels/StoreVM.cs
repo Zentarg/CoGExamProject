@@ -59,6 +59,7 @@ namespace MainWindow.ViewModels
 
         public RelayCommand DoAddGame { get; set; }
         public RelayCommand DoLoadGames { get; set; }
+  
 
         private async void LoadGames()
         {

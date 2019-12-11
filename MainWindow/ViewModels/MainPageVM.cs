@@ -57,6 +57,7 @@ namespace MainWindow.ViewModels
             _selectedGame = new Game(new Account("username", "password", "displayName"), "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg", "gameName", 34.5f, 0, lorem, "gamepath", categories, new List<CarrouselItem>(), new ReleaseDate(12,12,2069));
         }
 
+        
         public float TotalPrice
         {
             get { return _shoppingCart.TotalPrice;}
@@ -92,6 +93,7 @@ namespace MainWindow.ViewModels
             _shoppingCart.AddGame(SelectedGame);
             OnPropertyChanged(nameof(Games));
             OnPropertyChanged(nameof(TotalPrice));
+            
         }
 
         public void RemoveGame()
