@@ -118,7 +118,10 @@ namespace MainWindow
             _mainPageVM.RemoveGame();
         }
 
-       
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
 
