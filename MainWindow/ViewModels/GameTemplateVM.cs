@@ -28,7 +28,7 @@ namespace MainWindow.ViewModels
 
         public bool UserIsOwner
         {
-            get { return AccountHandler.Account.UserName == SelectedGame.Author.UserName; }
+            get { return AccountHandler.Account?.UserName == SelectedGame.Author?.UserName; }
         }
 
 

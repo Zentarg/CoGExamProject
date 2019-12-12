@@ -45,6 +45,7 @@ namespace MainWindow.Views
             _imagePicker.FileTypeFilter.Add(".jpg");
             _imagePicker.FileTypeFilter.Add(".jpeg");
             _imagePicker.FileTypeFilter.Add(".png");
+            _imagePicker.FileTypeFilter.Add(".gif");
             _videoPicker = new FileOpenPicker();
             _videoPicker.ViewMode = PickerViewMode.Thumbnail;
             _videoPicker.SuggestedStartLocation = PickerLocationId.Desktop;
@@ -195,7 +196,7 @@ namespace MainWindow.Views
                 var items = await e.DataView.GetStorageItemsAsync();
                 foreach (StorageFile item in items)
                 {
-                    if (item.FileType.ToLower() == ".jpg" || item.FileType.ToLower() == ".jpeg" || item.FileType.ToLower() == ".png")
+                    if (item.FileType.ToLower() == ".jpg" || item.FileType.ToLower() == ".jpeg" || item.FileType.ToLower() == ".png" || item.FileType.ToLower() == ".gif")
                     {
                         StorageFile newItem = await FileHandler.CopyFile(Constants.CarrouselItemFolderPath, item);
                         _addGameContentDialogVm.CarrouselImages.Add(newItem);
