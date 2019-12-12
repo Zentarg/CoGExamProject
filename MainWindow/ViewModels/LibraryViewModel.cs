@@ -6,7 +6,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel.Contacts;
+using Windows.ApplicationModel.Store.Preview.InstallControl;
+using Windows.UI.Xaml.Controls;
+using GalaSoft.MvvmLight.Command;
 using MainWindow.Annotations;
 using MainWindow.Models;
 
@@ -14,26 +18,43 @@ namespace MainWindow.ViewModels
 {
     public class LibraryViewModel : INotifyPropertyChanged
     {
-        private GameDetails _domainObject;
+        
         private GameCatalog _gameCatalog;
         private GameDetails _selectedGame;
+        private string _searchQuery;
+
         //private DeleteCommand _deletionCommand;
 
         public LibraryViewModel()
         {
             _gameCatalog = new GameCatalog();
-            DomainObject();
+            
             _selectedGame = null;
             //_deletionCommand = new DeleteCommand(_contactCatalog, this);
         }
 
-        public void DomainObject()
+        
+
+
+        public string GameSearch
         {
-            foreach (var c in _gameCatalog.Games)
+            get
             {
-                _domainObject = c;
+                var res = GamesCollection.FirstOrDefault(g => g.Title == _searchQuery);
+                if (res != null)
+                {
+                  return res.Title;  
+                }
+
+                return "Search";
+            }
+            set
+            {
+                _searchQuery = value;
+                OnPropertyChanged();
             }
         }
+
 
         public GameDetails SelectedGame
         {
@@ -49,6 +70,52 @@ namespace MainWindow.ViewModels
                 //_deletionCommand.RaiseCanExecuteChanged();
             }
         }
+        /*
+        public sealed class AutoSuggestBox : ItemsControl { 
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            // Only get results when it was a user typing, 
+            // otherwise assume the value got filled in by TextMemberPath 
+            // or the handler for SuggestionChosen.
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                //Set the ItemsSource to be your filtered dataset
+                sender.ItemsSource = GamesCollection;
+            }
+        }
+
+
+        private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            // Set sender.Text. You can use args.SelectedItem to build your text string.
+            sender.ItemsSource = args.SelectedItem;
+
+        }
+
+
+        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion != null)
+            {
+                
+                // User selected an item from the suggestion list, take an action on it here.
+            }
+            else
+            {
+                
+                Console.WriteLine("Game can't be found.");
+                // Use args.QueryText to determine what to do.
+            }
+        }
+            }
+            
+        */
+
+
+
+
+
         /*
         public DeleteCommand DeletionCommand
         {
