@@ -72,6 +72,7 @@ namespace MainWindow.Models
             {
                 foreach (Game gamePurchase in Games)
                 {
+                    AccountHandler.AccountDetail.GamesOwned.Add(gamePurchase.Identifier);
                     AccountHandler.AccountDetail.AddPurchaseToPurchaseHistory(gamePurchase.Name, gamePurchase.Price, DateTime.Now, gamePurchase.Identifier);
                 }
             }

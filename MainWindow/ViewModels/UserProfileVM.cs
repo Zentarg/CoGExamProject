@@ -18,7 +18,7 @@ namespace MainWindow.ViewModels
         private GameDetails _domainObject;
         private GameCatalog _gameCatalog;
         private GameDetails _selectedGame;
-        private int _gamesOwnedCount = 200;
+        private int _gamesOwnedCount;
         private string _joinedDate;
         private int _thisYear = DateTime.Now.Year;
         private int _yearDifference;
@@ -31,6 +31,7 @@ namespace MainWindow.ViewModels
             _selectedGame = null;
             _joinedDate = AccountHandler.AccountDetail.JoinDate;
             _yearDifference = _thisYear - Convert.ToInt32(_joinedDate.Split("/")[2]);
+            _gamesOwnedCount = AccountHandler.AccountDetail.GamesOwnedCount;
         }
 
         public string DisplayName

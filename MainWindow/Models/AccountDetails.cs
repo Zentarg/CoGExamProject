@@ -19,6 +19,7 @@ namespace MainWindow.Models
         private string _joinDate;
         private int _gamesOwnedCount;
         private ObservableCollection<AccountPurchase> _purchaseHistory = new ObservableCollection<AccountPurchase>();
+        private ObservableCollection<string> _gamesOwned = new ObservableCollection<string>();
 
         public AccountDetails()
         {
@@ -33,19 +34,27 @@ namespace MainWindow.Models
         public string JoinDate { get { return _joinDate; } set { _joinDate = value; } }
         public int GamesOwnedCount { get { return _gamesOwnedCount; } set { _gamesOwnedCount = value; } }
         public ObservableCollection<AccountPurchase> PurchaseHistory { get { return _purchaseHistory; } set { _purchaseHistory = value; } }
-        //Below need implementing
+        
+        //Below needs implementing
         public ShoppingCart AccountShoppingCart { get; set; }
-        public ObservableCollection<Game> Library { get; set; }
+        
+        
+        //Below is the link to the library (half of it, from the purchase of a game side, stores the game identifier can be changed to name easily if that is easier)
+        public ObservableCollection<string> GamesOwned { get { return _gamesOwned; } set { _gamesOwned = value; } }
+
 
         #endregion
 
         #region Methods
         public void AddPurchaseToPurchaseHistory(string gameName, float gamePrice, DateTime purchaseDate, string identifier)
         {
-            PurchaseHistory.Add(new AccountPurchase(gameName, gamePrice, purchaseDate, identifier));
-            PurchaseHistory = new ObservableCollection<AccountPurchase>(PurchaseHistory.OrderByDescending(i => i.PurchaseDate));
+            PurchaseHistory.Insert(0, new AccountPurchase(gameName, gamePrice, purchaseDate, identifier));
+            //Code below that is commented was used to sort the list of purchased games initially. However, I realized I could do insert instead of add and then orderbydescending, and achieve the same result.
+            //PurchaseHistory = new ObservableCollection<AccountPurchase>(PurchaseHistory.OrderByDescending(i => i.PurchaseDate));
             AccountHandler.AccountDetail.CreateUserDetailsFile(AccountHandler.AccountDetail, AccountHandler.Account.UserName);
+            GamesOwnedCount += 1;
         }
+
 
         public void CreateUserDetailsFile(AccountDetails accountDetails, string username)
         {

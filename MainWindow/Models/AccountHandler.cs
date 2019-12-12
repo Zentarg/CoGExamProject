@@ -77,6 +77,11 @@ namespace MainWindow.Models
                     MainPageVm?.CallForAccountStatus();
                     StoreVm?.OnAccountChanged();
                     GameTemplateVm?.OnAccountChanged();
+                    /*foreach (Game game in AccountDetail.AccountShoppingCart.Games)
+                    {
+                        ShoppingCart.Instance.AddGame(game);
+                    }*/
+                    
                     break;
                 }
             }
@@ -86,13 +91,19 @@ namespace MainWindow.Models
         {
             _accountDetails.CreateUserDetailsFile(_accountDetails, _account.UserName);
 
+            //Bellow needs implementing without errors
+            /*foreach (Game game in AccountDetail.AccountShoppingCart.Games)
+            {
+                ShoppingCart.Instance.RemoveGame(game);
+            }*/
+
+
             _account = null;
             _displaynameForUI = null;
             _accountDetails = null;
             MainPageVm?.CallForAccountStatus();
             StoreVm?.OnAccountChanged();
             GameTemplateVm?.OnAccountChanged();
-
         }
 
         public static void CreateAccount(Account account)
