@@ -43,6 +43,8 @@ namespace MainWindow.Models
         public void AddPurchaseToPurchaseHistory(string gameName, float gamePrice, DateTime purchaseDate, string identifier)
         {
             PurchaseHistory.Add(new AccountPurchase(gameName, gamePrice, purchaseDate, identifier));
+            PurchaseHistory = new ObservableCollection<AccountPurchase>(PurchaseHistory.OrderByDescending(i => i.PurchaseDate));
+            AccountHandler.AccountDetail.CreateUserDetailsFile(AccountHandler.AccountDetail, AccountHandler.Account.UserName);
         }
 
         public void CreateUserDetailsFile(AccountDetails accountDetails, string username)

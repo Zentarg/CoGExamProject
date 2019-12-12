@@ -1,6 +1,4 @@
-﻿using MainWindow.Models;
-using MainWindow.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,24 +20,11 @@ namespace MainWindow.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AccountSettings : Page
+    public sealed partial class PurchaseHistory : Page
     {
-        private NavigationHandler _navigationHandler;
-        public AccountSettings()
+        public PurchaseHistory()
         {
             this.InitializeComponent();
-            _navigationHandler = NavigationHandler.Instance;
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ChangePassword dialogbox = new ChangePassword();
-            await dialogbox.ShowAsync();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.PurchaseHistory"));
         }
     }
 }
