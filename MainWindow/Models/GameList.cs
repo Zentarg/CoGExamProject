@@ -37,16 +37,19 @@ namespace MainWindow.Models
 
         public void RemoveGame(Game removeGame)
         {
+            SelectedGame = null;
             StoreGameCollection.Remove(removeGame);
+            FileHandler.WriteFile(Constants.GameFileListName, StoreGameCollection);
         }
 
         public void RemoveGame(List<Game> removeGames)
         {
+            SelectedGame = null;
             foreach (Game game in removeGames)
             {
                 StoreGameCollection.Remove(game);
-            
             }
+            FileHandler.WriteFile(Constants.GameFileListName, StoreGameCollection);
         }
 
         public async Task LoadGames()

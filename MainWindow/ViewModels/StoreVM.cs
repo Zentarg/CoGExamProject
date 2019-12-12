@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 using MainWindow.Annotations;
 using MainWindow.Models;
 
 namespace MainWindow.ViewModels
 {
-    class StoreVM : INotifyPropertyChanged
+    public class StoreVM : INotifyPropertyChanged
     {
         private readonly Game _newGame;
         private readonly GameList _gameList;
@@ -55,6 +51,9 @@ namespace MainWindow.ViewModels
             _shoppingCart = ShoppingCart.Instance;
             DoLoadGames = new RelayCommand(LoadGames);
             LoadGames();
+
+            AccountHandler.StoreVm = this;
+
         }
 
         public RelayCommand DoAddGame { get; set; }
@@ -122,6 +121,11 @@ namespace MainWindow.ViewModels
                 _gameList.SelectedGame = value;
                 OnPropertyChanged();
             }
+        }
+
+        public void OnAccountChanged()
+        {
+            OnPropertyChanged(nameof(LoggedIn));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

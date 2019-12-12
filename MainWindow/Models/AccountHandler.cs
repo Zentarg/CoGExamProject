@@ -31,7 +31,8 @@ namespace MainWindow.Models
         }
 
         public static MainPageVM MainPageVm { get; set; }
-
+        public static StoreVM StoreVm { get; set; }
+        public static GameTemplateVM GameTemplateVm { get; set; }
 
         public static AccountLists AccountList
         {
@@ -74,6 +75,8 @@ namespace MainWindow.Models
                     AccountDetail = new AccountDetails();
                     _accountDetails = await AccountDetail.LoadUserDetailsFile(username);
                     MainPageVm?.CallForAccountStatus();
+                    StoreVm?.OnAccountChanged();
+                    GameTemplateVm?.OnAccountChanged();
                     break;
                 }
             }
@@ -87,6 +90,8 @@ namespace MainWindow.Models
             _displaynameForUI = null;
             _accountDetails = null;
             MainPageVm?.CallForAccountStatus();
+            StoreVm?.OnAccountChanged();
+            GameTemplateVm?.OnAccountChanged();
 
         }
 
@@ -102,6 +107,8 @@ namespace MainWindow.Models
             _accountDetails.JoinDate = _joinDateBeforeFormat.Date.ToShortDateString();
             _accountDetails.CreateUserDetailsFile(_accountDetails, account.UserName);
             MainPageVm?.CallForAccountStatus();
+            StoreVm?.OnAccountChanged();
+            GameTemplateVm?.OnAccountChanged();
 
             //_accountDetails = new AccountDetails(_account.UserName);
         }
