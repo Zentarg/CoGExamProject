@@ -51,8 +51,9 @@ namespace MainWindow.Models
             PurchaseHistory.Insert(0, new AccountPurchase(gameName, gamePrice, purchaseDate, identifier));
             //Code below that is commented was used to sort the list of purchased games initially. However, I realized I could do insert instead of add and then orderbydescending, and achieve the same result.
             //PurchaseHistory = new ObservableCollection<AccountPurchase>(PurchaseHistory.OrderByDescending(i => i.PurchaseDate));
-            AccountHandler.AccountDetail.CreateUserDetailsFile(AccountHandler.AccountDetail, AccountHandler.Account.UserName);
             GamesOwnedCount += 1;
+            
+            
         }
 
 

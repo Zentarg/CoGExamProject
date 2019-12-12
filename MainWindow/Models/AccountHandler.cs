@@ -77,10 +77,13 @@ namespace MainWindow.Models
                     MainPageVm?.CallForAccountStatus();
                     StoreVm?.OnAccountChanged();
                     GameTemplateVm?.OnAccountChanged();
-                    /*foreach (Game game in AccountDetail.AccountShoppingCart.Games)
+                    if (AccountDetail.AccountShoppingCart != null)
                     {
-                        ShoppingCart.Instance.AddGame(game);
-                    }*/
+                        foreach (Game game in AccountDetail.AccountShoppingCart.Games)
+                        {
+                            ShoppingCart.Instance.AddGame(game);
+                        }
+                    }
                     
                     break;
                 }
