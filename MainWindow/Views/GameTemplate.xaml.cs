@@ -69,5 +69,10 @@ namespace MainWindow.Views
             _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.Store"));
         }
 
+        private void EditGameButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            EditGameContentDialog dialog = new EditGameContentDialog();
+            dialog.ShowAsync();
+        }
     }
 }
