@@ -54,6 +54,7 @@ namespace MainWindow.ViewModels
             _shoppingCart = ShoppingCart.Instance;
             DoLoadGames = new RelayCommand(LoadGames);
             LoadGames();
+            CheckReleaseDate();
 
             AccountHandler.StoreVm = this;
 

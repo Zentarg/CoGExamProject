@@ -100,7 +100,7 @@
                         <TextBlock Text="Change Password" FontSize="25"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Center">
-                        
+
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right">
                         <Button Content="Change Password" CornerRadius="10" Margin="0,0,0,0" Width="180" Click="Button_Click"/>
@@ -125,20 +125,32 @@
 
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right">
+                        <Button Content="View Added Games" CornerRadius="10" Margin="0,0,0,0" Width="180">
+                            <Button.Flyout>
+                                <Flyout>
+                                    <Grid>
+<StackPanel Orientation="Horizontal">
+    <ListView ItemsSource="{Binding StoreGameCollection}">
 
+    </ListView>
+</StackPanel>
+                                    </Grid>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
                     </StackPanel>
                 </Grid>
-                
-                
-                
+
+
+
             </StackPanel>
             <StackPanel HorizontalAlignment="Center">
-                
-                    
-                
+
+
+
             </StackPanel>
             <StackPanel HorizontalAlignment="Right">
-                
+
             </StackPanel>
         </Grid>
     </Grid>
