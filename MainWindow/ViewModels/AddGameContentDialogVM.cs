@@ -19,8 +19,7 @@ namespace MainWindow.ViewModels
 
     class AddGameContentDialogVM : INotifyPropertyChanged
     {
-        private DateTime _dateTime;
-        private ReleaseDate _releaseDate;
+        private DateTime _releaseDate;
         private string _thumbnailImagePath;
         private ObservableCollection<StorageFile> _carrouselImages;
         private ObservableCollection<StorageFile> _carrouselVideos;
@@ -36,7 +35,6 @@ namespace MainWindow.ViewModels
             CarrouselVideos = new ObservableCollection<StorageFile>();
             CarrouselYoutubeVids = new ObservableCollection<ListviewString>();
             _gameList = GameList.Instance;
-            _dateTime = new DateTime(_releaseDate.Year,_releaseDate.Month,_releaseDate.Day);
         }
 
         public Constants.AddGameErrors AddGame()
@@ -143,8 +141,8 @@ namespace MainWindow.ViewModels
 
         public DateTime ReleaseTime
         {
-            get { return _dateTime; }
-            set { _dateTime = value; OnPropertyChanged(); }
+            get { return _releaseDate; }
+            set { _releaseDate = value; OnPropertyChanged(); }
         }
 
 

@@ -12,7 +12,7 @@ namespace MainWindow.Models
 {
     public class Game
     {
-        public Game(Account author, string thumbnailImagePath, string name, float price, int currentDiscountPercentage, string description, string gamePath, List<string> categories, List<CarrouselItem> carrouselItems, ReleaseDate releaseDate)
+        public Game(Account author, string thumbnailImagePath, string name, float price, int currentDiscountPercentage, string description, string gamePath, List<string> categories, List<CarrouselItem> carrouselItems, DateTime releaseDate)
         {
             Author = author;
             ThumbnailImagePath = thumbnailImagePath;
@@ -47,7 +47,7 @@ namespace MainWindow.Models
         public List<CarrouselItem> CarrouselItems { get; }
         public List<string> Categories { get; }
         public string Identifier { get; }
-        public ReleaseDate ReleaseDate { get; }
+        public DateTime ReleaseDate { get; }
 
         public void SetName(string name)
         {

@@ -17,7 +17,7 @@ namespace MainWindow.ViewModels
     class EditGameContentDialogVM : INotifyPropertyChanged
     {
 
-        private ReleaseDate _releaseDate;
+        private DateTime _releaseDate;
         private string _thumbnailImagePath;
         private ObservableCollection<StorageFile> _carrouselImages;
         private ObservableCollection<StorageFile> _carrouselVideos;
@@ -177,7 +177,7 @@ namespace MainWindow.ViewModels
             set { _selectedListviewStrings = value; OnPropertyChanged(); }
         }
 
-        public ReleaseDate ReleaseTime
+        public DateTime ReleaseTime
         {
             get { return _releaseDate; }
             set { _releaseDate = value; OnPropertyChanged(); }
