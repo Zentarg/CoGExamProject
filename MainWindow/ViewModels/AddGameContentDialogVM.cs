@@ -75,7 +75,7 @@ namespace MainWindow.ViewModels
             if (_price.ToString().Length == 0 || _price < 1 || _price > 1000)
                 return Constants.AddGameErrors.PriceInvalid;
 
-            Game newGame = new Game(AccountHandler.Account, ThumbnailImagePath, Name, _price, 0, Description, "", _categories, _carrouselItems, ReleaseTime);
+            Game newGame = new Game(AccountHandler.Account, ThumbnailImagePath, Name, _price, 0, Description, "", _categories, _carrouselItems, _releaseDate);
 
             foreach (Game game in _gameList.StoreGameCollection)
             {
