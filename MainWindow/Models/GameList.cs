@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MainWindow.ViewModels;
 using Newtonsoft.Json;
 
 namespace MainWindow.Models
@@ -27,6 +28,8 @@ namespace MainWindow.Models
             }
         }
 
+        public GameTemplateVM GameTemplateVm { get; set; }
+
         public Game SelectedGame { get; set; }
 
         public void AddGame(Game newGame)
@@ -37,18 +40,26 @@ namespace MainWindow.Models
 
         public void RemoveGame(Game removeGame)
         {
-            SelectedGame = null;
+            if (SelectedGame == removeGame)
+                SelectedGame = null;
             StoreGameCollection.Remove(removeGame);
             FileHandler.WriteFile(Constants.GameFileListName, StoreGameCollection);
         }
 
         public void RemoveGame(List<Game> removeGames)
         {
-            SelectedGame = null;
             foreach (Game game in removeGames)
             {
+                if (SelectedGame == game)
+                    SelectedGame = null;
                 StoreGameCollection.Remove(game);
             }
+            FileHandler.WriteFile(Constants.GameFileListName, StoreGameCollection);
+        }
+
+        public void EditGame(Game oldGame, Game newGame)
+        {
+            StoreGameCollection[StoreGameCollection.IndexOf(oldGame)] = newGame;
             FileHandler.WriteFile(Constants.GameFileListName, StoreGameCollection);
         }
 

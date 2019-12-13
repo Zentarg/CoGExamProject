@@ -66,16 +66,20 @@
                         <ColumnDefinition Width="250" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
+                        <TextBlock Text="{Binding SelectedGame.Name}" FontSize="20" Padding="10"/>
                         <TextBlock Text="Game Description" FontSize="18" Padding="10"/>
                         <TextBlock Text="{Binding SelectedGame.Description}" TextWrapping="WrapWholeWords" FontSize="15" Padding="10"/>
                     </StackPanel>
                     <Grid Grid.Column="1">
                         <StackPanel>
-                            <Button x:Name="RemoveGameButton" Click="RemoveGameButton_OnClick" HorizontalAlignment="Right" Visibility="{Binding UserIsOwner}" Content="Remove Game From Store"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                            </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <TextBlock Text="{Binding SelectedGame.Price}" Margin="0, 2, 0, 0" FontSize="17"/>
                                 <TextBlock Text="$" Margin="0, 2, 10, 0" FontSize="17"/>
-                                <Button x:Name="BuyGameButton" Content="Add to cart" Margin="0, 0, 40, 0" Click="BuyGameButton_OnClick"/>
+                                <Button x:Name="EditGameButton" Click="EditGameButton_OnClick" Content="Edit Game" Margin="0, 0, 10, 0" Visibility="{Binding UserIsOwner}"/>
+                                <Button x:Name="RemoveGameButton" Click="RemoveGameButton_OnClick" Content="Remove Game" Visibility="{Binding UserIsOwner}"/>
+                                <Button x:Name="BuyGameButton" Content="Add to cart" Margin="0, 0, 40, 0" Click="BuyGameButton_OnClick" Visibility="{Binding UserIsntOwner}"/>
                             </StackPanel>
                             <TextBlock Text="Developer:" FontSize="17"/>
                             <TextBlock Text="{Binding SelectedGame.Author.DisplayName}" FontSize="15"/>

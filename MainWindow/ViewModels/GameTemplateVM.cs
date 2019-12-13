@@ -19,6 +19,7 @@ namespace MainWindow.ViewModels
         {
             _gameList = GameList.Instance;
             AccountHandler.GameTemplateVm = this;
+            _gameList.GameTemplateVm = this;
         }
 
         public Game SelectedGame
@@ -31,13 +32,21 @@ namespace MainWindow.ViewModels
             get { return AccountHandler.Account?.UserName == SelectedGame.Author?.UserName; }
         }
 
-
+        public bool UserIsntOwner
+        {
+            get { return AccountHandler.Account?.UserName != SelectedGame.Author?.UserName; }
+        }
 
         public void OnAccountChanged()
         {
             OnPropertyChanged(nameof(UserIsOwner));
+            OnPropertyChanged(nameof(UserIsntOwner));
         }
 
+        public void OnGameEdited()
+        {
+            OnPropertyChanged(nameof(SelectedGame));
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

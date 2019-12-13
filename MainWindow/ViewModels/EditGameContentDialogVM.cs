@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.System.RemoteSystems;
-using Windows.UI.Xaml.Controls;
 using LinqToDB.Common;
 using MainWindow.Annotations;
 using MainWindow.Models;
 
 namespace MainWindow.ViewModels
 {
-
-    class AddGameContentDialogVM : INotifyPropertyChanged
+    class EditGameContentDialogVM : INotifyPropertyChanged
     {
+
         private ReleaseDate _releaseDate;
         private string _thumbnailImagePath;
         private ObservableCollection<StorageFile> _carrouselImages;
@@ -28,21 +26,66 @@ namespace MainWindow.ViewModels
 
         private GameList _gameList;
 
-        public AddGameContentDialogVM()
+        public EditGameContentDialogVM()
         {
+            _gameList = GameList.Instance;
             ThumbnailImagePath = "../Assets/10ReallyScaryHill.jpg";
+
             CarrouselImages = new ObservableCollection<StorageFile>();
             CarrouselVideos = new ObservableCollection<StorageFile>();
             CarrouselYoutubeVids = new ObservableCollection<ListviewString>();
-            _gameList = GameList.Instance;
+            
+            LoadGameContent();
+
         }
 
-        public Constants.AddGameErrors AddGame()
+        public async void LoadGameContent()
         {
+            foreach (CarrouselItem item in _gameList.SelectedGame.CarrouselItems)
+            {
+                switch (item.CarrouselItemType)
+                {
+                    case Constants.CarrouselItemType.Image:
+                        CarrouselImages.Add(await FileHandler.ReadStorageFile(item.ItemLink, true));
+                        break;
+                    case Constants.CarrouselItemType.Video:
+                        CarrouselVideos.Add(await FileHandler.ReadStorageFile(item.ItemLink, true));
+                        break;
+                    case Constants.CarrouselItemType.YoutubeVideo:
+                        CarrouselYoutubeVids.Add(new ListviewString(item.ItemLink));
+                        break;
+                }
+            }
+
+            foreach (string category in _gameList.SelectedGame.Categories)
+            {
+                if (category != _gameList.SelectedGame.Categories.Last())
+                    Categories += category + ",";
+                else
+                    Categories += category;
+
+            }
 
 
+            ThumbnailImagePath = _gameList.SelectedGame.ThumbnailImagePath;
+            Name = _gameList.SelectedGame.Name;
+            Price = _gameList.SelectedGame.Price.ToString();
+            Description = _gameList.SelectedGame.Description;
+            ReleaseTime = _gameList.SelectedGame.ReleaseDate;
 
+            OnPropertyChanged(nameof(CarrouselImages));
+            OnPropertyChanged(nameof(CarrouselVideos));
+            OnPropertyChanged(nameof(CarrouselYoutubeVids));
+            OnPropertyChanged(nameof(ThumbnailImagePath));
+            OnPropertyChanged(nameof(Name));
+            OnPropertyChanged(nameof(Categories));
+            OnPropertyChanged(nameof(Price));
+            OnPropertyChanged(nameof(Description));
+            OnPropertyChanged(nameof(ReleaseTime));
+        }
 
+        public Constants.AddGameErrors EditGame()
+        {
             if (Name.IsNullOrEmpty())
                 return Constants.AddGameErrors.NameInvalid;
             else if (Categories.IsNullOrEmpty())
@@ -73,19 +116,14 @@ namespace MainWindow.ViewModels
             if (_price.ToString().Length == 0 || _price < 1 || _price > 1000)
                 return Constants.AddGameErrors.PriceInvalid;
 
-            Game newGame = new Game(AccountHandler.Account, ThumbnailImagePath, Name, _price, 0, Description, "", _categories, _carrouselItems, ReleaseTime);
+            Game newGame = new Game(AccountHandler.Account, ThumbnailImagePath, Name, _price, 0, Description, "", _categories, _carrouselItems, _releaseDate);
 
-            foreach (Game game in _gameList.StoreGameCollection)
-            {
-                if (game.Identifier == newGame.Identifier)
-                {
-                    return Constants.AddGameErrors.GameExists;
-                }
-            }
-            _gameList.AddGame(newGame);
+            _gameList.EditGame(_gameList.SelectedGame, newGame);
+            _gameList.SelectedGame = newGame;
+
+            _gameList.GameTemplateVm.OnGameEdited();
 
             return Constants.AddGameErrors.NoError;
-
         }
 
 
@@ -149,6 +187,8 @@ namespace MainWindow.ViewModels
         public string Categories { get; set; }
         public string Price { get; set; }
         public string Description { get; set; }
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -40,6 +40,15 @@ namespace MainWindow.Models
             return _storageFolder.TryGetItemAsync(fileName) != null;
         }
 
+        public static async Task<StorageFile> ReadStorageFile(string filePath, bool fullpath)
+        {
+            if (fullpath)
+                return await StorageFile.GetFileFromPathAsync(filePath);
+            else
+                return await StorageFile.GetFileFromPathAsync(_storageFolder + filePath);
+
+        }
+
         public static async Task<String> ReadFile(string fileName)
         {
             string json = await FileIO.ReadTextAsync(await OpenOrCreateFile(fileName));
