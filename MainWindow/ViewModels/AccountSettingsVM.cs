@@ -3,6 +3,7 @@ using MainWindow.Annotations;
 using MainWindow.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -21,6 +22,8 @@ namespace MainWindow.ViewModels
         private string _displaynameTooltip;
         private BitmapImage _imagePathDisplayName;
         private bool _isSetDisplayNameEnabled;
+        private bool _isAddedGamesEnabled;
+        private AccountDetails _gamesOwned;
         private string _username;
         private string _pfpPath;
 
@@ -72,6 +75,7 @@ namespace MainWindow.ViewModels
         public RelayCommand DoSetDisplayName { get; set; }
         public string Username { get { return _username; } }
 
+        public bool IsAddedGamesEnabled { get { return _isAddedGamesEnabled; } set { _isAddedGamesEnabled = value; OnPropertyChanged(); } }
 
         public async void SetDisplayName()
         {

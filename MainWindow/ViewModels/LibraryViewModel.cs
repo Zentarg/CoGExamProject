@@ -88,8 +88,12 @@ namespace MainWindow.ViewModels
         }
         */
 
-        public ObservableCollection<Game> Games => _games;
-        
+        //public ObservableCollection<Game> Games => _games;
+
+        public ObservableCollection<Game> Games
+        {
+            get { return AccountHandler.AccountDetail.GamesOwned; }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

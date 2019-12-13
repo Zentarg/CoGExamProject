@@ -19,8 +19,8 @@ namespace MainWindow.Models
         private string _joinDate;
         private int _gamesOwnedCount;
         private ObservableCollection<AccountPurchase> _purchaseHistory = new ObservableCollection<AccountPurchase>();
-        private ObservableCollection<string> _gamesOwned = new ObservableCollection<string>();
-        
+        private ObservableCollection<Game> _gamesOwned = new ObservableCollection<Game>();
+
         public AccountDetails()
         {
 
@@ -39,8 +39,8 @@ namespace MainWindow.Models
         public ShoppingCart AccountShoppingCart { get; set; }
         
         
-        //Below is the link to the library (half of it, from the purchase of a game side, stores the game identifier can be changed to name easily if that is easier)
-        public ObservableCollection<string> GamesOwned { get { return _gamesOwned; } set { _gamesOwned = value; } }
+        //Below is the link to the library (half of it, from the purchase of a game side, stores the game)
+        public ObservableCollection<Game> GamesOwned { get { return _gamesOwned; } set { _gamesOwned = value; } }
 
 
         #endregion

@@ -19,6 +19,7 @@ namespace MainWindow.ViewModels
 
     class AddGameContentDialogVM : INotifyPropertyChanged
     {
+        private DateTime _dateTime;
         private ReleaseDate _releaseDate;
         private string _thumbnailImagePath;
         private ObservableCollection<StorageFile> _carrouselImages;
@@ -35,6 +36,7 @@ namespace MainWindow.ViewModels
             CarrouselVideos = new ObservableCollection<StorageFile>();
             CarrouselYoutubeVids = new ObservableCollection<ListviewString>();
             _gameList = GameList.Instance;
+            _dateTime = new DateTime(_releaseDate.Year,_releaseDate.Month,_releaseDate.Day);
         }
 
         public Constants.AddGameErrors AddGame()
@@ -73,7 +75,7 @@ namespace MainWindow.ViewModels
             if (_price.ToString().Length == 0 || _price < 1 || _price > 1000)
                 return Constants.AddGameErrors.PriceInvalid;
 
-            Game newGame = new Game(AccountHandler.Account, ThumbnailImagePath, Name, _price, 0, Description, "", _categories, _carrouselItems, ReleaseTime);
+            Game newGame = new Game(AccountHandler.Account, ThumbnailImagePath, Name, _price, 0, Description, "", _categories, _carrouselItems, _releaseDate);
 
             foreach (Game game in _gameList.StoreGameCollection)
             {
@@ -139,11 +141,12 @@ namespace MainWindow.ViewModels
             set { _selectedListviewStrings = value; OnPropertyChanged(); }
         }
 
-        public ReleaseDate ReleaseTime
+        public DateTime ReleaseTime
         {
-            get { return _releaseDate; }
-            set { _releaseDate = value; OnPropertyChanged(); }
+            get { return _dateTime; }
+            set { _dateTime = value; OnPropertyChanged(); }
         }
+
 
         public string Name { get; set; }
         public string Categories { get; set; }

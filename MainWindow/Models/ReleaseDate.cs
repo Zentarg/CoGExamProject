@@ -16,7 +16,6 @@ namespace MainWindow.Models
             Day = day;
             Month = month;
             Year = year;
-            DateTime Date = new DateTime(Year, Month, Day);
         }
 
         public int Year { get; set; }
@@ -25,10 +24,8 @@ namespace MainWindow.Models
 
         public int Day { get; set; }
 
-        public void ReleaseDateCheck()
-        {
-
-        }
 
     }
+
 }
+
