@@ -41,25 +41,25 @@
                                     QuerySubmitted="AutoSuggestBox_QuerySubmitted"
                                     SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
                 -->
-
+                    
                     <TextBox Text="{Binding GameSearch, Mode=TwoWay}"/>
                     
                     <TextBox Text="{Binding GameSearch}"/>
 
 
-                    <ListView ItemsSource="{Binding GamesCollection}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
+                    <ListView ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame.Name, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                     Width="40"
                                     Height="40"
-                                    Source="{Binding GameImageSource}" />
+                                    Source="{Binding ThumbnailImagePath}" />
                                 <TextBlock
                                     Margin="10,10,10,10"
                                     VerticalAlignment="Center"
                                     FontSize="8"
-                                    Text="{Binding Title}" />
+                                    Text="{Binding Name}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -70,7 +70,7 @@
 
 
             <!--  Details Part  -->
-            <StackPanel Width="auto" Background="#00020E" >
+            <StackPanel Width="1319" Background="#00020E" >
                 <StackPanel
                     Margin="10,10,10,10"
                     BorderBrush="#00020E"
@@ -79,19 +79,20 @@
                     <Image
                         Width="200"
                         Height="200"
-                        Margin="10,10,420,10"
-                        Source="{Binding SelectedGame.GameImageSource}" />
+                        Margin="10,10,1020,10"
+                        Source="{Binding SelectedGame.ThumbnailImagePath}" />
 
                     
 
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
-                        <TextBlock x:Name="Game" Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Title}" SelectionHighlightColor="#000033" FontSize="36" Width="500" Height="auto" HorizontalTextAlignment="DetectFromContent" TextWrapping="Wrap" />
+                        <TextBlock x:Name="Game" Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Name}" SelectionHighlightColor="#000033" FontSize="36" Width="500" Height="auto" HorizontalTextAlignment="DetectFromContent" TextWrapping="WrapWholeWords" Margin="10,10,700,10" />
+                    </Viewbox>
+                    <Button x:Name="ViewGameInStore" Content="View in Store" Visibility="Collapsed" Click="GoToGameButton_OnClick"/>
+                    <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Categories}" FontSize="24" Height="auto" Width="500" TextWrapping="WrapWholeWords" Margin="10,10,700,10"/>
                     </Viewbox>
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
-                            <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Categories}" FontSize="24" Height="auto" Width="500" TextWrapping="Wrap" />
-                    </Viewbox>
-                    <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
-                                <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.GameDescription}" FontSize="16" Width="500"  Height="400" Padding="3" TextWrapping="Wrap" />
+                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Description}" FontSize="16" Width="500"  Height="400" Padding="3" TextWrapping="WrapWholeWords" Margin="10,10,700,10"/>
                     </Viewbox>
 
                 </StackPanel>

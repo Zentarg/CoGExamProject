@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using MainWindow.Models;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,9 +23,12 @@ namespace MainWindow.Views
     /// </summary>
     public sealed partial class Library : Page
     {
+        private NavigationHandler _navigationHandler;
+
         public Library()
         {
             this.InitializeComponent();
+            _navigationHandler = NavigationHandler.Instance;
         }
 
         private void BaseExample_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -60,6 +64,21 @@ namespace MainWindow.Views
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void GoToGameButton_OnClick(object sender, RoutedEventArgs e)
+        { 
+            _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.GameTemplate"));
+        }
+
+        private void Library_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
