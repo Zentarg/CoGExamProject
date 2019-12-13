@@ -44,6 +44,7 @@ namespace MainWindow.ViewModels
             SetDisplayNameForUI = AccountHandler.Account.DisplayName;
         }
 
+
         public string TempUsername
         {
             get { return _tempUsername; }
@@ -60,7 +61,7 @@ namespace MainWindow.ViewModels
                 //Allows one to enter password first and then the username without having to click on the password field and retype to check
                 if (_tempPassword != null)
                 {
-                    PasswordAsync();
+                    Password();
                 }     
             }
         }
@@ -73,7 +74,7 @@ namespace MainWindow.ViewModels
                 _tempPassword = value;
                 OnPropertyChanged();
 
-                PasswordAsync();
+                Password();
             }
         }
 
@@ -153,7 +154,7 @@ namespace MainWindow.ViewModels
             }
         }
 
-        private void PasswordAsync()
+        private void Password()
         {
             PasswordCheck = PasswordCheckForLogin(_tempPassword, _tempUsername);
             PasswordTooltip = PasswordResultStringForLogin(PasswordCheck);

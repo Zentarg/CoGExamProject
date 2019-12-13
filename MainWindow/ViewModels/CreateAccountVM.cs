@@ -20,6 +20,7 @@ namespace MainWindow.ViewModels
         private string _tempUsername;
         private string _tempPassword;
         private string _tempDisplayName;
+        private string _tempProfilePicturePath;
 
         private int _usernameCheck = 5;
         private string _usernameTooltip;
@@ -56,12 +57,14 @@ namespace MainWindow.ViewModels
         {
             TempDisplayName = AccountHandler.DisplayNameAddTag(_tempDisplayName);
             AccountHandler.Account = new Account(_tempUsername, TempPassword, TempDisplayName);
-            AccountHandler.CreateAccount(AccountHandler.Account);
+            AccountHandler.CreateAccount(AccountHandler.Account, TempProfilePicturePath);
             await AccountList.AddAccountToFile(AccountHandler.Account);
             SetDisplayNameForUI = AccountHandler.Account.DisplayName;
         }
 
         #region Properties
+        public string TempProfilePicturePath { get { return _tempProfilePicturePath; } set { _tempProfilePicturePath = value; OnPropertyChanged(); } } 
+
         public  string TempUsername
         {
             get { return _tempUsername; }

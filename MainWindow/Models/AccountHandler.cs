@@ -33,6 +33,7 @@ namespace MainWindow.Models
         public static MainPageVM MainPageVm { get; set; }
         public static StoreVM StoreVm { get; set; }
         public static GameTemplateVM GameTemplateVm { get; set; }
+        public static AccountLoginVM ALVM { get; set; }
 
         public static AccountLists AccountList
         {
@@ -74,6 +75,7 @@ namespace MainWindow.Models
                     SetDisplayNameForUI = _account.DisplayName;
                     AccountDetail = new AccountDetails();
                     _accountDetails = await AccountDetail.LoadUserDetailsFile(username);
+                    SetProfileImagePathForUI = _accountDetails.ProfilePicturePath;
                     MainPageVm?.CallForAccountStatus();
                     StoreVm?.OnAccountChanged();
                     GameTemplateVm?.OnAccountChanged();
@@ -84,7 +86,7 @@ namespace MainWindow.Models
                             ShoppingCart.Instance.AddGame(game);
                         }
                     }
-                    
+
                     break;
                 }
             }
@@ -104,12 +106,13 @@ namespace MainWindow.Models
             _account = null;
             _displaynameForUI = null;
             _accountDetails = null;
+            SetProfileImagePathForUI = null;
             MainPageVm?.CallForAccountStatus();
             StoreVm?.OnAccountChanged();
             GameTemplateVm?.OnAccountChanged();
         }
 
-        public static void CreateAccount(Account account)
+        public static void CreateAccount(Account account, string pfpPath)
         {
 
             _accountList.AccountList.Add(account);
@@ -117,6 +120,8 @@ namespace MainWindow.Models
             AccountDetail = new AccountDetails();
             _accountDetails.DisplayName = account.DisplayName;
             _accountDetails.UserName = account.UserName;
+            _accountDetails.ProfilePicturePath = pfpPath;
+            SetProfileImagePathForUI = _accountDetails.ProfilePicturePath;
             _joinDateBeforeFormat = DateTime.Now;
             _accountDetails.JoinDate = _joinDateBeforeFormat.Date.ToShortDateString();
             _accountDetails.CreateUserDetailsFile(_accountDetails, account.UserName);
@@ -132,6 +137,8 @@ namespace MainWindow.Models
             get { return _displaynameForUI; }
             set { _displaynameForUI = value; }
         }
+
+        public static string SetProfileImagePathForUI { get; set; }
 
 
         #region Check Username, password and display name methods

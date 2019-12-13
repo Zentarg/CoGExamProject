@@ -21,13 +21,18 @@ namespace MainWindow.ViewModels
         private string _displaynameTooltip;
         private BitmapImage _imagePathDisplayName;
         private bool _isSetDisplayNameEnabled;
+        private string _username;
+        private string _pfpPath;
 
         public AccountSettingsVM()
         {
             AccountHandler.AccountList.LoadAccounts();
             DoSetDisplayName = new RelayCommand(SetDisplayName);
-            
+            _username = AccountHandler.Account.UserName;
+            _pfpPath = AccountHandler.SetProfileImagePathForUI;
         }
+
+        public string PFPPath { get { return _pfpPath; } }
 
         public string TempDisplayName
         {
@@ -65,6 +70,7 @@ namespace MainWindow.ViewModels
 
         public bool IsSetDisplayNameEnabled { get { return _isSetDisplayNameEnabled; } set { _isSetDisplayNameEnabled = value; OnPropertyChanged(); } }
         public RelayCommand DoSetDisplayName { get; set; }
+        public string Username { get { return _username; } }
 
 
         public async void SetDisplayName()

@@ -14,7 +14,8 @@
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
     xmlns:ViewModel="using:MainWindow.ViewModels"
     xmlns:Custom="using:Microsoft.Xaml.Interactivity"
-    xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core">
+    xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls">
 
     <ContentDialog.DataContext>
         <ViewModel:AccountLoginVM/>

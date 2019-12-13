@@ -19,11 +19,13 @@ namespace MainWindow.ViewModels
         private ReleaseDate _releaseDate;
         private ShoppingCart _shoppingCart;
         private Game _selectedGame;
-        private bool _isAccountCreationLoginEnabled;
+        private bool _isAccountCreationLoginEnabled = true;
         private bool _isAccountLogOffEnabled;
         private string _displayName;
         private bool _isAccountSettingsEnabled = false;
         private bool _isProfileEnabled = false;
+        private string _profileImagePath;
+
 
         public MainPageVM()
         {
@@ -33,7 +35,7 @@ namespace MainWindow.ViewModels
             DoAddGame = new RelayCommand(AddGame);
             DoRemoveGame = new RelayCommand(RemoveGame);
             DoPurchaseGame = new RelayCommand(PurchaseGame);
-            DoCheckAccountStatus = new RelayCommand(CheckAccountStatus);
+            
             AccountHandler.MainPageVm = this;
             List<string> categories = new List<string>();
             categories.Add("Category 1");
@@ -86,8 +88,9 @@ namespace MainWindow.ViewModels
         public string DisplayName { get { return _displayName; } set { _displayName = value; OnPropertyChanged(); } }
         public bool IsAccountSettingsEnabled { get { return _isAccountSettingsEnabled; } set { _isAccountSettingsEnabled = value; OnPropertyChanged(); } }
         public bool IsProfileEnabled { get { return _isProfileEnabled; } set { _isProfileEnabled = value; OnPropertyChanged(); } }
-
-
+        public string ProfileImagePath { get { return _profileImagePath; } set { _profileImagePath = value; OnPropertyChanged(); } }
+       
+        
         public void AddGame()
         {
             _shoppingCart.AddGame(SelectedGame);
@@ -122,24 +125,7 @@ namespace MainWindow.ViewModels
             }  
         }
 
-        private void IsAccountLogOffPossible()
-        {
-            if (AccountHandler.Account != null)
-            {
-                IsAccountLogOffEnabled = true;
-            }
-            else
-            {
-                IsAccountLogOffEnabled = false;
-            }
-        }
-
-        private void CheckAccountStatus()
-        {
-            IsAccountCreationLoginPossible();
-            IsAccountLogOffPossible();
-
-        }
+        
 
 
 
@@ -150,16 +136,22 @@ namespace MainWindow.ViewModels
                 DisplayName = AccountHandler.SetDisplayNameForUI;
                 IsAccountSettingsEnabled = true;
                 IsProfileEnabled = true;
+                IsAccountCreationLoginEnabled = false;
+                IsAccountLogOffEnabled = true;
+                ProfileImagePath = AccountHandler.SetProfileImagePathForUI;
             }
             else
             {
                 DisplayName = null;
                 IsAccountSettingsEnabled = false;
                 IsProfileEnabled = false;
+                IsAccountLogOffEnabled = false;
+                IsAccountCreationLoginEnabled = true;
+                ProfileImagePath = null;
             }
         }
 
-
+       
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

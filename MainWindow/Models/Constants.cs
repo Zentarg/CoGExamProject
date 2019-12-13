@@ -22,6 +22,6 @@ namespace MainWindow.Models
 
         public const string CarrouselItemFolderPath = "\\CarrouselItems\\";
 
-
+        public const string AccountImageFolderPath = "\\AccountProfilePictures\\";
     }
 }

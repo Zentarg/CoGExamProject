@@ -15,8 +15,7 @@
     </Page.DataContext>
 
     <Grid>
-        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;" FontSize="75" HorizontalAlignment="Center" Margin="0,50,0,0"/>
-        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEA3A;" FontSize="100" HorizontalAlignment="Center" Margin="0,40,0,0"/>
+        <PersonPicture ProfilePicture="{Binding ProfileImagePath}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0"/>
         <TextBlock Text="{Binding DisplayName, Mode=TwoWay}" FontSize="35" HorizontalAlignment="Center" Margin="0,150,0,0"/>
 
         <Grid Margin="50,250,50,50" Background="LightGray" CornerRadius="20">

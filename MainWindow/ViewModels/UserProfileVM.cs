@@ -14,7 +14,7 @@ namespace MainWindow.ViewModels
     public class UserProfileVM : INotifyPropertyChanged
     {
         private string _displayName;
-
+        private string _profileImagePath;
         private GameDetails _domainObject;
         private GameCatalog _gameCatalog;
         private GameDetails _selectedGame;
@@ -32,6 +32,7 @@ namespace MainWindow.ViewModels
             _joinedDate = AccountHandler.AccountDetail.JoinDate;
             _yearDifference = _thisYear - Convert.ToInt32(_joinedDate.Split("/")[2]);
             _gamesOwnedCount = AccountHandler.AccountDetail.GamesOwnedCount;
+            _profileImagePath = AccountHandler.SetProfileImagePathForUI;
         }
 
         public string DisplayName
@@ -58,6 +59,7 @@ namespace MainWindow.ViewModels
         }
 
         public int YearsSinceJoined { get { return _yearDifference; } }
+        public string ProfileImagePath { get { return _profileImagePath; } set { _profileImagePath = value; OnPropertyChanged(); } }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

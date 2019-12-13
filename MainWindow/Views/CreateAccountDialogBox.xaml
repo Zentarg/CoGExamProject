@@ -67,8 +67,8 @@
         <StackPanel Width="500" Height="483">
 
             <Grid>
-                <Image Style="{ThemeResource ShowImage}" Height="50" Width="50" AllowDrop="True" DragOver="FontIcon_DragOver" Drop="FontIcon_Drop"/>
-                <TextBlock FontSize="15" Margin="30,70,30,0" HorizontalAlignment="Center" Text="Add Photo"/>
+                <PersonPicture x:Name="PfpImage" Width="70" AllowDrop="True" DragOver="ProfilePicture_OnDragOver" Drop="ProfilePicture_OnDrop" Tapped="ProfilePicture_OnTapped" Margin="0,-25,0,0"/>
+                <Button Margin="30,75,30,0" HorizontalAlignment="Center" Content="Add Photo" FontSize="8" Click="ProfilePictureChangeButton_OnClick"/>
                 
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">

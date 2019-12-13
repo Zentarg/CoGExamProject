@@ -20,7 +20,7 @@ namespace MainWindow.Models
         private int _gamesOwnedCount;
         private ObservableCollection<AccountPurchase> _purchaseHistory = new ObservableCollection<AccountPurchase>();
         private ObservableCollection<string> _gamesOwned = new ObservableCollection<string>();
-
+        
         public AccountDetails()
         {
 
@@ -29,11 +29,11 @@ namespace MainWindow.Models
 
         #region Properties
         public string UserName { get { return _username; } set { _username = value; } }
-        //public string ProfilePicturePatch { get; set; }
         public string DisplayName { get { return _displayname; } set { _displayname = value; } } 
         public string JoinDate { get { return _joinDate; } set { _joinDate = value; } }
         public int GamesOwnedCount { get { return _gamesOwnedCount; } set { _gamesOwnedCount = value; } }
         public ObservableCollection<AccountPurchase> PurchaseHistory { get { return _purchaseHistory; } set { _purchaseHistory = value; } }
+        public string ProfilePicturePath { get; set; }
         
         //Below needs implementing
         public ShoppingCart AccountShoppingCart { get; set; }

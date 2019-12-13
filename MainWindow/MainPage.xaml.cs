@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MainWindow.Models;
 using MainWindow.ViewModels;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -27,7 +28,7 @@ namespace MainWindow
     public sealed partial class MainPage : Page
     {
         private readonly NavigationHandler _navigationHandler;
-        private MainPageVM _mainPageVM;
+        private MainPageVM _mainPageVM; 
 
 
         public MainPage()
@@ -38,6 +39,7 @@ namespace MainWindow
             _mainPageVM = DataContext as MainPageVM;
             
         }
+
 
         private void NavigateMainFrameBack(object sender, RoutedEventArgs e)
         {
@@ -118,9 +120,9 @@ namespace MainWindow
             _mainPageVM.RemoveGame();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Border_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            
+            Flyout.ShowAttachedFlyout(sender as FrameworkElement);
         }
     }
 }

@@ -48,6 +48,20 @@
                 <Setter Property="FontSize" Value="15"/>
             </Style>
 
+            <Style x:Key="DownwardDropShadow" TargetType="Border">
+                <Setter Property="CornerRadius" Value="100" />
+                <Setter Property="BorderThickness" Value="0,0,0,2" />
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#ccc" Offset="1" />
+                            <GradientStop Color="#ddd" Offset="0" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+          
         </ResourceDictionary>
     </Page.Resources>
 
@@ -55,14 +69,26 @@
         <TextBlock Text="Account settings" FontSize="50" Margin="20,20,0,0"/>
         <Grid Margin="50,100,50,20">
             <StackPanel>
-                <StackPanel HorizontalAlignment="Left">
-                    <TextBlock Text="UserName" FontSize="25"/>
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                    <TextBlock Text="User Name:" FontSize="25"/>
+                    <TextBlock Text="{Binding Username}" FontSize="25" Margin="5,0,0,0"/>
                 </StackPanel>
-                <Grid Margin="0,20,0,20">
-                    <StackPanel HorizontalAlignment="Left">
+
+                <Grid Margin="0,50,0,0">
+                    <StackPanel HorizontalAlignment="Left" Margin="5">
+                        <TextBlock Text="Change profile picture" FontSize="25"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Margin="5">
+                        <PersonPicture ProfilePicture="{Binding PFPPath}" x:Name="PfpImage" AllowDrop="True" DragOver="ProfilePicture_OnDragOver" Drop="ProfilePicture_OnDrop" Tapped="ProfilePicture_OnTapped"/>
+                        <Button CornerRadius="10" Width="180" Content="Change Photo"  Margin="0,5,0,0" Click="ProfilePictureChangeButton_OnClick"/>
+                    </StackPanel>
+                </Grid>
+                <Border Margin="0,20,0,20" Style="{StaticResource DownwardDropShadow}"/>
+                <Grid Margin="0,0,0,20" >
+                    <StackPanel HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center">
                         <TextBlock Text="Change Display Name" FontSize="25"/>
                     </StackPanel>
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
                         <TextBox Style="{StaticResource InputField}" PlaceholderText="Display Name" Text="{Binding TempDisplayName, Mode=TwoWay}" Margin="0,0,0,0">
                             <Custom:Interaction.Behaviors>
                                 <Custom1:DataTriggerBehavior Value="3" Binding="{Binding DisplaynameCheck}">
@@ -91,29 +117,29 @@
                             </ToolTipService.ToolTip>
                         </Image>
                     </StackPanel>
-                    <StackPanel HorizontalAlignment="Right">
+                    <StackPanel HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center">
                         <Button Content="Set Display Name" CornerRadius="10" Margin="0,0,0,0" Width="180" Command="{Binding DoSetDisplayName}" IsEnabled="{Binding IsSetDisplayNameEnabled}"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="0,0,0,20">
-                    <StackPanel HorizontalAlignment="Left">
+                    <StackPanel HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center">
                         <TextBlock Text="Change Password" FontSize="25"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Center">
                         
                     </StackPanel>
-                    <StackPanel HorizontalAlignment="Right">
+                    <StackPanel HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center">
                         <Button Content="Change Password" CornerRadius="10" Margin="0,0,0,0" Width="180" Click="Button_Click"/>
                     </StackPanel>
                 </Grid>
                 <Grid Margin="0,0,0,20">
-                    <StackPanel HorizontalAlignment="Left">
+                    <StackPanel HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center">
                         <TextBlock Text="Purchase History" FontSize="25"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Center">
 
                     </StackPanel>
-                    <StackPanel HorizontalAlignment="Right">
+                    <StackPanel HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center">
                         <Button Content="View Purchase History" CornerRadius="10" Margin="0,0,0,0" Width="180" Click="Button_Click_1" Tag="PurchaseHistory"/>
                     </StackPanel>
                 </Grid>
