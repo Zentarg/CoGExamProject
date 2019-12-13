@@ -47,7 +47,7 @@
                     <TextBox Text="{Binding GameSearch}"/>
 
 
-                    <ListView ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame.Name, Mode=TwoWay}">
+                    <ListView ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
