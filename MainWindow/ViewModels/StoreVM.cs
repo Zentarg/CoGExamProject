@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -14,6 +15,8 @@ namespace MainWindow.ViewModels
         private readonly GameList _gameList;
         private readonly ShoppingCart _shoppingCart;
         private ObservableCollection<Game> _filteredGames = new ObservableCollection<Game>();
+        private bool _isBuyButtonEnabled = false;
+        private ReleaseDate _releaseDate;
 
         public StoreVM()
         {
@@ -126,6 +129,25 @@ namespace MainWindow.ViewModels
         public void OnAccountChanged()
         {
             OnPropertyChanged(nameof(LoggedIn));
+        }
+
+        public void CheckReleaseDate()
+        {
+            DateTime date = new DateTime(_releaseDate.Year, _releaseDate.Month, _releaseDate.Day);
+            if (date <= DateTime.Now)
+            {
+                IsBuyButtonEnabled = true;
+                OnPropertyChanged();
+            } else if (date > DateTime.Now)
+            {
+                IsBuyButtonEnabled = false;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsBuyButtonEnabled
+        {
+            get { return _isBuyButtonEnabled; }
+            set { _isBuyButtonEnabled = value; OnPropertyChanged(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
