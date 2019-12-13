@@ -172,7 +172,7 @@
                     </Button.Flyout>
                 </Button>
 
-                <TextBlock Text="{Binding DisplayName}" FontSize="25" Foreground="White"/>
+                <TextBlock Text="{Binding DisplayName}" FontSize="25" Foreground="White" Margin="0, 5, 15, 0"/>
                 <Button Style="{StaticResource MenuButon}" FocusVisualSecondaryBrush="#33FFFFFF" Background="Black" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}" Padding="0" BorderThickness="0" CornerRadius="30" Margin="0, 2.5, 5, 0" x:Name="PfpButton">
                     <Button.Resources>
                         <controls:TeachingTip x:Name="Account" Title="Account creation and login" Subtitle="You can login, create an account, or logoff from this button" Target="{x:Bind PfpButton}" IsOpen="True"/>
