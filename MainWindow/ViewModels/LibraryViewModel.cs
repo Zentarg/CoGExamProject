@@ -34,6 +34,11 @@ namespace MainWindow.ViewModels
             //_selectedGame = null;
             //_deletionCommand = new DeleteCommand(_contactCatalog, this);
             _navigationHandler = NavigationHandler.Instance;
+
+            foreach (Game game in Games)
+            {
+                FilteredGames.Add(game);
+            }
             
         }
 
@@ -71,10 +76,15 @@ namespace MainWindow.ViewModels
             {
                 _game = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(ShowDetailsView));
                 //_deletionCommand.RaiseCanExecuteChanged();
             }
         }
 
+        public bool ShowDetailsView
+        {
+            get { return SelectedGame != null; }
+        }
 
         private void GoToGameButton_OnClick(object sender, RoutedEventArgs e)
         {
@@ -93,6 +103,30 @@ namespace MainWindow.ViewModels
         public ObservableCollection<Game> Games
         {
             get { return AccountHandler.AccountDetail.GamesOwned; }
+        }
+
+        public ObservableCollection<Game> FilteredGames { get; set; } = new ObservableCollection<Game>();
+
+        public void FilterGames(string searchTerms)
+        {
+            List<Game> _tempList = new List<Game>();
+            foreach (Game game in Games)
+            {
+                if (game.Name.ToLower().Contains(searchTerms.ToLower()))
+                    _tempList.Add(game);
+            }
+
+            for (int i = FilteredGames.Count; i > 0; i--)
+            {
+                if (!(_tempList.Contains(FilteredGames[i - 1])))
+                    FilteredGames.Remove(FilteredGames[i - 1]);
+            }
+
+            foreach (Game game in _tempList)
+            {
+                if (!FilteredGames.Contains(game))
+                    FilteredGames.Add(game);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

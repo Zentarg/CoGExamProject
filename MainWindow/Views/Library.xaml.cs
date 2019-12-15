@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MainWindow.Models;
+using MainWindow.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,11 +25,16 @@ namespace MainWindow.Views
     public sealed partial class Library : Page
     {
         private NavigationHandler _navigationHandler;
+        private LibraryViewModel _libraryViewModel;
+        private GameList _gameList;
+
 
         public Library()
         {
             this.InitializeComponent();
             _navigationHandler = NavigationHandler.Instance;
+            _libraryViewModel = DataContext as LibraryViewModel;
+            _gameList = GameList.Instance;
         }
 
         private void BaseExample_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -71,14 +77,20 @@ namespace MainWindow.Views
 
         }
 
-        private void GoToGameButton_OnClick(object sender, RoutedEventArgs e)
-        { 
+        private void GoToGamePageButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _gameList.SelectedGame = _libraryViewModel.SelectedGame;
             _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.GameTemplate"));
         }
 
         private void Library_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void LibrarySearchBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _libraryViewModel.FilterGames(LibrarySearchBox.Text);
         }
     }
 }
