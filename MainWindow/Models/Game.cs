@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Calls.Background;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Storage.Streams;
@@ -12,7 +13,7 @@ namespace MainWindow.Models
 {
     public class Game
     {
-        public Game(Account author, string thumbnailImagePath, string name, float price, int currentDiscountPercentage, string description, string gamePath, List<string> categories, List<CarrouselItem> carrouselItems, DateTime releaseDate)
+        public Game(Account author, string thumbnailImagePath, string name, float price, int currentDiscountPercentage, string description, string gamePath, List<string> categories, List<CarrouselItem> carrouselItems, DateTimeOffset releaseDate)
         {
             Author = author;
             ThumbnailImagePath = thumbnailImagePath;
@@ -47,7 +48,7 @@ namespace MainWindow.Models
         public List<CarrouselItem> CarrouselItems { get; }
         public List<string> Categories { get; }
         public string Identifier { get; }
-        public DateTime ReleaseDate { get; }
+        public DateTimeOffset ReleaseDate { get; private set; }
 
         public void SetName(string name)
         {
@@ -77,6 +78,11 @@ namespace MainWindow.Models
         public void SetGamePath(string gamePath)
         {
             GamePath = gamePath;
+        }
+
+        public void SetReleaseDate(DateTimeOffset releaseDate)
+        {
+            ReleaseDate = releaseDate;
         }
 
         public void AddCategory(string category)
@@ -130,6 +136,5 @@ namespace MainWindow.Models
                 CarrouselItems.Remove(item);
             }
         }
-
     }
 }

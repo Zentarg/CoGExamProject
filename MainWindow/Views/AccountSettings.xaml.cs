@@ -31,6 +31,7 @@ namespace MainWindow.Views
         private NavigationHandler _navigationHandler;
         private AccountSettingsVM vm;
         private FileOpenPicker _imagePicker;
+        private GameList _gameList;
 
         public AccountSettings()
         {
@@ -44,6 +45,7 @@ namespace MainWindow.Views
             _imagePicker.FileTypeFilter.Add(".jpeg");
             _imagePicker.FileTypeFilter.Add(".png");
             _imagePicker.FileTypeFilter.Add(".gif");
+            _gameList = GameList.Instance;
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -119,6 +121,19 @@ namespace MainWindow.Views
         private void ProfilePicture_OnDragOver(object sender, DragEventArgs e)
         {
             e.AcceptedOperation = DataPackageOperation.Copy;
+        }
+
+        private void GamePage_OnClick(object sender, RoutedEventArgs e)
+        {
+            var item = sender as DependencyObject;
+            while (!(item is ListViewItem))
+            {
+                item = VisualTreeHelper.GetParent(item);
+            }
+            item.SetValue(ListViewItem.IsSelectedProperty, true);
+
+            _gameList.SelectedGame = vm.SelectedGame;
+            _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.GameTemplate"));
         }
     }
 }

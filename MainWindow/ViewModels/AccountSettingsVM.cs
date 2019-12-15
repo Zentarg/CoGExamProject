@@ -23,9 +23,10 @@ namespace MainWindow.ViewModels
         private BitmapImage _imagePathDisplayName;
         private bool _isSetDisplayNameEnabled;
         private bool _isAddedGamesEnabled;
-        private AccountDetails _gamesOwned;
+        private GameList _gameList;
         private string _username;
         private string _pfpPath;
+        private Game _selectedGame;
 
         public AccountSettingsVM()
         {
@@ -33,6 +34,12 @@ namespace MainWindow.ViewModels
             DoSetDisplayName = new RelayCommand(SetDisplayName);
             _username = AccountHandler.Account.UserName;
             _pfpPath = AccountHandler.SetProfileImagePathForUI;
+            _gameList = GameList.Instance;
+            if (_gameList.StoreGameCollection.Count == 0)
+                LoadGames();
+            else
+                FilterGames();
+            SelectedGame = GamesMade.Count > 0 ? GamesMade[0] : null;
         }
 
         public string PFPPath { get { return _pfpPath; } }
@@ -49,7 +56,7 @@ namespace MainWindow.ViewModels
                 DisplaynameTooltip = AccountHandler.DisplayNameResultStrng(DisplaynameCheck);
                 ImagePathDisplayname = AccountHandler.ReturnImagePathDisplayName(DisplaynameCheck);
                 IsSetDisplayNameEnabled = EnableSetDisplayName();
-                
+
             }
         }
 
@@ -74,8 +81,9 @@ namespace MainWindow.ViewModels
         public bool IsSetDisplayNameEnabled { get { return _isSetDisplayNameEnabled; } set { _isSetDisplayNameEnabled = value; OnPropertyChanged(); } }
         public RelayCommand DoSetDisplayName { get; set; }
         public string Username { get { return _username; } }
+        public Game SelectedGame { get { return _selectedGame;} set { _selectedGame = value; OnPropertyChanged();} }
 
-        public bool IsAddedGamesEnabled { get { return _isAddedGamesEnabled; } set { _isAddedGamesEnabled = value; OnPropertyChanged(); } }
+        public ObservableCollection<Game> GamesMade { get; set; } = new ObservableCollection<Game>();
 
         public async void SetDisplayName()
         {
@@ -95,7 +103,7 @@ namespace MainWindow.ViewModels
         private bool EnableSetDisplayName()
         {
             if (DisplaynameCheck == 0 && _currentDisplayName != _tempDisplayName && _oldDisplayName != _currentDisplayName)
-            { 
+            {
                 return true;
             }
             else
@@ -105,6 +113,24 @@ namespace MainWindow.ViewModels
                 ImagePathDisplayname = new BitmapImage(new Uri("ms-appx:///Assets/RedX.png"));
                 return false;
             }
+        }
+
+        private async void LoadGames()
+        {
+            await _gameList.LoadGames();
+            FilterGames();
+        }
+
+        private void FilterGames()
+        {
+            foreach (Game game in _gameList.StoreGameCollection)
+            {
+                if (game.Author.UserName == AccountHandler.Account.UserName)
+                {
+                    GamesMade.Add(game);
+                }
+            }
+            OnPropertyChanged(nameof(GamesMade));
         }
 
         [NotifyPropertyChangedInvocator]

@@ -84,6 +84,9 @@
                             <TextBlock Text="Developer:" FontSize="17"/>
                             <TextBlock Text="{Binding SelectedGame.Author.DisplayName}" FontSize="15"/>
                             <TextBlock Text="Overall Rating: " FontSize="17" />
+                            <TextBlock FontSize="15"/>
+                            <TextBlock Text="Release Date:" FontSize="17"/>
+                            <TextBlock Text="{Binding ReleaseDateString}" FontSize="15"/>
                             <TextBlock Text="" FontSize="15"/>
                             <TextBlock Text="Categories:" FontSize="17" />
                             <GridView ItemsSource="{Binding SelectedGame.Categories}" SelectionMode="None" HorizontalAlignment="Right" Margin="0, 0, 20, 0">
@@ -101,7 +104,7 @@
                                 </GridView.ItemContainerStyle>
                             </GridView>
                         </StackPanel>
-                        
+
                     </Grid>
                 </Grid>
             </Grid>

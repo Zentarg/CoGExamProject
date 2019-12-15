@@ -62,12 +62,5 @@ namespace MainWindow.Views
             AddGameContentDialog dialog = new AddGameContentDialog();
             dialog.ShowAsync();
         }
-
-        /* private void BuyButton_Enabled(object sender, RoutedEventArgs e)
-        {
-            
-            _storeVm.IsBuyButtonEnabled;
-        }
-        */
     }
 }
