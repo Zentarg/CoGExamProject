@@ -76,10 +76,15 @@ namespace MainWindow.ViewModels
             {
                 _game = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(ShowDetailsView));
                 //_deletionCommand.RaiseCanExecuteChanged();
             }
         }
 
+        public bool ShowDetailsView
+        {
+            get { return SelectedGame != null; }
+        }
 
         private void GoToGameButton_OnClick(object sender, RoutedEventArgs e)
         {
