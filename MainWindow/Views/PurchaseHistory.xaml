@@ -13,6 +13,9 @@
         <ViewModel:PurchaseHistoryVM/>
     </Page.DataContext>
 
+
+    
+    
     <Grid>
         <StackPanel Orientation="Horizontal" Margin="20">
             <TextBlock Text="Purchase History For:" FontSize="35"/>
@@ -22,26 +25,40 @@
         
         <Grid Margin="20,100,20,20" Background="LightGray" BorderThickness="1" CornerRadius="20">
             <ScrollViewer>
-                <ListView ItemsSource="{Binding PurchaseHistory}" SelectedItem="{Binding SelectedPurchase, Mode=TwoWay}">
+                <ListView x:Name="PurchaseHistoryList" ItemsSource="{Binding PurchaseHistory}" SelectedItem="{Binding SelectedPurchase, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                                    <TextBlock Text="Game Name:" Margin="5,0,5,0"/>
-                                    <TextBlock Text="{Binding GameName}"/>
-                                </StackPanel>
-                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                    <TextBlock Text="Price:" Margin="100,0,5,0"/>
-                                    <TextBlock Text="{Binding GamePrice}"/>
-                                </StackPanel>
-                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                                    <TextBlock Text="Purchase Date" Margin="100,0,5,0"/>
-                                    <TextBlock Text="{Binding PurchaseDate}"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Refundable:" Margin="100,0,5,0"/>
-                                    <TextBlock Text="No"/>
-                                </StackPanel>
+                                <Grid Width="300">
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <TextBlock Text="Game Name:" Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding GameName}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Width="200" Margin="20,0,0,0">
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <TextBlock Text="Price:" Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding GamePrice}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Width="300" Margin="20,0,0,0">
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                                        <TextBlock Text="Purchase Date" Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding PurchaseDate}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Width="200" Margin="20,0,0,0">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <TextBlock Text="Refundable:" Margin="0,0,5,0"/>
+                                        <TextBlock Text="No"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Width="200">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <Button  x:Name="GoToGamePageButton" Width="200" Height="20" Content="Go To Game Store Page" Padding="0" BorderThickness="0" Click="GoToGamePageButton_Click"/>
+                                    </StackPanel>
+                                </Grid>
+                                
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

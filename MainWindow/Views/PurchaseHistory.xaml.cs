@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MainWindow.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,19 @@ namespace MainWindow.Views
     /// </summary>
     public sealed partial class PurchaseHistory : Page
     {
+        private NavigationHandler _navigationHandler;
+
         public PurchaseHistory()
         {
             this.InitializeComponent();
+            _navigationHandler = NavigationHandler.Instance;
+        }
+
+        private void GoToGamePageButton_Click(object sender, RoutedEventArgs e)
+        {
+            PurchaseHistoryList.SelectedItem = ((FrameworkElement)sender).DataContext;
+
+            _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.GameTemplate"));
         }
     }
 }
