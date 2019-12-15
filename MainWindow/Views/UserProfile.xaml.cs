@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MainWindow.Models;
+using MainWindow.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +24,23 @@ namespace MainWindow.Views
     /// </summary>
     public sealed partial class UserProfile : Page
     {
+
+        private NavigationHandler _navigationHandler;
+
         public UserProfile()
         {
+
+
             this.InitializeComponent();
+            _navigationHandler = NavigationHandler.Instance;
+
+        }
+
+        private void GoToGamePageButton_Click(object sender, RoutedEventArgs e)
+        {
+            RecentPurchases.SelectedItem = ((FrameworkElement)sender).DataContext;
+
+            _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.GameTemplate"));
         }
     }
 }

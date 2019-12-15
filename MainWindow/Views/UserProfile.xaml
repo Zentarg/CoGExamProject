@@ -14,7 +14,25 @@
         <ViewModel:UserProfileVM/>
     </Page.DataContext>
 
-    <Grid>
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style x:Key="DownwardDropShadow" TargetType="Grid">
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="BorderThickness" Value="0,0,0,2" />
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#c6a482" Offset="1" />
+                            <GradientStop Color="#c6a490" Offset="0" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+        
+    </Page.Resources>
+
+    <Grid x:Name="OuterGrid">
         <PersonPicture ProfilePicture="{Binding ProfileImagePath}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0"/>
         <TextBlock Text="{Binding DisplayName, Mode=TwoWay}" FontSize="35" HorizontalAlignment="Center" Margin="0,150,0,0"/>
 
@@ -34,6 +52,24 @@
                     <TextBlock Text="Years" FontSize="15" HorizontalAlignment="Left" Margin="0,10,21,0"/>
                 </StackPanel>
             </StackPanel>
+            
+            <ListView x:Name="RecentPurchases" Margin="50,100,250,50" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="20" Header="   Recent Acquisitions" ItemsSource="{Binding RecentPurchases}" SelectedItem="{Binding SelectedPurchase, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="10000" Style="{StaticResource DownwardDropShadow}">
+                            <StackPanel Orientation="Horizontal">
+                                <PersonPicture ProfilePicture="{Binding ElementName=OuterGrid, Path=DataContext.ProfileImagePath}" Height="75" Margin="5"/>
+                                <TextBlock Text="{Binding ElementName=OuterGrid, Path=DataContext.DisplayName}" VerticalAlignment="Bottom" Margin="10"/>
+                                <TextBlock Text="Bought on the" Margin="10,0,3,10" VerticalAlignment="Bottom"/>
+                                <TextBlock Text="{Binding PurchaseDate}" VerticalAlignment="Bottom" Margin="0,0,0,10"/>
+                                <TextBlock Text="{Binding GameName}" Margin="10,0,3,10" VerticalAlignment="Bottom"/>
+                                <Button  x:Name="GoToGamePageButton" Width="200" Height="25" Content="Go To Game Store Page" Padding="0" BorderThickness="0" Click="GoToGamePageButton_Click" VerticalAlignment="Bottom" Margin="100,0,0,10"/>
+                            </StackPanel>
+                        </Grid>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </Grid>
 </Page>

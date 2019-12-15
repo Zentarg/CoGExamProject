@@ -15,24 +15,31 @@ namespace MainWindow.ViewModels
     {
         private string _displayName;
         private string _profileImagePath;
-        private GameDetails _domainObject;
-        private GameCatalog _gameCatalog;
-        private GameDetails _selectedGame;
         private int _gamesOwnedCount;
         private string _joinedDate;
         private int _thisYear = DateTime.Now.Year;
         private int _yearDifference;
+        
+        private GameList _gameList;
+        private AccountPurchase _selectedPurchase;
 
         public UserProfileVM()
         {
             DisplayName = AccountHandler.SetDisplayNameForUI;
-            _gameCatalog = new GameCatalog();
-            DomainObject();
-            _selectedGame = null;
             _joinedDate = AccountHandler.AccountDetail.JoinDate;
             _yearDifference = _thisYear - Convert.ToInt32(_joinedDate.Split("/")[2]);
             _gamesOwnedCount = AccountHandler.AccountDetail.GamesOwnedCount;
             _profileImagePath = AccountHandler.SetProfileImagePathForUI;
+            RecentPurchases = GetRecentPurchases();
+            
+            _gameList = GameList.Instance;
+            LoadGames();
+            _selectedPurchase = null;
+        }
+
+        private async void LoadGames()
+        {
+            await _gameList.LoadGames();
         }
 
         public string DisplayName
@@ -53,6 +60,8 @@ namespace MainWindow.ViewModels
             }
         }
 
+        public ObservableCollection<AccountPurchase> RecentPurchases { get; }
+
         public string JoinedDate
         {
             get { return _joinedDate; }
@@ -60,7 +69,40 @@ namespace MainWindow.ViewModels
 
         public int YearsSinceJoined { get { return _yearDifference; } }
         public string ProfileImagePath { get { return _profileImagePath; } set { _profileImagePath = value; OnPropertyChanged(); } }
+        
+        public AccountPurchase SelectedPurchase { get { return _selectedPurchase; } set { _selectedPurchase = value; OnPropertyChanged(); SelectedGame = GetGameFromPurchaseHistory(); } }
+        public Game SelectedGame { set { _gameList.SelectedGame = value; OnPropertyChanged(); } }
 
+        public ObservableCollection<AccountPurchase> GetRecentPurchases()
+        {
+            ObservableCollection<AccountPurchase> temp = new ObservableCollection<AccountPurchase>();
+
+            if(AccountHandler.AccountDetail.PurchaseHistory.Count > 5)
+            {
+                for (int count = 0; count < 6; count++)
+                {
+                    temp.Add(AccountHandler.AccountDetail.PurchaseHistory[count]);
+                }
+                return temp;
+            }
+            else
+            {
+                temp = AccountHandler.AccountDetail.PurchaseHistory;
+                return temp;
+            }
+        }
+
+        public Game GetGameFromPurchaseHistory()
+        {
+            foreach (Game game in GameList.Instance.StoreGameCollection)
+            {
+                if (SelectedPurchase.GameName == game.Name)
+                {
+                    return game;
+                }
+            }
+            return null;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -68,38 +110,6 @@ namespace MainWindow.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-
-
-        //Test Stuff
-
-        public GameDetails SelectedGame
-        {
-            get
-            {
-                return _selectedGame;
-            }
-
-            set
-            {
-                _selectedGame = value;
-                OnPropertyChanged();
-                //_deletionCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        public ObservableCollection<GameDetails> GamesCollection
-        {
-            get { return _gameCatalog.Games; }
-        }
-
-        public void DomainObject()
-        {
-            foreach (var c in _gameCatalog.Games)
-            {
-                _domainObject = c;
-            }
         }
     }
 }

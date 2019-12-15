@@ -110,16 +110,6 @@
                 <Image Source="Assets/Logo.png" Margin="20, 0, 0, 0"></Image>
                 <TextBlock Visibility="Collapsed" x:Name="PageNameTextblock" Margin="20, 0, 0, 0" Padding="0, 5, 0, 0" FontSize="25" Text="Page" />
             </StackPanel>
-            <StackPanel>
-                <Button Content="Test" HorizontalAlignment="Center" Foreground="White">
-
-                </Button>
-                <controls:TeachingTip x:Name="AccountLoginTeachi" Title="Login Success" PreferredPlacement="Top" IsLightDismissEnabled="False">
-                    <TextBlock TextWrapping="Wrap" Text="You have successfully logged into Collection of Games"/>
-                </controls:TeachingTip>
-
-                
-            </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50">
                 <Button Style="{StaticResource MenuButon}" x:Name="CartButton" Margin="0, 2.5, 5, 0" Height="45" FontFamily="Segoe MDL2 Assets" Content="&#xE7BF;" CornerRadius="30" FontSize="25" Width="45" FocusVisualSecondaryBrush="#33FFFFFF" Background="Black" FocusVisualPrimaryBrush="#A4FFFFFF" BorderBrush="{x:Null}">
                     <Button.Flyout>
