@@ -41,13 +41,11 @@
                                     QuerySubmitted="AutoSuggestBox_QuerySubmitted"
                                     SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
                 -->
-                    
-                    <TextBox Text="{Binding GameSearch, Mode=TwoWay}"/>
-                    
-                    <TextBox Text="{Binding GameSearch}"/>
+
+                    <TextBox x:Name="LibrarySearchBox" TextChanged="LibrarySearchBox_OnTextChanged" PlaceholderText="Search..."/>
 
 
-                    <ListView ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
+                    <ListView ItemsSource="{Binding FilteredGames}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
