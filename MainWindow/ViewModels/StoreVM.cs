@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using GalaSoft.MvvmLight.Command;
 using MainWindow.Annotations;
@@ -79,9 +80,11 @@ namespace MainWindow.ViewModels
                     _tempList.Add(game);
             }
 
+            _tempList = _tempList.OrderBy(item => item.Name).ToList();
+
             for (int i = FilteredGames.Count; i > 0; i--)
             {
-                if (!(_tempList.Contains(FilteredGames[i - 1])))
+                //if (!(_tempList.Contains(FilteredGames[i - 1])))
                     FilteredGames.Remove(FilteredGames[i - 1]);
             }
 
@@ -90,6 +93,7 @@ namespace MainWindow.ViewModels
                 if (!FilteredGames.Contains(game))
                     FilteredGames.Add(game);
             }
+
 
         }
 
