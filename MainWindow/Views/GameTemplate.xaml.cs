@@ -37,8 +37,8 @@ namespace MainWindow.Views
             _shoppingCart = ShoppingCart.Instance;
             _gameList = GameList.Instance;
             _navigationHandler = NavigationHandler.Instance;
-            ScrollViewGrid.MaxHeight = ApplicationView.GetForCurrentView().VisibleBounds.Height *
-                                       DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+            CarrouselGrid.MaxHeight = 2*((ApplicationView.GetForCurrentView().VisibleBounds.Height *
+                                       DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel)/3);
             DeleteGameCommand = new RelayCommand(DeleteGame);
         }
 
@@ -46,7 +46,6 @@ namespace MainWindow.Views
         {
             _shoppingCart.AddGame(_gameList.SelectedGame);
         }
-
 
         private RelayCommand DeleteGameCommand { get; }
 
