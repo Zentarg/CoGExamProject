@@ -47,7 +47,7 @@ namespace MainWindow
         /// </summary>
         public async void LoadAccounts()
         {
-            if (FileHandler.FileExists(Constants.AccountListFileName)) 
+            if (await FileHandler.FileExists(Constants.AccountListFileName)) 
             {
                 string accounts = await FileHandler.ReadFile(Constants.AccountListFileName);
                 if (accounts != "")

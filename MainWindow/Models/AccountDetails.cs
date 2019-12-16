@@ -62,7 +62,7 @@ namespace MainWindow.Models
         public async Task<AccountDetails> LoadUserDetailsFile(string username)
         {
             //This method loads a user's details file if it exists, else returns null. However, it should never happen that this returns null.
-            if (FileHandler.FileExists(Constants.AccountDetailsFolderPath + username + ".json"))
+            if (await FileHandler.FileExists(Constants.AccountDetailsFolderPath + username + ".json"))
             {
                 //Reads the data of an object of this class' properties and then returns that data.
                 string json = await FileHandler.ReadFile(Constants.AccountDetailsFolderPath + username + ".json");
