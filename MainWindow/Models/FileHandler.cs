@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Storage;
 using Newtonsoft.Json;
 
@@ -33,11 +34,9 @@ namespace MainWindow.Models
             await (await StorageFile.GetFileFromPathAsync(_storageFolder + filePath)).DeleteAsync();
         }
 
-        public static bool FileExists(string fileName)
+        public static async Task<bool> FileExists(string fileName)
         {
-            string path = _storageFolder.Path;
-
-            return _storageFolder.TryGetItemAsync(fileName) != null;
+            return await _storageFolder.TryGetItemAsync(fileName) != null;
         }
 
         public static async Task<StorageFile> ReadStorageFile(string filePath, bool fullpath)

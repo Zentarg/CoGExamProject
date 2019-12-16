@@ -65,7 +65,7 @@ namespace MainWindow.Models
 
         public async Task LoadGames()
         {
-            if (FileHandler.FileExists(Constants.GameFileListName))
+            if (await FileHandler.FileExists(Constants.GameFileListName))
             {
                 string json = await FileHandler.ReadFile(Constants.GameFileListName);
 
