@@ -12,19 +12,25 @@ namespace MainWindow.ViewModels
 {
     class ApplicationSettingsVM
     {
-
-
-
+        #region Constructor
         public ApplicationSettingsVM()
         {
             DoOpenFolder = new RelayCommand(OpenFolder);
         }
+        #endregion
 
+        #region Properties
         public RelayCommand DoOpenFolder { get; set; }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Method for opening the storage folder we use for storing data in (localfolder)
+        /// </summary>
         public async void OpenFolder()
         {
             await Launcher.LaunchFolderAsync(ApplicationData.Current.LocalFolder);
         }
+        #endregion
     }
 }
