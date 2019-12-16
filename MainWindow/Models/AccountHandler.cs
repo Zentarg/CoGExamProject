@@ -12,24 +12,23 @@ namespace MainWindow.Models
 {
     public static class AccountHandler 
     {
+        #region Instance Fields
         private static Account _account;
-
         private static AccountLists _accountList = AccountLists.AccountListInstance;
-
         private static string _displaynameForUI;
-
         private static AccountDetails _accountDetails;
-
         private static DateTime _joinDateBeforeFormat;
+        #endregion
 
-        static  AccountHandler()
-        {
-            
+        #region Constructor
+        static AccountHandler()
+        {  
             _account = null;
-            _accountDetails = null;
-            
+            _accountDetails = null;  
         }
+        #endregion
 
+        #region Properties
         public static MainPageVM MainPageVm { get; set; }
         public static StoreVM StoreVm { get; set; }
         public static GameTemplateVM GameTemplateVm { get; set; }
@@ -63,8 +62,10 @@ namespace MainWindow.Models
             get { return _accountDetails; } 
             set { _accountDetails = value; } 
         }
+        #endregion
 
 
+        #region Methods pertaining to login, account creation and logoff
         public static async void Login(string username, string password)
         {
             foreach (Account account in _accountList.AccountList)
@@ -86,7 +87,6 @@ namespace MainWindow.Models
                             ShoppingCart.Instance.AddGame(game);
                         }
                     }
-
                     break;
                 }
             }
@@ -128,9 +128,8 @@ namespace MainWindow.Models
             MainPageVm?.CallForAccountStatus();
             StoreVm?.OnAccountChanged();
             GameTemplateVm?.OnAccountChanged();
-
-            //_accountDetails = new AccountDetails(_account.UserName);
         }
+        #endregion
 
         public static string SetDisplayNameForUI
         {

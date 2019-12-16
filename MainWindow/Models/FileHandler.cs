@@ -61,6 +61,11 @@ namespace MainWindow.Models
         }
 
 
+        //Creates the folders we use in local folder, in case they are not created already.
+        public static async void CreateFolderIfDoesNotExist(string folderName) 
+        { 
+            await _storageFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+        }
 
     }
 }

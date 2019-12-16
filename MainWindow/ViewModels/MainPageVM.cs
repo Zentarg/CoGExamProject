@@ -36,6 +36,11 @@ namespace MainWindow.ViewModels
             DoRemoveGame = new RelayCommand(RemoveGame);
             DoPurchaseGame = new RelayCommand(PurchaseGame);
             
+            FileHandler.CreateFolderIfDoesNotExist(Constants.AccountDetailsFolderPath);
+            FileHandler.CreateFolderIfDoesNotExist(Constants.AccountImageFolderPath);
+            FileHandler.CreateFolderIfDoesNotExist(Constants.CarrouselItemFolderPath);
+            FileHandler.CreateFolderIfDoesNotExist(Constants.ThumbnailImageFolderPath);
+
             AccountHandler.MainPageVm = this;
             List<string> categories = new List<string>();
             categories.Add("Category 1");
