@@ -24,6 +24,7 @@ namespace MainWindow.ViewModels
         private bool _isAccountSettingsEnabled = false;
         private bool _isProfileEnabled = false;
         private string _profileImagePath;
+        private bool _isLibraryEnabled = false;
 
 
         public MainPageVM()
@@ -93,6 +94,7 @@ namespace MainWindow.ViewModels
         public bool IsAccountSettingsEnabled { get { return _isAccountSettingsEnabled; } set { _isAccountSettingsEnabled = value; OnPropertyChanged(); } }
         public bool IsProfileEnabled { get { return _isProfileEnabled; } set { _isProfileEnabled = value; OnPropertyChanged(); } }
         public string ProfileImagePath { get { return _profileImagePath; } set { _profileImagePath = value; OnPropertyChanged(); } }
+        public bool IsLibraryEnabled { get { return _isLibraryEnabled; } set { _isLibraryEnabled = value; OnPropertyChanged(); } }
        
         
         public void AddGame()
@@ -143,6 +145,7 @@ namespace MainWindow.ViewModels
                 IsAccountCreationLoginEnabled = false;
                 IsAccountLogOffEnabled = true;
                 ProfileImagePath = AccountHandler.SetProfileImagePathForUI;
+                _isLibraryEnabled = true;
             }
             else
             {
@@ -152,6 +155,7 @@ namespace MainWindow.ViewModels
                 IsAccountLogOffEnabled = false;
                 IsAccountCreationLoginEnabled = true;
                 ProfileImagePath = null;
+                _isLibraryEnabled = false;
             }
         }
 

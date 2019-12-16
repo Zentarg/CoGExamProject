@@ -85,12 +85,12 @@ namespace MainWindow.ViewModels
 
         public ObservableCollection<Game> GamesMade { get; set; } = new ObservableCollection<Game>();
 
-        public async void SetDisplayName()
+        public void SetDisplayName()
         {
             _currentDisplayName = _tempDisplayName;
             AccountHandler.Account.DisplayName = AccountHandler.DisplayNameAddTag(_tempDisplayName);
             AccountHandler.ChangeDisplayNameInAccountList(AccountHandler.Account.DisplayName);
-            await AccountHandler.AccountList.AddAccountToFile(AccountHandler.Account);
+            AccountHandler.AccountList.AddAccountToFile();
             AccountHandler.SetDisplayNameForUI = AccountHandler.Account.DisplayName;
             AccountHandler.MainPageVm?.CallForAccountStatus();
             IsSetDisplayNameEnabled = false;

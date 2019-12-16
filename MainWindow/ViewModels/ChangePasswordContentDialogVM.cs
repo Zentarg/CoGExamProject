@@ -194,11 +194,11 @@ namespace MainWindow.ViewModels
             IsConfirmButtonEnabled = CheckConfirmButtonStatus();
         }
 
-        public async void ChangePassword()
+        public void ChangePassword()
         {
             AccountHandler.Account.PassWord = EnteredConfirmPassword;
             AccountHandler.ChangeUserPassword(EnteredConfirmPassword);
-            await AccountHandler.AccountList.AddAccountToFile(AccountHandler.Account);
+            AccountHandler.AccountList.AddAccountToFile();
             IsConfirmButtonEnabled = false;
         }
 

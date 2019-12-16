@@ -197,7 +197,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="Library" Background="{x:Null}">
+                    <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="Library" Background="{x:Null}" IsEnabled="{Binding IsLibraryEnabled}">
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7FC;" FontSize="35" Width="50" />

@@ -13,26 +13,39 @@ using System.Collections.ObjectModel;
 
 namespace MainWindow
 {
+    /// <summary>
+    /// A singleton class, which insures that it is the same object being dealt with everywhere, that stores all Account objects and handles file writing for them
+    /// </summary>
     public class AccountLists
     {
+        
         private static ObservableCollection<Account> _accountLists = new ObservableCollection<Account>();
         private static AccountLists accountListInstance = new AccountLists();
 
         static AccountLists() { }
         private AccountLists() { }
 
+        /// <summary>
+        /// Returns the singleton instance of this class when called
+        /// </summary>
         public static AccountLists AccountListInstance
         {
             get { return accountListInstance; }
         }
 
+
+        /// <summary>
+        /// Through the instance, you can get the Account List, which returns the list of accounts
+        /// </summary>
         public ObservableCollection<Account> AccountList
         {
             get { return _accountLists; }
         }
 
-
-        public async Task LoadAccounts()
+        /// <summary>
+        /// Loads all the accounts from the accountlist.json file
+        /// </summary>
+        public async void LoadAccounts()
         {
             if (FileHandler.FileExists(Constants.AccountListFileName)) 
             {
@@ -44,7 +57,10 @@ namespace MainWindow
             }     
         }
 
-        public async Task AddAccountToFile(Account A)
+        /// <summary>
+        /// Writes the current account list instance to the file accountlist.json over writing what was there
+        /// </summary>
+        public void AddAccountToFile()
         {
             FileHandler.WriteFile(Constants.AccountListFileName, _accountLists);
         }

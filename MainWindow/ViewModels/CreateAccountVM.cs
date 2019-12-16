@@ -53,12 +53,12 @@ namespace MainWindow.ViewModels
             
         }
 
-        public async void Confirm()
+        public void Confirm()
         {
             TempDisplayName = AccountHandler.DisplayNameAddTag(_tempDisplayName);
             AccountHandler.Account = new Account(_tempUsername, TempPassword, TempDisplayName);
             AccountHandler.CreateAccount(AccountHandler.Account, TempProfilePicturePath);
-            await AccountList.AddAccountToFile(AccountHandler.Account);
+            AccountList.AddAccountToFile();
             SetDisplayNameForUI = AccountHandler.Account.DisplayName;
         }
 

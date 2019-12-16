@@ -68,8 +68,10 @@ namespace MainWindow.Models
             if (FileHandler.FileExists(Constants.GameFileListName))
             {
                 string json = await FileHandler.ReadFile(Constants.GameFileListName);
-
-                StoreGameCollection = JsonConvert.DeserializeObject<ObservableCollection<Game>>(json);
+                if (json != "")
+                {
+                    StoreGameCollection = JsonConvert.DeserializeObject<ObservableCollection<Game>>(json);
+                }               
             }
         }
 
