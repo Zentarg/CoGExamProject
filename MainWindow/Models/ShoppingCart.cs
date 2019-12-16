@@ -14,12 +14,11 @@ namespace MainWindow.Models
     {
         private ObservableCollection<Game> _games;
         private static ShoppingCart instance;
-        private float _totalPrice;
+
 
         private ShoppingCart()
         {
             _games = new ObservableCollection<Game>();
-            _totalPrice = TotalPrice;
         }
 
 
@@ -77,9 +76,10 @@ namespace MainWindow.Models
                 }
                 AccountHandler.AccountDetail.AccountShoppingCart = null;
                 AccountHandler.AccountDetail.CreateUserDetailsFile(AccountHandler.AccountDetail, AccountHandler.Account.UserName);
-                
             }
         }
+
+        public MainPageVM MainPageVm { get; set; }
 
         public static ShoppingCart Instance
         {
@@ -88,7 +88,6 @@ namespace MainWindow.Models
                 if (instance == null)
                 {
                     instance = new ShoppingCart();
-                    
                 }
                 return instance;
             }
@@ -111,7 +110,6 @@ namespace MainWindow.Models
             {
                price += game.Price - (game.Price *  ((float)game.CurrentDiscountPercentage / 100));
             }
-            
             return price;
         }
     }

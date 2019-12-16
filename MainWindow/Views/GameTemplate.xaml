@@ -76,6 +76,9 @@
                             <Button x:Name="RemoveGameButton" Click="RemoveGameButton_OnClick" Content="Remove Game" Visibility="{Binding UserIsOwner}"/>
                             <Button x:Name="BuyGameButton" Content="Add to cart" Margin="0, 0, 40, 0" Click="BuyGameButton_OnClick" Visibility="{Binding UserIsntOwner}"/>
                         </StackPanel>
+                        <StackPanel>
+                            <Button x:Name="ViewAddedGamesButton" Click="ViewAddedGames_OnClick" Content="View Added Games" HorizontalAlignment="Right" Margin="0,0,40,0" Visibility="{Binding UserIsOwner}"/>
+                        </StackPanel>
                         <TextBlock Text="Developer:" FontSize="17"/>
                         <TextBlock Text="{Binding SelectedGame.Author.DisplayName}" FontSize="15"/>
                         <TextBlock Text="" FontSize="15"/>

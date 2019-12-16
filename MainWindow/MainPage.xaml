@@ -138,7 +138,7 @@
                                         <TextBlock Text="Totalprice:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                         <TextBlock Text="{Binding TotalPrice, Mode=OneWay}" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                         <TextBlock Text="$" VerticalAlignment="Center"/>
-                                        <Button Content="Proceed to checkout" HorizontalAlignment="Right" Margin="20,0,0,0">
+                                        <Button x:Name="CheckoutButton"  Content="Proceed to checkout" HorizontalAlignment="Right" Margin="20,0,0,0" IsEnabled="{Binding IsCheckoutEnabled}">
                                     <Button.Flyout>
                                             <Flyout x:Name="CheckoutFlyout"  Placement="Bottom">
                                                 <StackPanel>
