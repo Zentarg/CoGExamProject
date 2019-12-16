@@ -16,7 +16,6 @@ namespace MainWindow.ViewModels
 {
     public class MainPageVM : INotifyPropertyChanged
     {
-        private DateTime _releaseDate;
         private ShoppingCart _shoppingCart;
         private Game _selectedGame;
         private bool _isAccountCreationLoginEnabled = true;

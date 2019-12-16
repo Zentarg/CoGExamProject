@@ -41,13 +41,11 @@
                                     QuerySubmitted="AutoSuggestBox_QuerySubmitted"
                                     SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
                 -->
-                    
-                    <TextBox Text="{Binding GameSearch, Mode=TwoWay}"/>
-                    
-                    <TextBox Text="{Binding GameSearch}"/>
+
+                    <TextBox x:Name="LibrarySearchBox" TextChanged="LibrarySearchBox_OnTextChanged" PlaceholderText="Search..."/>
 
 
-                    <ListView ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
+                    <ListView ItemsSource="{Binding FilteredGames}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -70,7 +68,7 @@
 
 
             <!--  Details Part  -->
-            <StackPanel Width="1319" Background="#00020E" >
+            <StackPanel Width="1319" Background="#00020E" Visibility="{Binding ShowDetailsView}">
                 <StackPanel
                     Margin="10,10,10,10"
                     BorderBrush="#00020E"
@@ -87,14 +85,13 @@
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                         <TextBlock x:Name="Game" Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Name}" SelectionHighlightColor="#000033" FontSize="36" Width="500" Height="auto" HorizontalTextAlignment="DetectFromContent" TextWrapping="WrapWholeWords" Margin="10,10,700,10" />
                     </Viewbox>
-                    <Button x:Name="ViewGameInStore" Content="View in Store" Visibility="Collapsed" Click="GoToGameButton_OnClick"/>
+                    <Button x:Name="GoToGamePageButton" Content="Go to game page" Click="GoToGamePageButton_OnClick"/>
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                         <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Categories}" FontSize="24" Height="auto" Width="500" TextWrapping="WrapWholeWords" Margin="10,10,700,10"/>
                     </Viewbox>
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                         <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Description}" FontSize="16" Width="500"  Height="400" Padding="3" TextWrapping="WrapWholeWords" Margin="10,10,700,10"/>
                     </Viewbox>
-
                 </StackPanel>
             </StackPanel>
         </StackPanel>

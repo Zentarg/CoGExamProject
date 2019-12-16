@@ -19,7 +19,7 @@ namespace MainWindow.ViewModels
 
     class AddGameContentDialogVM : INotifyPropertyChanged
     {
-        private DateTime _releaseDate;
+        private DateTimeOffset _releaseDate;
         private string _thumbnailImagePath;
         private ObservableCollection<StorageFile> _carrouselImages;
         private ObservableCollection<StorageFile> _carrouselVideos;
@@ -139,7 +139,7 @@ namespace MainWindow.ViewModels
             set { _selectedListviewStrings = value; OnPropertyChanged(); }
         }
 
-        public DateTime ReleaseTime
+        public DateTimeOffset ReleaseDate
         {
             get { return _releaseDate; }
             set { _releaseDate = value; OnPropertyChanged(); }

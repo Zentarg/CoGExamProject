@@ -37,6 +37,11 @@ namespace MainWindow.ViewModels
             get { return AccountHandler.Account?.UserName != SelectedGame.Author?.UserName; }
         }
 
+        public string ReleaseDateString
+        {
+            get { return SelectedGame.ReleaseDate.Date.ToShortDateString(); }
+        }
+
         public void OnAccountChanged()
         {
             OnPropertyChanged(nameof(UserIsOwner));
@@ -46,6 +51,7 @@ namespace MainWindow.ViewModels
         public void OnGameEdited()
         {
             OnPropertyChanged(nameof(SelectedGame));
+            OnPropertyChanged(nameof(ReleaseDateString));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

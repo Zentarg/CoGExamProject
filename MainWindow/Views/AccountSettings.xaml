@@ -61,7 +61,7 @@
                 </Setter>
             </Style>
 
-          
+
         </ResourceDictionary>
     </Page.Resources>
 
@@ -151,23 +151,37 @@
 
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right">
-                        <Button Content="View Added Games" CornerRadius="10" Margin="0,0,0,0" Width="180">
-                            <Button.Flyout>
-                                <Flyout>
-                                    <Grid>
-<StackPanel Orientation="Horizontal">
-    <ListView ItemsSource="{Binding StoreGameCollection}">
 
-    </ListView>
-</StackPanel>
-                                    </Grid>
-                                </Flyout>
-                            </Button.Flyout>
-                        </Button>
                     </StackPanel>
                 </Grid>
-
-
+                <StackPanel Height="354">
+                    <ListView ItemsSource="{Binding GamesMade}" SelectedItem="{Binding SelectedGame, Mode=TwoWay}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Width="150" TextWrapping="WrapWholeWords"/>
+                                        <Button Content="View Game" Click="GamePage_OnClick"/>
+                                        <GridView ItemsSource="{Binding Categories}" SelectionMode="None" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0">
+                                            <GridView.ItemContainerStyle>
+                                                <Style TargetType="GridViewItem">
+                                                    <Setter Property="MinHeight" Value="10" />
+                                                    <Setter Property="MinWidth" Value="10" />
+                                                    <Setter Property="Margin" Value="3.5"/>
+                                                    <Setter Property="BorderThickness" Value="0" />
+                                                    <Setter Property="Background" Value="CornflowerBlue" />
+                                                    <Setter Property="Padding" Value="5, 2, 5, 2"/>
+                                                    <Setter Property="Foreground" Value="AliceBlue" />
+                                                    <Setter Property="FontSize" Value="12" />
+                                                </Style>
+                                            </GridView.ItemContainerStyle>
+                                        </GridView>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
 
             </StackPanel>
             <StackPanel HorizontalAlignment="Center">

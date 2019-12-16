@@ -61,7 +61,7 @@
                     </Flyout>
                 </FlyoutBase.AttachedFlyout>
             </TextBox>
-            <DatePicker HorizontalAlignment="Stretch" SelectedDate="{Binding ReleaseTime, Mode=TwoWay}" Header="Game Release Date:">
+            <DatePicker HorizontalAlignment="Stretch" Date="{Binding ReleaseDate, Mode=TwoWay}" Header="Game Release Date:">
             </DatePicker>
             <Grid>
                 <TextBlock Text="Carrousel Videos:" Margin="0, 10, 0, 10" AllowDrop="True" Drop="CarrouselVideosGridView_OnDrop" DragOver="CarrouselVideosGridView_OnDragOver"/>

@@ -17,7 +17,7 @@ namespace MainWindow.ViewModels
     class EditGameContentDialogVM : INotifyPropertyChanged
     {
 
-        private DateTime _releaseDate;
+        private DateTimeOffset _releaseDate;
         private string _thumbnailImagePath;
         private ObservableCollection<StorageFile> _carrouselImages;
         private ObservableCollection<StorageFile> _carrouselVideos;
@@ -34,7 +34,7 @@ namespace MainWindow.ViewModels
             CarrouselImages = new ObservableCollection<StorageFile>();
             CarrouselVideos = new ObservableCollection<StorageFile>();
             CarrouselYoutubeVids = new ObservableCollection<ListviewString>();
-            
+
             LoadGameContent();
 
         }
@@ -71,7 +71,7 @@ namespace MainWindow.ViewModels
             Name = _gameList.SelectedGame.Name;
             Price = _gameList.SelectedGame.Price.ToString();
             Description = _gameList.SelectedGame.Description;
-            ReleaseTime = _gameList.SelectedGame.ReleaseDate;
+            ReleaseDate = _gameList.SelectedGame.ReleaseDate;
 
             OnPropertyChanged(nameof(CarrouselImages));
             OnPropertyChanged(nameof(CarrouselVideos));
@@ -81,7 +81,7 @@ namespace MainWindow.ViewModels
             OnPropertyChanged(nameof(Categories));
             OnPropertyChanged(nameof(Price));
             OnPropertyChanged(nameof(Description));
-            OnPropertyChanged(nameof(ReleaseTime));
+            OnPropertyChanged(nameof(ReleaseDate));
         }
 
         public Constants.AddGameErrors EditGame()
@@ -177,7 +177,7 @@ namespace MainWindow.ViewModels
             set { _selectedListviewStrings = value; OnPropertyChanged(); }
         }
 
-        public DateTime ReleaseTime
+        public DateTimeOffset ReleaseDate
         {
             get { return _releaseDate; }
             set { _releaseDate = value; OnPropertyChanged(); }

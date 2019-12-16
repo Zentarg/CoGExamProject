@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using GalaSoft.MvvmLight.Command;
 using MainWindow.Annotations;
@@ -16,7 +17,6 @@ namespace MainWindow.ViewModels
         private readonly ShoppingCart _shoppingCart;
         private ObservableCollection<Game> _filteredGames = new ObservableCollection<Game>();
         private bool _isBuyButtonEnabled = false;
-        private DateTime _releaseDate;
 
         public StoreVM()
         {
@@ -49,12 +49,11 @@ namespace MainWindow.ViewModels
             };
             string lorem =
                 "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-            _newGame = new Game(new Account("username", "password", "displayName"), "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg", "gameName", 34.5f, 0, lorem, "gamepath", categories,carrouselItems,new DateTime(2069,12,13));
+            _newGame = new Game(new Account("username", "password", "displayName"), "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg", "gameName", 34.5f, 0, lorem, "gamepath", categories,carrouselItems, new DateTime(2027,12,22));
             _gameList = GameList.Instance;
             _shoppingCart = ShoppingCart.Instance;
             DoLoadGames = new RelayCommand(LoadGames);
             LoadGames();
-            CheckReleaseDate();
 
             AccountHandler.StoreVm = this;
 
@@ -62,7 +61,7 @@ namespace MainWindow.ViewModels
 
         public RelayCommand DoAddGame { get; set; }
         public RelayCommand DoLoadGames { get; set; }
-  
+
 
         private async void LoadGames()
         {
@@ -75,13 +74,15 @@ namespace MainWindow.ViewModels
             List<Game> _tempList = new List<Game>();
             foreach (Game game in StoreGameCollection)
             {
-                if (game.Name.ToLower().Contains(searchTerms.ToLower()))
+                if (game.Name.ToLower().Contains(searchTerms.ToLower()) && game.ReleaseDate.Date <= DateTime.Now)
                     _tempList.Add(game);
             }
 
+            _tempList = _tempList.OrderBy(item => item.Name).ToList();
+
             for (int i = FilteredGames.Count; i > 0; i--)
             {
-                if (!(_tempList.Contains(FilteredGames[i - 1])))
+                //if (!(_tempList.Contains(FilteredGames[i - 1])))
                     FilteredGames.Remove(FilteredGames[i - 1]);
             }
 
@@ -90,6 +91,7 @@ namespace MainWindow.ViewModels
                 if (!FilteredGames.Contains(game))
                     FilteredGames.Add(game);
             }
+
 
         }
 
@@ -132,19 +134,6 @@ namespace MainWindow.ViewModels
             OnPropertyChanged(nameof(LoggedIn));
         }
 
-        public void CheckReleaseDate()
-        {
-            DateTime date = new DateTime();
-            if (date <= DateTime.Now)
-            {
-                IsBuyButtonEnabled = true;
-                OnPropertyChanged();
-            } else if (date > DateTime.Now)
-            {
-                IsBuyButtonEnabled = false;
-                OnPropertyChanged();
-            }
-        }
         public bool IsBuyButtonEnabled
         {
             get { return _isBuyButtonEnabled; }
