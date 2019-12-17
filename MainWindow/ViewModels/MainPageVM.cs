@@ -149,7 +149,7 @@ namespace MainWindow.ViewModels
                 IsAccountCreationLoginEnabled = false;
                 IsAccountLogOffEnabled = true;
                 ProfileImagePath = AccountHandler.SetProfileImagePathForUI;
-                _isLibraryEnabled = true;
+                IsLibraryEnabled = true;
             }
             else
             {
@@ -159,7 +159,7 @@ namespace MainWindow.ViewModels
                 IsAccountLogOffEnabled = false;
                 IsAccountCreationLoginEnabled = true;
                 ProfileImagePath = null;
-                _isLibraryEnabled = false;
+                IsLibraryEnabled = false;
             }
         }
 
