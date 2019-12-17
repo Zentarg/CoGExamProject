@@ -23,10 +23,10 @@
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <TextBox x:Name="StoreSearchTextBox" TextChanged="StoreSearchTextBox_OnTextChanged" Width="250" Height="30" PlaceholderText="Search..." Margin="0, 0, 10, 0"/>
                 <Button x:Name="AddGameButton" Click="AddGameButton_OnClick" Margin="0, 0, 10, 0" Visibility="{Binding LoggedIn}">
-                    AddGame
+                    Add Game
                 </Button>
                 <Button Command="{Binding DoLoadGames}">
-                    LoadGames
+                    Reload
                 </Button>
 
             </StackPanel>
