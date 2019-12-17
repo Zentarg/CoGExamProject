@@ -17,6 +17,7 @@ namespace MainWindow.ViewModels
 {
     class CreateAccountVM : INotifyPropertyChanged
     {
+        #region Instance Fields
         private string _tempUsername;
         private string _tempPassword;
         private string _tempDisplayName;
@@ -40,41 +41,29 @@ namespace MainWindow.ViewModels
         private BitmapImage _imagePathConfirmPassword;
 
         private bool _isConfirmButtonEnabled = false;
+        #endregion
 
-        
-        public RelayCommand DoConfirm { get; set; }
-
-
-
+        #region Constructor
         public CreateAccountVM()
         {
             AccountList.LoadAccounts();
-            DoConfirm = new RelayCommand(Confirm);
-            
+            DoConfirm = new RelayCommand(Confirm); 
         }
-
-        public void Confirm()
-        {
-            TempDisplayName = AccountHandler.DisplayNameAddTag(_tempDisplayName);
-            AccountHandler.Account = new Account(_tempUsername, TempPassword, TempDisplayName);
-            AccountHandler.CreateAccount(AccountHandler.Account, TempProfilePicturePath);
-            AccountList.AddAccountToFile();
-            SetDisplayNameForUI = AccountHandler.Account.DisplayName;
-        }
+        #endregion
 
         #region Properties
-        public string TempProfilePicturePath { get { return _tempProfilePicturePath; } set { _tempProfilePicturePath = value; OnPropertyChanged(); } } 
+        public RelayCommand DoConfirm { get; set; }
+        public string TempProfilePicturePath { get { return _tempProfilePicturePath; } set { _tempProfilePicturePath = value; OnPropertyChanged(); } }
+        public bool IsConfirmButtonEnabled { get { return _isConfirmButtonEnabled; } set { _isConfirmButtonEnabled = value; OnPropertyChanged(); } }
 
         public  string TempUsername
         {
             get { return _tempUsername; }
             set { 
                 _tempUsername = value; 
-                OnPropertyChanged(); 
+                OnPropertyChanged();
 
-                UsernameCheck = UserNameCheck(_tempUsername);
-                UsernameTooltip = UserNameResultStringForCreateAccount(UsernameCheck);
-                ImagePathUsername = ReturnImagePathUsernamePassword(UsernameCheck);
+                Username();
                 IsConfirmButtonEnabled = EnableConfirmButton();
             }    
         }
@@ -86,14 +75,8 @@ namespace MainWindow.ViewModels
                 _tempPassword = value; 
                 OnPropertyChanged();
 
-                PasswordCheck = PasswordCheck(_tempPassword);
-                PasswordTooltip = PasswordResultString(PasswordCheck);
-                ImagePathPassword = ReturnImagePathUsernamePassword(PasswordCheck);
-
-                PasswordConfirmCheck = ConfirmPasswordCheck(_confirmPassword, TempPassword);
-                ConfirmPasswordTooltip = PasswordConfirmResultString(PasswordConfirmCheck);
-                ImagePathConfirmPassword = ReturnImagePathConfirmPassword(PasswordConfirmCheck);
-
+                Password();
+                CPassword();
                 IsConfirmButtonEnabled = EnableConfirmButton();
             }
         }
@@ -105,9 +88,7 @@ namespace MainWindow.ViewModels
                 _tempDisplayName = value; 
                 OnPropertyChanged();
 
-                DisplaynameCheck = DisplayNameCheck(_tempDisplayName);
-                DisplaynameTooltip = DisplayNameResultStrng(DisplaynameCheck);
-                ImagePathDisplayname = ReturnImagePathDisplayName(DisplaynameCheck);
+                DisplayName();
                 IsConfirmButtonEnabled = EnableConfirmButton();
             }
         }
@@ -120,9 +101,7 @@ namespace MainWindow.ViewModels
                 _confirmPassword = value;
                 OnPropertyChanged();
 
-                PasswordConfirmCheck = ConfirmPasswordCheck(_confirmPassword, TempPassword);
-                ConfirmPasswordTooltip = PasswordConfirmResultString(PasswordConfirmCheck);
-                ImagePathConfirmPassword = ReturnImagePathConfirmPassword(PasswordConfirmCheck);
+                CPassword();
                 IsConfirmButtonEnabled = EnableConfirmButton();
             }
         }
@@ -237,10 +216,25 @@ namespace MainWindow.ViewModels
         {
             get; set;
         }
-
-        public bool IsConfirmButtonEnabled { get { return _isConfirmButtonEnabled; } set { _isConfirmButtonEnabled = value; OnPropertyChanged(); } }
         #endregion
 
+        #region Methods
+        /// <summary>
+        /// Method that creates an account with the entered information and stores it into relevant files
+        /// </summary>
+        public void Confirm()
+        {
+            TempDisplayName = AccountHandler.DisplayNameAddTag(_tempDisplayName);
+            AccountHandler.Account = new Account(_tempUsername, TempPassword, TempDisplayName);
+            AccountHandler.CreateAccount(AccountHandler.Account, TempProfilePicturePath);
+            AccountList.AddAccountToFile();
+            SetDisplayNameForUI = AccountHandler.Account.DisplayName;
+        }
+
+        /// <summary>
+        /// Method for enabling the confirm button
+        /// </summary>
+        /// <returns></returns>
         private bool EnableConfirmButton()
         {
             if(UsernameCheck == 0 && PasswordCheck == 00 && DisplaynameCheck == 0 && PasswordConfirmCheck == 0)
@@ -253,8 +247,50 @@ namespace MainWindow.ViewModels
             }
         }
 
+        /// <summary>
+        /// Checks for username are done here
+        /// </summary>
+        private void Username()
+        {
+            UsernameCheck = UserNameCheck(_tempUsername);
+            UsernameTooltip = UserNameResultStringForCreateAccount(UsernameCheck);
+            ImagePathUsername = ReturnImagePathUsernamePassword(UsernameCheck);
+        }
 
+        /// <summary>
+        /// Checks for password are done here
+        /// </summary>
+        private void Password()
+        {
+            PasswordCheck = PasswordCheck(_tempPassword);
+            PasswordTooltip = PasswordResultString(PasswordCheck);
+            ImagePathPassword = ReturnImagePathUsernamePassword(PasswordCheck);      
+        }
 
+        /// <summary>
+        /// Checks for confirm password are done here
+        /// </summary>
+        private void CPassword()
+        {
+            PasswordConfirmCheck = ConfirmPasswordCheck(_confirmPassword, TempPassword);
+            ConfirmPasswordTooltip = PasswordConfirmResultString(PasswordConfirmCheck);
+            ImagePathConfirmPassword = ReturnImagePathConfirmPassword(PasswordConfirmCheck);
+        }
+
+        /// <summary>
+        /// Checks for display name are done here
+        /// </summary>
+        private void DisplayName()
+        {
+            DisplaynameCheck = DisplayNameCheck(_tempDisplayName);
+            DisplaynameTooltip = DisplayNameResultStrng(DisplaynameCheck);
+            ImagePathDisplayname = ReturnImagePathDisplayName(DisplaynameCheck);
+        }
+
+        /// <summary>
+        /// Method that lets the view know when a property has been updated
+        /// </summary>
+        /// <param name="propertyName"></param>
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -262,5 +298,6 @@ namespace MainWindow.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
 }

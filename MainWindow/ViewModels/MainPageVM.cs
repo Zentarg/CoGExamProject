@@ -25,7 +25,7 @@ namespace MainWindow.ViewModels
         private bool _isProfileEnabled = false;
         private string _profileImagePath;
         private bool _isLibraryEnabled = false;
-
+        private bool _isCheckoutEnabled = false;
 
         public MainPageVM()
         {
@@ -35,7 +35,7 @@ namespace MainWindow.ViewModels
             DoAddGame = new RelayCommand(AddGame);
             DoRemoveGame = new RelayCommand(RemoveGame);
             DoPurchaseGame = new RelayCommand(PurchaseGame);
-            
+            _shoppingCart.MainPageVm = this;
             FileHandler.CreateFolderIfDoesNotExist(Constants.AccountDetailsFolderPath);
             FileHandler.CreateFolderIfDoesNotExist(Constants.AccountImageFolderPath);
             FileHandler.CreateFolderIfDoesNotExist(Constants.CarrouselItemFolderPath);
@@ -64,7 +64,7 @@ namespace MainWindow.ViewModels
             _selectedGame = new Game(new Account("username", "password", "displayName"), "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg", "gameName", 34.5f, 0, lorem, "gamepath", categories, new List<CarrouselItem>(), new DateTime(2069,12,23));
         }
 
-        
+
         public float TotalPrice
         {
             get { return _shoppingCart.TotalPrice;}
@@ -79,10 +79,7 @@ namespace MainWindow.ViewModels
             }
         }
 
-        public ObservableCollection<Game> Games
-        {
-            get { return _shoppingCart.Games; }
-        }
+        public ObservableCollection<Game> Games { get { return _shoppingCart.Games; } }
 
         public RelayCommand DoRemoveGame { get; set; }
         public RelayCommand DoAddGame { get; set; }
@@ -95,14 +92,21 @@ namespace MainWindow.ViewModels
         public bool IsProfileEnabled { get { return _isProfileEnabled; } set { _isProfileEnabled = value; OnPropertyChanged(); } }
         public string ProfileImagePath { get { return _profileImagePath; } set { _profileImagePath = value; OnPropertyChanged(); } }
         public bool IsLibraryEnabled { get { return _isLibraryEnabled; } set { _isLibraryEnabled = value; OnPropertyChanged(); } }
-       
-        
+        public bool IsCheckoutEnabled { get { return Games.Count > 0 ? _isCheckoutEnabled = true : _isCheckoutEnabled = false; } set { _isCheckoutEnabled = value; OnPropertyChanged(); } }
+
         public void AddGame()
         {
             _shoppingCart.AddGame(SelectedGame);
             OnPropertyChanged(nameof(Games));
             OnPropertyChanged(nameof(TotalPrice));
-            
+            OnPropertyChanged(nameof(IsCheckoutEnabled));
+        }
+
+        public void RefreshPurchaseSelectedGame()
+        {
+            OnPropertyChanged(nameof(Games));
+            OnPropertyChanged(nameof(TotalPrice));
+            OnPropertyChanged(nameof(IsCheckoutEnabled));
         }
 
         public void RemoveGame()
@@ -110,6 +114,7 @@ namespace MainWindow.ViewModels
             _shoppingCart.RemoveGame(SelectedGame);
             OnPropertyChanged(nameof(Games));
             OnPropertyChanged(nameof(TotalPrice));
+            OnPropertyChanged(nameof(IsCheckoutEnabled));
         }
 
         public void PurchaseGame()
@@ -128,10 +133,9 @@ namespace MainWindow.ViewModels
             else
             {
                 IsAccountCreationLoginEnabled = true;
-            }  
+            }
         }
 
-        
 
 
 
@@ -159,7 +163,7 @@ namespace MainWindow.ViewModels
             }
         }
 
-       
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

@@ -13,6 +13,7 @@ namespace MainWindow.ViewModels
 {
     public class UserProfileVM : INotifyPropertyChanged
     {
+        #region Instance Fields
         private string _displayName;
         private string _profileImagePath;
         private int _gamesOwnedCount;
@@ -22,7 +23,9 @@ namespace MainWindow.ViewModels
         
         private GameList _gameList;
         private AccountPurchase _selectedPurchase;
+        #endregion
 
+        #region Constructor
         public UserProfileVM()
         {
             DisplayName = AccountHandler.SetDisplayNameForUI;
@@ -36,12 +39,9 @@ namespace MainWindow.ViewModels
             LoadGames();
             _selectedPurchase = null;
         }
+        #endregion
 
-        private async void LoadGames()
-        {
-            await _gameList.LoadGames();
-        }
-
+        #region Properties
         public string DisplayName
         {
             get { return _displayName; }
@@ -72,7 +72,21 @@ namespace MainWindow.ViewModels
         
         public AccountPurchase SelectedPurchase { get { return _selectedPurchase; } set { _selectedPurchase = value; OnPropertyChanged(); SelectedGame = GetGameFromPurchaseHistory(); } }
         public Game SelectedGame { set { _gameList.SelectedGame = value; OnPropertyChanged(); } }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Method for loading the gamelist.json if it hasnt been loaded yet
+        /// </summary>
+        private async void LoadGames()
+        {
+            await _gameList.LoadGames();
+        }
+
+        /// <summary>
+        /// Method that gets the 6 most recent purchases made and adds them to the a new Observable collection and returns that
+        /// </summary>
+        /// <returns>returns a temp observable collection that can be assigned to an observable collection for use</returns>
         public ObservableCollection<AccountPurchase> GetRecentPurchases()
         {
             ObservableCollection<AccountPurchase> temp = new ObservableCollection<AccountPurchase>();
@@ -92,6 +106,10 @@ namespace MainWindow.ViewModels
             }
         }
 
+        /// <summary>
+        /// Method for getting a selected game's game object from the gamelist instance using the game's name 
+        /// </summary>
+        /// <returns>returns the game object</returns>
         public Game GetGameFromPurchaseHistory()
         {
             foreach (Game game in GameList.Instance.StoreGameCollection)
@@ -106,10 +124,15 @@ namespace MainWindow.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Method for telling the view when a property has been updated
+        /// </summary>
+        /// <param name="propertyName"></param>
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }

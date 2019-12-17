@@ -17,6 +17,7 @@ namespace MainWindow.ViewModels
         private readonly ShoppingCart _shoppingCart;
         private ObservableCollection<Game> _filteredGames = new ObservableCollection<Game>();
         private bool _isBuyButtonEnabled = false;
+        private MainPageVM _mainPageVM;
 
         public StoreVM()
         {
@@ -103,6 +104,7 @@ namespace MainWindow.ViewModels
         public void PurchaseSelectedGame()
         {
             _shoppingCart.AddGame(SelectedGame);
+            _shoppingCart.MainPageVm.RefreshPurchaseSelectedGame();
         }
 
         public ObservableCollection<Game> StoreGameCollection {
@@ -134,11 +136,6 @@ namespace MainWindow.ViewModels
             OnPropertyChanged(nameof(LoggedIn));
         }
 
-        public bool IsBuyButtonEnabled
-        {
-            get { return _isBuyButtonEnabled; }
-            set { _isBuyButtonEnabled = value; OnPropertyChanged(); }
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

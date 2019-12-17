@@ -15,6 +15,7 @@ namespace MainWindow.ViewModels
 {
     public class AccountLoginVM : INotifyPropertyChanged
     {
+        #region Instance Fields
         private string _tempUsername;
         private string _tempPassword;
 
@@ -29,22 +30,17 @@ namespace MainWindow.ViewModels
 
         private bool _isConfirmButtonEnabled = false;
         public RelayCommand DoConfirm { get; set; }
+        #endregion
 
-
-
+        #region Constructor
         public AccountLoginVM()
         {
             AccountList.LoadAccounts();
             DoConfirm = new RelayCommand(Confirm);
         }
+        #endregion
 
-        public void Confirm()
-        {
-            Login(_tempUsername, _tempPassword);
-            SetDisplayNameForUI = AccountHandler.Account.DisplayName;
-        }
-
-
+        #region Properties
         public string TempUsername
         {
             get { return _tempUsername; }
@@ -53,16 +49,7 @@ namespace MainWindow.ViewModels
                 _tempUsername = value;
                 OnPropertyChanged();
 
-                UsernameCheck = UserNameCheck(_tempUsername);
-                UsernameTooltip = UserNameResultStringForLogin(UsernameCheck);
-                ImagePathUsername = ReturnImagePathUsernameForLogin(UsernameCheck);
-                IsConfirmButtonEnabled = EnableConfirmButton();
-
-                //Allows one to enter password first and then the username without having to click on the password field and retype to check
-                if (_tempPassword != null)
-                {
-                    Password();
-                }     
+                Username();
             }
         }
 
@@ -138,10 +125,23 @@ namespace MainWindow.ViewModels
             }
         }
 
-
-
         public bool IsConfirmButtonEnabled { get { return _isConfirmButtonEnabled; } set { _isConfirmButtonEnabled = value; OnPropertyChanged(); } }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Method that logs the user into the system, calls AccountHandler.Login(_tempUsername, _tempPassword)
+        /// </summary>
+        public void Confirm()
+        {
+            Login(_tempUsername, _tempPassword);
+            SetDisplayNameForUI = AccountHandler.Account.DisplayName;
+        }
+
+        /// <summary>
+        /// A method that is called whenever something is typed into the login text fields in the view, used to enable the confirm button
+        /// </summary>
+        /// <returns>returns true if username exists and has a password match, returns false otherwise</returns>
         private bool EnableConfirmButton()
         {
             if (UsernameCheck == 1 && PasswordCheck == 0)
@@ -154,6 +154,9 @@ namespace MainWindow.ViewModels
             }
         }
 
+        /// <summary>
+        /// All password checks are done here
+        /// </summary>
         private void Password()
         {
             PasswordCheck = PasswordCheckForLogin(_tempPassword, _tempUsername);
@@ -162,7 +165,27 @@ namespace MainWindow.ViewModels
             IsConfirmButtonEnabled = EnableConfirmButton();
         }
 
+        /// <summary>
+        /// All username checks are done here
+        /// </summary>
+        private void Username()
+        {
+            UsernameCheck = UserNameCheck(_tempUsername);
+            UsernameTooltip = UserNameResultStringForLogin(UsernameCheck);
+            ImagePathUsername = ReturnImagePathUsernameForLogin(UsernameCheck);
+            IsConfirmButtonEnabled = EnableConfirmButton();
 
+            //Allows one to enter password first and then the username without having to click on the password field and retype to check
+            if (_tempPassword != null)
+            {
+                Password();
+            }
+        }
+
+        /// <summary>
+        /// Method for telling the view a property has been updated
+        /// </summary>
+        /// <param name="propertyName"></param>
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -170,5 +193,6 @@ namespace MainWindow.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
 }

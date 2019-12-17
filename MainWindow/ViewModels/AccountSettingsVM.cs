@@ -15,6 +15,7 @@ namespace MainWindow.ViewModels
 {
     class AccountSettingsVM : INotifyPropertyChanged
     {
+        #region Instance Fields
         private string _tempDisplayName;
         private string _oldDisplayName;
         private string _currentDisplayName = AccountHandler.Account.DisplayName.Split("#")[0];
@@ -27,7 +28,9 @@ namespace MainWindow.ViewModels
         private string _username;
         private string _pfpPath;
         private Game _selectedGame;
+        #endregion
 
+        #region Constructor
         public AccountSettingsVM()
         {
             AccountHandler.AccountList.LoadAccounts();
@@ -41,7 +44,9 @@ namespace MainWindow.ViewModels
                 FilterGames();
             SelectedGame = GamesMade.Count > 0 ? GamesMade[0] : null;
         }
+        #endregion
 
+        #region Properties
         public string PFPPath { get { return _pfpPath; } }
 
         public string TempDisplayName
@@ -84,7 +89,12 @@ namespace MainWindow.ViewModels
         public Game SelectedGame { get { return _selectedGame;} set { _selectedGame = value; OnPropertyChanged();} }
 
         public ObservableCollection<Game> GamesMade { get; set; } = new ObservableCollection<Game>();
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Method for setting the display name to that of the one entered in the view
+        /// </summary>
         public void SetDisplayName()
         {
             _currentDisplayName = _tempDisplayName;
@@ -100,6 +110,10 @@ namespace MainWindow.ViewModels
             AccountHandler.AccountDetail.CreateUserDetailsFile(AccountHandler.AccountDetail, AccountHandler.Account.UserName);
         }
 
+        /// <summary>
+        /// Method that enables the button if you can set your display name to it
+        /// </summary>
+        /// <returns>True if you can set your display name to what you have typed, false if you cannot</returns>
         private bool EnableSetDisplayName()
         {
             if (DisplaynameCheck == 0 && _currentDisplayName != _tempDisplayName && _oldDisplayName != _currentDisplayName)
@@ -115,12 +129,18 @@ namespace MainWindow.ViewModels
             }
         }
 
+        /// <summary>
+        /// Loads the gamelist
+        /// </summary>
         private async void LoadGames()
         {
             await _gameList.LoadGames();
             FilterGames();
         }
 
+        /// <summary>
+        /// filters the gamelist to show the ones you have made/added
+        /// </summary>
         private void FilterGames()
         {
             foreach (Game game in _gameList.StoreGameCollection)
@@ -133,6 +153,10 @@ namespace MainWindow.ViewModels
             OnPropertyChanged(nameof(GamesMade));
         }
 
+        /// <summary>
+        /// Method for telling the view a property has been updated
+        /// </summary>
+        /// <param name="propertyName"></param>
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -140,5 +164,6 @@ namespace MainWindow.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
 }

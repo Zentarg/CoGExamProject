@@ -14,6 +14,7 @@ namespace MainWindow.ViewModels
 {
     class ChangePasswordContentDialogVM : INotifyPropertyChanged
     {
+        #region Instance Fields
         private string _enteredOldPassword;
         private string _enteredNewPassword;
         private string _enteredConfirmPassword;
@@ -31,15 +32,16 @@ namespace MainWindow.ViewModels
         private BitmapImage _imagePathConfirmPassword;
 
         private bool _isConfirmButtonEnabled;
+        #endregion
 
-
+        #region Constructor
         public ChangePasswordContentDialogVM()
         {
             AccountHandler.AccountList.LoadAccounts();
-
         }
+        #endregion
 
-
+        #region Properties
         public string EnteredOldPassword
         {
             get { return _enteredOldPassword; }
@@ -162,7 +164,13 @@ namespace MainWindow.ViewModels
                 OnPropertyChanged();
             }
         }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// A method that enables the confirm button if all text boxes have a green check next to them
+        /// </summary>
+        /// <returns>returns true if all of the 3 checks result in 0, else return false</returns>
         public bool CheckConfirmButtonStatus()
         {
             if (CheckConfirmPassword == 0 && CheckNewPassword == 0 && CheckOldPassword == 0)
@@ -175,6 +183,9 @@ namespace MainWindow.ViewModels
             }
         }
 
+        /// <summary>
+        /// Checks on the old password, new password and confirm new password are done here
+        /// </summary>
         public void CheckPassword()
         {
             CheckOldPassword = AccountHandler.PasswordCheckVersusOldPassword(EnteredOldPassword);
@@ -194,6 +205,9 @@ namespace MainWindow.ViewModels
             IsConfirmButtonEnabled = CheckConfirmButtonStatus();
         }
 
+        /// <summary>
+        /// Method that changes the password of the account and writes the account list to the file
+        /// </summary>
         public void ChangePassword()
         {
             AccountHandler.Account.PassWord = EnteredConfirmPassword;
@@ -202,6 +216,10 @@ namespace MainWindow.ViewModels
             IsConfirmButtonEnabled = false;
         }
 
+        /// <summary>
+        /// Method that tells the view when a property is updated
+        /// </summary>
+        /// <param name="propertyName"></param>
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -209,5 +227,6 @@ namespace MainWindow.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
 }

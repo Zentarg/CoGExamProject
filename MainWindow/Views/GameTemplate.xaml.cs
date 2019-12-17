@@ -73,5 +73,10 @@ namespace MainWindow.Views
             EditGameContentDialog dialog = new EditGameContentDialog();
             dialog.ShowAsync();
         }
+
+        private void ViewAddedGames_OnClick(object sender, RoutedEventArgs e)
+        {
+            _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.AccountSettings"));
+        }
     }
 }
