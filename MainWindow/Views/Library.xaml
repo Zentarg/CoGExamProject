@@ -85,7 +85,22 @@
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                         <TextBlock x:Name="Game" Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Name}" SelectionHighlightColor="#000033" FontSize="36" Width="500" Height="auto" HorizontalTextAlignment="DetectFromContent" TextWrapping="WrapWholeWords" Margin="10,10,700,10" />
                     </Viewbox>
-                    <Button x:Name="GoToGamePageButton" Content="Go to game page" Click="GoToGamePageButton_OnClick"/>
+                    <Button x:Name="GoToGamePageButton" Content="Go to game page" Click="GoToGamePageButton_OnClick" Foreground="Black" Background="DarkGray">
+                        <Button.Resources>
+                            <ResourceDictionary>
+                                <ResourceDictionary.ThemeDictionaries>
+                                    <ResourceDictionary x:Key="Dark">
+                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Black"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Gray"/>
+                                    </ResourceDictionary>
+                                    <ResourceDictionary x:Key="Light">
+                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Black"/>
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Gray"/>
+                                    </ResourceDictionary>
+                                </ResourceDictionary.ThemeDictionaries>
+                            </ResourceDictionary>
+                        </Button.Resources>
+                    </Button>
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                         <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Categories}" FontSize="24" Height="auto" Width="500" TextWrapping="WrapWholeWords" Margin="10,10,700,10"/>
                     </Viewbox>
