@@ -92,5 +92,10 @@ namespace MainWindow.Views
         {
             _libraryViewModel.FilterGames(LibrarySearchBox.Text);
         }
+
+        private void TextBlock_SelectionChanged_2()
+        {
+
+        }
     }
 }

@@ -95,9 +95,24 @@
                             </ResourceDictionary>
                         </Button.Resources>
                     </Button>
-                    <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
-                        <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Categories}" FontSize="24" Height="auto" Width="500" TextWrapping="WrapWholeWords" Margin="10,10,700,10"/>
-                    </Viewbox>
+                    <GridView ItemsSource="{Binding SelectedGame.Categories, Mode=TwoWay}">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                                    <TextBlock
+                                               TextAlignment="Center"
+                                               Margin="00,0,0,0"
+                                               FontSize="16"
+                                               Foreground="#a9a9a9"
+                                               Height="30"
+                                               Width="100"
+                                               Text="{Binding}"
+                                               TextWrapping="WrapWholeWords"
+                                               />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                         <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Description}" FontSize="16" Width="500"  Height="400" Padding="3" TextWrapping="WrapWholeWords" Margin="10,10,700,10"/>
                     </Viewbox>
