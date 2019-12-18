@@ -17,6 +17,7 @@ namespace MainWindow.Models
         private int _gamesOwnedCount;
         private ObservableCollection<AccountPurchase> _purchaseHistory = new ObservableCollection<AccountPurchase>();
         private ObservableCollection<Game> _gamesOwned = new ObservableCollection<Game>();
+        private ObservableCollection<Game> _shoppingCart = new ObservableCollection<Game>();
         #endregion
 
         #region Constructor
@@ -34,7 +35,7 @@ namespace MainWindow.Models
         public int GamesOwnedCount { get { return _gamesOwnedCount; } set { _gamesOwnedCount = value; } }
         
         //Stores the current users shopping cart.
-        public ShoppingCart AccountShoppingCart { get; set; }
+        public ObservableCollection<Game> AccountShoppingCart { get { return _shoppingCart; } set { _shoppingCart = value; } }
              
         //Stores all purchased games for the library.
         public ObservableCollection<Game> GamesOwned { get { return _gamesOwned; } set { _gamesOwned = value; } }

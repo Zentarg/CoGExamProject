@@ -27,7 +27,7 @@ namespace MainWindow.Models
             Games.Add(game);
             if (AccountHandler.Account != null)
             {
-                AccountHandler.AccountDetail.AccountShoppingCart = this;
+                AccountHandler.AccountDetail.AccountShoppingCart.Add(game);
             }
         }
 
@@ -36,11 +36,7 @@ namespace MainWindow.Models
             foreach (Game game in games)
             {
                 Games.Add(game);
-            }
-            if (AccountHandler.Account != null)
-            {
-                AccountHandler.AccountDetail.AccountShoppingCart = this;
-            }
+            }            
         }
 
         public void RemoveGame(Game game)
@@ -48,7 +44,7 @@ namespace MainWindow.Models
             Games.Remove(game);
             if (AccountHandler.Account != null)
             {
-                AccountHandler.AccountDetail.AccountShoppingCart = this;
+                AccountHandler.AccountDetail.AccountShoppingCart.Remove(game);
             }
         }
 
@@ -58,11 +54,11 @@ namespace MainWindow.Models
             foreach (Game game in games)
             {
                 Games.Remove(game);
-            }
-            if (AccountHandler.Account != null)
-            {
-                AccountHandler.AccountDetail.AccountShoppingCart = this;
-            }
+                if (AccountHandler.Account != null)
+                {
+                    AccountHandler.AccountDetail.AccountShoppingCart.Remove(game);
+                }
+            }           
         }
 
         public void PurchaseGame()
@@ -74,8 +70,9 @@ namespace MainWindow.Models
                     AccountHandler.AccountDetail.GamesOwned.Add(gamePurchase);
                     AccountHandler.AccountDetail.AddPurchaseToPurchaseHistory(gamePurchase.Name, gamePurchase.Price, DateTime.Now, gamePurchase.Identifier);
                 }
-                AccountHandler.AccountDetail.AccountShoppingCart = null;
+                AccountHandler.AccountDetail.AccountShoppingCart.Clear();
                 AccountHandler.AccountDetail.CreateUserDetailsFile(AccountHandler.AccountDetail, AccountHandler.Account.UserName);
+                ClearShoppingCart();
             }
         }
 
@@ -111,6 +108,12 @@ namespace MainWindow.Models
                price += game.Price - (game.Price *  ((float)game.CurrentDiscountPercentage / 100));
             }
             return price;
+        }
+
+        public void ClearShoppingCart()
+        {
+            Games.Clear();
+            GetCurrentPrice();
         }
     }
 }

@@ -121,7 +121,9 @@ namespace MainWindow.ViewModels
         {
             _shoppingCart.PurchaseGame();
             OnPropertyChanged(nameof(Games));
-            AccountHandler.AccountDetail.AccountShoppingCart = null;
+            OnPropertyChanged(nameof(TotalPrice));
+            OnPropertyChanged(nameof(IsCheckoutEnabled));
+            AccountHandler.AccountDetail.AccountShoppingCart.Clear();
         }
 
         private void IsAccountCreationLoginPossible()

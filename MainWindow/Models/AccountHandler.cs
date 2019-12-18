@@ -2,6 +2,7 @@
 using MainWindow.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -95,11 +96,16 @@ namespace MainWindow.Models
                     GameTemplateVm?.OnAccountChanged();
                     if (AccountDetail.AccountShoppingCart != null)
                     {
-                        foreach (Game game in AccountDetail.AccountShoppingCart.Games)
+                        if (AccountDetail.AccountShoppingCart.Count > 0)
                         {
-                            ShoppingCart.Instance.AddGame(game);
+                            ShoppingCart.Instance.AddGame(AccountDetail?.AccountShoppingCart);
                         }
                     }
+                    else
+                    {
+                        AccountDetail.AccountShoppingCart = new ObservableCollection<Game>();
+                    }
+                    MainPageVm?.RefreshPurchaseSelectedGame();
                     break;
                 }
             }
@@ -126,6 +132,8 @@ namespace MainWindow.Models
             MainPageVm?.CallForAccountStatus();
             StoreVm?.OnAccountChanged();
             GameTemplateVm?.OnAccountChanged();
+            ShoppingCart.Instance.ClearShoppingCart();
+            MainPageVm?.RefreshPurchaseSelectedGame();
         }
 
         /// <summary>
