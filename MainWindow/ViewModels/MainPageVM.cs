@@ -16,6 +16,7 @@ namespace MainWindow.ViewModels
 {
     public class MainPageVM : INotifyPropertyChanged
     {
+        #region Instance fields
         private ShoppingCart _shoppingCart;
         private Game _selectedGame;
         private bool _isAccountCreationLoginEnabled = true;
@@ -26,7 +27,9 @@ namespace MainWindow.ViewModels
         private string _profileImagePath;
         private bool _isLibraryEnabled = false;
         private bool _isCheckoutEnabled = false;
+        #endregion
 
+        #region Constructor
         public MainPageVM()
         {
             //AccountLists allAccounts = new AccountLists();
@@ -63,8 +66,9 @@ namespace MainWindow.ViewModels
                 "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
             _selectedGame = new Game(new Account("username", "password", "displayName"), "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg", "gameName", 34.5f, 0, lorem, "gamepath", categories, new List<CarrouselItem>(), new DateTime(2069,12,23));
         }
+        #endregion
 
-
+        #region Properties
         public float TotalPrice
         {
             get { return _shoppingCart.TotalPrice;}
@@ -80,7 +84,6 @@ namespace MainWindow.ViewModels
         }
 
         public ObservableCollection<Game> Games { get { return _shoppingCart.Games; } }
-
         public RelayCommand DoRemoveGame { get; set; }
         public RelayCommand DoAddGame { get; set; }
         public RelayCommand DoPurchaseGame { get; set; }
@@ -93,7 +96,13 @@ namespace MainWindow.ViewModels
         public string ProfileImagePath { get { return _profileImagePath; } set { _profileImagePath = value; OnPropertyChanged(); } }
         public bool IsLibraryEnabled { get { return _isLibraryEnabled; } set { _isLibraryEnabled = value; OnPropertyChanged(); } }
         public bool IsCheckoutEnabled { get { return Games.Count > 0 ? _isCheckoutEnabled = true : _isCheckoutEnabled = false; } set { _isCheckoutEnabled = value; OnPropertyChanged(); } }
+        #endregion
 
+        #region Methods
+
+        /// <summary>
+        /// Method that adds a game to the shopping cart and updates it
+        /// </summary>
         public void AddGame()
         {
             _shoppingCart.AddGame(SelectedGame);
@@ -102,6 +111,9 @@ namespace MainWindow.ViewModels
             OnPropertyChanged(nameof(IsCheckoutEnabled));
         }
 
+        /// <summary>
+        /// Method that updates the shopping cart when a game is added
+        /// </summary>
         public void RefreshPurchaseSelectedGame()
         {
             OnPropertyChanged(nameof(Games));
@@ -109,6 +121,9 @@ namespace MainWindow.ViewModels
             OnPropertyChanged(nameof(IsCheckoutEnabled));
         }
 
+        /// <summary>
+        /// Method that removes a game from the shopping cart and updates it
+        /// </summary>
         public void RemoveGame()
         {
             _shoppingCart.RemoveGame(SelectedGame);
@@ -117,6 +132,9 @@ namespace MainWindow.ViewModels
             OnPropertyChanged(nameof(IsCheckoutEnabled));
         }
 
+        /// <summary>
+        /// Method that executes game purchase, clears the shopping cart and updates it
+        /// </summary>
         public void PurchaseGame()
         {
             _shoppingCart.PurchaseGame();
@@ -126,6 +144,9 @@ namespace MainWindow.ViewModels
             AccountHandler.AccountDetail.AccountShoppingCart.Clear();
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void IsAccountCreationLoginPossible()
         {
             if (AccountHandler.Account != null)
@@ -138,9 +159,9 @@ namespace MainWindow.ViewModels
             }
         }
 
-
-
-
+        /// <summary>
+        ///
+        /// </summary>
         public void CallForAccountStatus()
         {
             if (AccountHandler.Account != null)
@@ -165,7 +186,9 @@ namespace MainWindow.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// Method for telling the view a property has been updated
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -173,5 +196,6 @@ namespace MainWindow.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }

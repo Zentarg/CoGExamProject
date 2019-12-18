@@ -19,15 +19,17 @@ namespace MainWindow.ViewModels
 
     class AddGameContentDialogVM : INotifyPropertyChanged
     {
+        #region Instance fields
         private DateTimeOffset _releaseDate;
         private string _thumbnailImagePath;
         private ObservableCollection<StorageFile> _carrouselImages;
         private ObservableCollection<StorageFile> _carrouselVideos;
         private ObservableCollection<ListviewString> _carrouselYoutubeVids;
         private ListviewString _selectedListviewStrings;
-
         private GameList _gameList;
+        #endregion
 
+        #region Constructor
         public AddGameContentDialogVM()
         {
             ThumbnailImagePath = "../Assets/10ReallyScaryHill.jpg";
@@ -36,6 +38,7 @@ namespace MainWindow.ViewModels
             CarrouselYoutubeVids = new ObservableCollection<ListviewString>();
             _gameList = GameList.Instance;
         }
+        #endregion
 
         public Constants.AddGameErrors AddGame()
         {
@@ -88,7 +91,7 @@ namespace MainWindow.ViewModels
 
         }
 
-
+        #region Properties
         public string ThumbnailImagePath
         {
             get { return _thumbnailImagePath; }
@@ -150,7 +153,12 @@ namespace MainWindow.ViewModels
         public string Categories { get; set; }
         public string Price { get; set; }
         public string Description { get; set; }
+        #endregion
 
+        /// <summary>
+        /// Method for telling the view a property has been updated
+        /// </summary>
+        /// <param name="propertyName"></param>
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
