@@ -405,7 +405,7 @@ namespace MainWindow.Models
             {
                 return "The entered username does not exist";
             }
-            return "Ok";
+            return "The entered username is ok";
         }
 
         /// <summary>
@@ -420,7 +420,6 @@ namespace MainWindow.Models
                 if (StringContainsSpecialChar(password) == true)
                 {
                     //If the password contains special characters, return 4
-
                     return 4;
                 }
                 else
@@ -429,13 +428,11 @@ namespace MainWindow.Models
                     if (StringLengthCheck(password) == 2)
                     {
                         //If the password's length is less than 8, return 3
-
                         return 3;
                     }
                     else if (StringLengthCheck(password) == 1)
                     {
                         //Return 2 if the password's length is greater than 16
-
                         return 2;
                     }
                     else
@@ -444,7 +441,6 @@ namespace MainWindow.Models
                         if (StringDoesNotContainOneNumberAndOneCapitalLetter(password) == true)
                         {
                             //If the password does not contain at least 1 number and 1 capital letter
-
                             return 1;
                         }
                         else
