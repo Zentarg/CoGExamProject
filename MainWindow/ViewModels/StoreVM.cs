@@ -12,45 +12,12 @@ namespace MainWindow.ViewModels
 {
     public class StoreVM : INotifyPropertyChanged
     {
-        private readonly Game _newGame;
         private readonly GameList _gameList;
         private readonly ShoppingCart _shoppingCart;
         private ObservableCollection<Game> _filteredGames = new ObservableCollection<Game>();
-        private bool _isBuyButtonEnabled = false;
-        private MainPageVM _mainPageVM;
 
         public StoreVM()
         {
-            List<string> categories = new List<string>
-            {
-                "Category 1",
-                "Category 2",
-                "Category 1",
-                "Category 2",
-                "Category 1",
-                "Category 2",
-                "Category 1",
-                "Category 2",
-                "Category 1",
-                "Category 2",
-                "Category 1",
-                "Category 2",
-                "Category 1",
-                "Category 2",
-                "Category 1",
-                "Category 2"
-            };
-            List<CarrouselItem> carrouselItems = new List<CarrouselItem>
-            {
-                new CarrouselItem(Constants.CarrouselItemType.Image, "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg"),
-                new CarrouselItem(Constants.CarrouselItemType.Image, "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg"),
-                new CarrouselItem(Constants.CarrouselItemType.Image, "https://media3.s-nbcnews.com/j/newscms/2019_41/3047866/191010-japan-stalker-mc-1121_06b4c20bbf96a51dc8663f334404a899.fit-760w.JPG"),
-                new CarrouselItem(Constants.CarrouselItemType.Image, "https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg"),
-                new CarrouselItem(Constants.CarrouselItemType.YoutubeVideo, "https://www.youtube.com/embed/8xNmUNlJZtE")
-            };
-            string lorem =
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-            _newGame = new Game(new Account("username", "password", "displayName"), "https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg", "gameName", 34.5f, 0, lorem, "gamepath", categories,carrouselItems, new DateTime(2027,12,22));
             _gameList = GameList.Instance;
             _shoppingCart = ShoppingCart.Instance;
             DoLoadGames = new RelayCommand(LoadGames);
@@ -59,34 +26,43 @@ namespace MainWindow.ViewModels
             AccountHandler.StoreVm = this;
 
         }
-
-        public RelayCommand DoAddGame { get; set; }
         public RelayCommand DoLoadGames { get; set; }
 
 
+        /// <summary>
+        /// Calls LoadGames() on GameList singleton, then calls FilterGames() with an empty string.
+        /// </summary>
         private async void LoadGames()
         {
             await _gameList.LoadGames();
             FilterGames("");
         }
 
+        /// <summary>
+        /// Filters all games based on search terms. (Updates FilteredGames property)
+        /// </summary>
+        /// <param name="searchTerms">The terms to be searched for.</param>
         public void FilterGames(string searchTerms)
         {
             List<Game> _tempList = new List<Game>();
+
+            // Loops over every game in StoreGameCollection, to add the games that fit the search terms to the temporary list defined above.
             foreach (Game game in StoreGameCollection)
             {
                 if (game.Name.ToLower().Contains(searchTerms.ToLower()) && game.ReleaseDate.Date <= DateTime.Now)
                     _tempList.Add(game);
             }
 
+            // Orders the temp list in alphabetical order.
             _tempList = _tempList.OrderBy(item => item.Name).ToList();
 
+            // Clears the FilteredGames list
             for (int i = FilteredGames.Count; i > 0; i--)
             {
-                //if (!(_tempList.Contains(FilteredGames[i - 1])))
-                    FilteredGames.Remove(FilteredGames[i - 1]);
+                FilteredGames.Remove(FilteredGames[i - 1]);
             }
 
+            // Adds all the games from the temp list to the FilteredList, if they don't exist in the FilteredList already.
             foreach (Game game in _tempList)
             {
                 if (!FilteredGames.Contains(game))
@@ -101,6 +77,9 @@ namespace MainWindow.ViewModels
             get { return AccountHandler.Account != null; }
         }
 
+        /// <summary>
+        /// Adds SelectedGame to the shopping cart, then refreshes it in the mainpage.
+        /// </summary>
         public void PurchaseSelectedGame()
         {
             _shoppingCart.AddGame(SelectedGame);
@@ -131,6 +110,9 @@ namespace MainWindow.ViewModels
             }
         }
 
+        /// <summary>
+        /// Updates the LoggedIn property.
+        /// </summary>
         public void OnAccountChanged()
         {
             OnPropertyChanged(nameof(LoggedIn));

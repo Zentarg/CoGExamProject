@@ -39,13 +39,13 @@ namespace MainWindow.ViewModels
             _gameList = GameList.Instance;
         }
         #endregion
-
+        /// <summary>
+        /// Attempts to add the game, returns errors if there are any.
+        /// </summary>
+        /// <returns>Returns Constants.AddGameErrors enum, depicting what error occured, if any.</returns>
         public Constants.AddGameErrors AddGame()
         {
-
-
-
-
+            // Checks if any of the variables are either null or empty, and returns with an error if they are.
             if (Name.IsNullOrEmpty())
                 return Constants.AddGameErrors.NameInvalid;
             else if (Categories.IsNullOrEmpty())
@@ -55,11 +55,15 @@ namespace MainWindow.ViewModels
             else if (Description.IsNullOrEmpty())
                 return Constants.AddGameErrors.DescriptionInvalid;
 
+            // Parses the price string to a float.
             float _price = float.Parse(Price, System.Globalization.CultureInfo.InvariantCulture);
+
+            // Creates a list of categories, and splits the Categories string into it.
             List<String> _categories = new List<string>();
             _categories = Categories.Split(",").ToList();
             List<CarrouselItem> _carrouselItems = new List<CarrouselItem>();
 
+            // Creates and adds CarrouselItems to the list above, depending on what type of CarrouselItem it is.
             foreach (StorageFile file in CarrouselImages)
             {
                 _carrouselItems.Add(new CarrouselItem(Constants.CarrouselItemType.Image, file.Path));
@@ -73,11 +77,14 @@ namespace MainWindow.ViewModels
                 _carrouselItems.Add(new CarrouselItem(Constants.CarrouselItemType.YoutubeVideo, item.Value));
             }
 
+            // Checks the price, and returns an error depending on whether or not it is valid.
             if (_price.ToString().Length == 0 || _price < 1 || _price > 1000)
                 return Constants.AddGameErrors.PriceInvalid;
 
+            // Creates a new game with all the information.
             Game newGame = new Game(AccountHandler.Account, ThumbnailImagePath, Name, _price, 0, Description, "", _categories, _carrouselItems, _releaseDate);
 
+            // Checks if the identifier for the game is identical to any game already in the list. Return with error if it does.
             foreach (Game game in _gameList.StoreGameCollection)
             {
                 if (game.Identifier == newGame.Identifier)
@@ -85,8 +92,11 @@ namespace MainWindow.ViewModels
                     return Constants.AddGameErrors.GameExists;
                 }
             }
+
+            // Adds the newly created game to the gamelist.
             _gameList.AddGame(newGame);
 
+            // Returns with no errors.
             return Constants.AddGameErrors.NoError;
 
         }
@@ -158,7 +168,6 @@ namespace MainWindow.ViewModels
         /// <summary>
         /// Method for telling the view a property has been updated
         /// </summary>
-        /// <param name="propertyName"></param>
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

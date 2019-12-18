@@ -42,18 +42,27 @@ namespace MainWindow.ViewModels
             get { return SelectedGame.ReleaseDate.Date.ToShortDateString(); }
         }
 
+        /// <summary>
+        /// Updates UserIsOwner, and UserIsntOwner.
+        /// </summary>
         public void OnAccountChanged()
         {
             OnPropertyChanged(nameof(UserIsOwner));
             OnPropertyChanged(nameof(UserIsntOwner));
         }
 
+        /// <summary>
+        /// Updates SelectedGame, and ReleaseDateString
+        /// </summary>
         public void OnGameEdited()
         {
             OnPropertyChanged(nameof(SelectedGame));
             OnPropertyChanged(nameof(ReleaseDateString));
         }
 
+        /// <summary>
+        /// Method for telling the view a property has been updated
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

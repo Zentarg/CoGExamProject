@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Calls.Background;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Storage.Streams;
-using Newtonsoft.Json;
 
 namespace MainWindow.Models
 {
@@ -30,6 +25,11 @@ namespace MainWindow.Models
 
         }
 
+        /// <summary>
+        /// Generates a Md5 hash based on the string passed.
+        /// </summary>
+        /// <param name="stringToHash">The string to hash.</param>
+        /// <returns>Md5 hash of the passed string.</returns>
         private string Hash(string stringToHash)
         {
             IBuffer buffer = CryptographicBuffer.ConvertStringToBinary(stringToHash, BinaryStringEncoding.Utf8);
@@ -49,6 +49,7 @@ namespace MainWindow.Models
         public List<string> Categories { get; }
         public string Identifier { get; }
         public DateTimeOffset ReleaseDate { get; private set; }
+
 
         public void SetName(string name)
         {
