@@ -20,19 +20,16 @@ namespace MainWindow.ViewModels
 {
     public class LibraryViewModel : INotifyPropertyChanged
     {
-        
+        //Instance Fields
         private Game _game;
         private static ObservableCollection<Game> _games = new ObservableCollection<Game>();
         private NavigationHandler _navigationHandler;
+        
 
-        //private string _searchQuery;
-        //private GameDetails _selectedGame;
-        //private DeleteCommand _deletionCommand;
-
+        //Constructor
         public LibraryViewModel()
         {
-            //_selectedGame = null;
-            //_deletionCommand = new DeleteCommand(_contactCatalog, this);
+            
             _navigationHandler = NavigationHandler.Instance;
 
             foreach (Game game in Games)
@@ -42,29 +39,8 @@ namespace MainWindow.ViewModels
             
         }
 
-        
-
-        /*
-        public string GameSearch
-        {
-            get
-            {
-                var res = Game.FirstOrDefault(g => g.Name == _searchQuery);
-                if (res != null)
-                {
-                  return res.Name;  
-                }
-
-                return "Search";
-            }
-            set
-            {
-                _searchQuery = value;
-                OnPropertyChanged();
-            }
-        }
-        */
-
+       
+        //Properties
         public Game SelectedGame
         {
             get
@@ -77,7 +53,6 @@ namespace MainWindow.ViewModels
                 _game = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(ShowDetailsView));
-                //_deletionCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -86,27 +61,23 @@ namespace MainWindow.ViewModels
             get { return SelectedGame != null; }
         }
 
+        //Button that leads to a games page in the store
         private void GoToGameButton_OnClick(object sender, RoutedEventArgs e)
         {
             _navigationHandler.NavigateFrame(Type.GetType($"{Application.Current.GetType().Namespace}.Views.GameTemplate"));
         }
 
-        /*
-        public DeleteCommand DeletionCommand
-        {
-            get { return _deletionCommand; }
-        }
-        */
-
-        //public ObservableCollection<Game> Games => _games;
-
+        
+        //Stores the owned games into an accounts details
         public ObservableCollection<Game> Games
         {
             get { return AccountHandler.AccountDetail.GamesOwned; }
         }
 
+        //Stores owned games into a searchable collection
         public ObservableCollection<Game> FilteredGames { get; set; } = new ObservableCollection<Game>();
 
+        //Search for games owned in an accounts library 
         public void FilterGames(string searchTerms)
         {
             List<Game> _tempList = new List<Game>();

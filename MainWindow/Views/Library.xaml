@@ -34,13 +34,7 @@
             <ScrollViewer>
             <StackPanel Width="180" Background="#a9a9a9" >
                     
-                <!--
-                    <AutoSuggestBox PlaceholderText="Search" QueryIcon="Find" Width="200"
-                                    Text="{Binding SearchQuery}"
-                                    TextChanged="AutoSuggestBox_TextChanged"
-                                    QuerySubmitted="AutoSuggestBox_QuerySubmitted"
-                                    SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
-                -->
+                
 
                     <TextBox x:Name="LibrarySearchBox" TextChanged="LibrarySearchBox_OnTextChanged" PlaceholderText="Search..."/>
 
@@ -85,7 +79,7 @@
                     <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                         <TextBlock x:Name="Game" Style="{StaticResource TextBlockStyle}" Text="{Binding SelectedGame.Name}" SelectionHighlightColor="#000033" FontSize="36" Width="500" Height="auto" HorizontalTextAlignment="DetectFromContent" TextWrapping="WrapWholeWords" Margin="10,10,700,10" />
                     </Viewbox>
-                    <Button x:Name="GoToGamePageButton" Content="Go to game page" Click="GoToGamePageButton_OnClick" Foreground="Black" Background="DarkGray">
+                    <Button x:Name="GoToGamePageButton" Content="Go to game page" Click="GoToGamePageButton_OnClick" Foreground="Black" Background="DarkGray" Margin="50,0,0,0">
                         <Button.Resources>
                             <ResourceDictionary>
                                 <ResourceDictionary.ThemeDictionaries>
