@@ -145,22 +145,7 @@ namespace MainWindow.ViewModels
         }
 
         /// <summary>
-        ///
-        /// </summary>
-        private void IsAccountCreationLoginPossible()
-        {
-            if (AccountHandler.Account != null)
-            {
-                IsAccountCreationLoginEnabled = false;
-            }
-            else
-            {
-                IsAccountCreationLoginEnabled = true;
-            }
-        }
-
-        /// <summary>
-        ///
+        /// Method used to update all properties connected to the account.
         /// </summary>
         public void CallForAccountStatus()
         {

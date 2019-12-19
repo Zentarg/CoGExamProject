@@ -171,9 +171,9 @@
 
                         <FlyoutBase.AttachedFlyout>
                             <MenuFlyout Placement="BottomEdgeAlignedRight" >
-                                <MenuFlyoutItem Text="Create Account" Click="ShowDialog_Click" IsEnabled="{Binding IsAccountCreationLoginEnabled}"/>
-                                <MenuFlyoutItem Text="Login" Click="MenuFlyoutItem_Click" IsEnabled="{Binding IsAccountCreationLoginEnabled}"/>
-                                <MenuFlyoutItem Text="LogOff" Click="MenuFlyoutItem_Click_1" IsEnabled="{Binding IsAccountLogOffEnabled}"/>
+                                <MenuFlyoutItem Text="Create Account" Click="ShowDialog_Click" IsEnabled="{Binding IsAccountCreationLoginEnabled}" Visibility="{Binding IsAccountCreationLoginEnabled}"/>
+                                <MenuFlyoutItem Text="Login" Click="MenuFlyoutItem_Click" IsEnabled="{Binding IsAccountCreationLoginEnabled}" Visibility="{Binding IsAccountCreationLoginEnabled}"/>
+                                <MenuFlyoutItem Text="LogOff" Click="MenuFlyoutItem_Click_1" IsEnabled="{Binding IsAccountLogOffEnabled}" Visibility="{Binding IsAccountLogOffEnabled}"/>
                             </MenuFlyout>
                         </FlyoutBase.AttachedFlyout>
                     </PersonPicture>
@@ -197,7 +197,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="Library" Background="{x:Null}" IsEnabled="{Binding IsLibraryEnabled}">
+                    <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="Library" Background="{x:Null}" Visibility="{Binding IsLibraryEnabled}" >
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE7FC;" FontSize="35" Width="50" />
@@ -206,7 +206,7 @@
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                        <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="UserProfile" Background="{x:Null}" IsEnabled="{Binding IsProfileEnabled}">
+                        <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="UserProfile" Background="{x:Null}" Visibility="{Binding IsProfileEnabled}">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;" FontSize="35" Width="50" />
                                 <TextBlock Margin="22, 0, 0, 0" FontSize="23" Width="164">
@@ -216,7 +216,7 @@
                         </Button>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Bottom">
-                        <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="AccountSettings" IsEnabled="{Binding IsAccountSettingsEnabled}">
+                        <Button Style="{StaticResource MenuButon}" Click="ChangePage" Tag="AccountSettings" Visibility="{Binding IsAccountSettingsEnabled}">
                             <StackPanel Orientation="Horizontal">
                                 <Grid>
                                     <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE77B;" FontSize="20" Width="50" Margin="0,0,0,0"/>

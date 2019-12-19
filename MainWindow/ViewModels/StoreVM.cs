@@ -57,16 +57,12 @@ namespace MainWindow.ViewModels
             _tempList = _tempList.OrderBy(item => item.Name).ToList();
 
             // Clears the FilteredGames list
-            for (int i = FilteredGames.Count; i > 0; i--)
-            {
-                FilteredGames.Remove(FilteredGames[i - 1]);
-            }
+            FilteredGames.Clear();
 
             // Adds all the games from the temp list to the FilteredList, if they don't exist in the FilteredList already.
             foreach (Game game in _tempList)
             {
-                if (!FilteredGames.Contains(game))
-                    FilteredGames.Add(game);
+                FilteredGames.Add(game);
             }
 
 
