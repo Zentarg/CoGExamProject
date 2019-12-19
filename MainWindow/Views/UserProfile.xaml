@@ -38,32 +38,32 @@
 
         <Grid Margin="50,250,50,50" Background="LightGray" CornerRadius="20">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Games Owned:" FontSize="15" HorizontalAlignment="Left" Margin="21,10,0,0"/>
-                <TextBlock Text="{Binding GamesOwnedCount}" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0"/>
+                <TextBlock Foreground="Black" Text="Games Owned:" FontSize="15" HorizontalAlignment="Left" Margin="21,10,0,0"/>
+                <TextBlock Foreground="Black" Text="{Binding GamesOwnedCount}" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="A Member Since:" FontSize="15" HorizontalAlignment="Left" Margin="21,10,0,0"/>
-                    <TextBlock Text="{Binding JoinedDate}" FontSize="15" HorizontalAlignment="Left" Margin="10,10,21,0"/>
+                    <TextBlock Foreground="Black" Text="A Member Since:" FontSize="15" HorizontalAlignment="Left" Margin="21,10,0,0"/>
+                    <TextBlock Foreground="Black" Text="{Binding JoinedDate}" FontSize="15" HorizontalAlignment="Left" Margin="10,10,21,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="A Member For:" FontSize="15" HorizontalAlignment="Left" Margin="21,10,0,0"/>
-                    <TextBlock Text="{Binding YearsSinceJoined}" FontSize="15" HorizontalAlignment="Left" Margin="10,10,10,0"/>
-                    <TextBlock Text="Years" FontSize="15" HorizontalAlignment="Left" Margin="0,10,21,0"/>
+                    <TextBlock Foreground="Black" Text="A Member For:" FontSize="15" HorizontalAlignment="Left" Margin="21,10,0,0"/>
+                    <TextBlock Foreground="Black" Text="{Binding YearsSinceJoined}" FontSize="15" HorizontalAlignment="Left" Margin="10,10,10,0"/>
+                    <TextBlock Foreground="Black" Text="Years" FontSize="15" HorizontalAlignment="Left" Margin="0,10,21,0"/>
                 </StackPanel>
             </StackPanel>
-            
-            <ListView x:Name="RecentPurchases" Margin="50,100,250,50" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="20" Header="   Recent Acquisitions" ItemsSource="{Binding RecentPurchases}" SelectedItem="{Binding SelectedPurchase, Mode=TwoWay}">
+
+            <ListView x:Name="RecentPurchases" Margin="50,100,250,50" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="20" Header="   Recent Acquisitions" Foreground="Black" ItemsSource="{Binding RecentPurchases}" SelectedItem="{Binding SelectedPurchase, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="10000" Style="{StaticResource DownwardDropShadow}">
                             <StackPanel Orientation="Horizontal">
                                 <PersonPicture ProfilePicture="{Binding ElementName=OuterGrid, Path=DataContext.ProfileImagePath}" Height="75" Margin="5"/>
-                                <TextBlock Text="{Binding ElementName=OuterGrid, Path=DataContext.DisplayName}" VerticalAlignment="Bottom" Margin="10"/>
-                                <TextBlock Text="Bought on the" Margin="10,0,3,10" VerticalAlignment="Bottom"/>
-                                <TextBlock Text="{Binding PurchaseDate}" VerticalAlignment="Bottom" Margin="0,0,0,10"/>
-                                <TextBlock Text="{Binding GameName}" Margin="10,0,3,10" VerticalAlignment="Bottom"/>
-                                <Button  x:Name="GoToGamePageButton" Width="200" Height="25" Content="Go To Game Store Page" Padding="0" BorderThickness="0" Click="GoToGamePageButton_Click" VerticalAlignment="Bottom" Margin="100,0,0,10"/>
+                                <TextBlock Foreground="Black" Text="{Binding ElementName=OuterGrid, Path=DataContext.DisplayName}" VerticalAlignment="Bottom" Margin="10"/>
+                                <TextBlock Foreground="Black" Text="Bought on the" Margin="10,0,3,10" VerticalAlignment="Bottom"/>
+                                <TextBlock Foreground="Black" Text="{Binding PurchaseDate}" VerticalAlignment="Bottom" Margin="0,0,0,10"/>
+                                <TextBlock Foreground="Black" Text="{Binding GameName}" Margin="10,0,3,10" VerticalAlignment="Bottom"/>
+                                <Button  x:Name="GoToGamePageButton" Foreground="Black" Width="200" Height="25" Content="Go To Game Store Page" Padding="0" BorderThickness="0" Click="GoToGamePageButton_Click" VerticalAlignment="Bottom" Margin="100,0,0,10"/>
                             </StackPanel>
                         </Grid>
                         

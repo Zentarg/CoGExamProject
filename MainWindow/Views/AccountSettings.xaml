@@ -89,7 +89,7 @@
                         <TextBlock Text="Change Display Name" FontSize="25"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
-                        <TextBox Style="{StaticResource InputField}" PlaceholderText="Display Name" Text="{Binding TempDisplayName, Mode=TwoWay}" Margin="0,0,0,0">
+                        <TextBox Style="{StaticResource InputField}" PlaceholderText="Display Name" Text="{Binding TempDisplayName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0">
                             <Custom:Interaction.Behaviors>
                                 <Custom1:DataTriggerBehavior Value="3" Binding="{Binding DisplaynameCheck}">
                                     <Custom1:ChangePropertyAction PropertyName="BorderBrush" Value="Red"/>
@@ -111,7 +111,7 @@
                                 </Custom1:DataTriggerBehavior>
                             </Custom:Interaction.Behaviors>
                         </TextBox>
-                        <Image Source="{Binding ImagePathDisplayname}" Stretch="Fill" Height="20" Margin="0,20,0,0">
+                        <Image Source="{Binding ImagePathDisplayname}" Stretch="Fill" Height="20" Margin="10,0,0,0">
                             <ToolTipService.ToolTip>
                                 <ToolTip Content="{Binding DisplaynameTooltip}" FontSize="15"/>
                             </ToolTipService.ToolTip>

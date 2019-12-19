@@ -122,9 +122,13 @@ namespace MainWindow.ViewModels
             }
             else
             {
-                DisplaynameCheck = 5;
-                DisplaynameTooltip = "You cannot set your display name to your current one";
-                ImagePathDisplayname = new BitmapImage(new Uri("ms-appx:///Assets/RedX.png"));
+                if (DisplaynameCheck != 1 && DisplaynameCheck != 2 && DisplaynameCheck != 3 && DisplaynameCheck != 4)
+                {
+                    DisplaynameCheck = 5;
+                    DisplaynameTooltip = "You cannot set your display name to your current one";
+                    ImagePathDisplayname = new BitmapImage(new Uri("ms-appx:///Assets/RedX.png"));
+                    return false;
+                }
                 return false;
             }
         }
